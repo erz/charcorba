@@ -1,0 +1,17 @@
+#mico et le script "start-naming-mico.sh" se trouve dans le répertoire ORB
+
+# Installation de MICO 
+cd ORB/mico
+./configure && make && make install
+
+# Lancement du service linux micod ( dans un shell )
+./start-naming-mico.sh
+
+# Lancement du NameService
+nsd -ORBIIOPAddr inet:localhost:2809 ( dans un autre shell )
+
+# Lancement du serveur d'annuaire
+./bin/serveur -ORBInitRef NameService=corbaloc::localhost:2809/NameService
+
+# Lancement des clients
+./bin/client -ORBInitRef NameService=corbaloc::localhost:2809/NameService
