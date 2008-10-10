@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Installation et utilisation de charcorba-c++
 
 
 Voir fichier README à la racine du projet charcorba-c++
