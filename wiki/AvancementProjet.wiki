@@ -1,0 +1,19 @@
+#summary Suivi de l'avancement du projet
+
+Module général
+ * -OK- ORB
+ * -OK- UML
+ * -__- IDL Annuaire
+ * -__- IDL Message
+
+Module charcorba-c++
+ * -OK- Mise en place des bases
+ * -OK- Serveur
+ * -__- Client
+ * -__- Design Client QT4
+
+Module charcorba-java
+ * -__- Client
+
+Module charcorba-php
+ * -__- Client
