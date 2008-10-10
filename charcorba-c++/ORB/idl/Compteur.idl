@@ -1,0 +1,7 @@
+interface Compteur
+{
+     void inc ( );
+     void dec ( );
+     long valeur ( );
+};
+
