@@ -11,6 +11,5 @@ Annuaire_impl::ajouter( CORBA::ULong id )
   throw(
     ::CORBA::SystemException)
 {
-	cout << "Ajout !!!!!!!!" << endl ;
-    mico_throw(::CORBA::NO_IMPLEMENT());
+	cout << "Ajout !" << endl ;
 }
