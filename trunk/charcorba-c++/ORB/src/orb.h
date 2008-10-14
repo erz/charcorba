@@ -3,8 +3,9 @@
 
 #include <CORBA.h>
 #include <coss/CosNaming.h>
-#include <vector>
 #include <string>
+#include <annuaire.h>
+#include <vector>
 
 class ORB  
 {
@@ -27,6 +28,7 @@ public:
 	void demarrer();
 	void arreter();
 	void ajout_service(PortableServer::Servant,std::string);
+	CORBA::Object_var connecter_servive  (std::string nom_service);
 };
 
 #endif

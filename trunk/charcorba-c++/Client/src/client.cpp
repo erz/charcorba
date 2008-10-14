@@ -1,32 +1,35 @@
-    // client.cc
-    #include <iostream.h>
-    #include <mico/naming.h>
-    #include "CompteClient.h"
+#include "client.h"
+#include "annuaire.h"
+#include "orb.h"
 
-    int main(int argc, char* argv[])
-    {
-    // --- initialisation du bus et de l'adaptateur d'objets
-    CORBA::ORB_var orb = CORBA::ORB_init ( argc, argv, "mico-local-orb" );
+Client::Client()
+{}
 
-    // --- connexion au service de nommage
-    CORBA::Object_var            ns = orb->resolve_initial_references ("NameService");
-    CosNaming::NamingContext_var nc = CosNaming::NamingContext::_narrow (ns);
+Client::Client(int argc, char ** argv)  
+{
+	m_MICO_ORB = new ORB (argc,argv) ;		
+}
 
-    // --- définition du chemin d'accès
-    CosNaming::Name name;
-    name.length (1);
-    name[0].id   = CORBA::string_dup ("MonCompte");
-    name[0].kind = CORBA::string_dup ("");
+Client::~Client()
+{}
 
-    // --- résolution du nom pour obtenir une référence sur MonCompte
-    CORBA::Object_var obj    = nc->resolve (name);
-    CompteClient_var  compte = CompteClient::_narrow( obj );
+void Client::ajout_annuaire()
+{
+	std::cout << "Connection au service ..." << std::endl ;
+	CORBA::Object_var service = m_MICO_ORB->connecter_servive("Annuaire");
+	std::cout << "OK ..." << std::endl ;
+	
+	std::cout << "Conversion en service Annuaire ..." << std::endl ;
+	Annuaire_var service_annuaire = Annuaire::_narrow(service.in()) ;
+	std::cout << "Fin conversion" << std::endl ;
 
-    // --- quelques opérations sur mon compte...
-    compte->credit(1000000);
-    cout << "solde: " << compte->solde() << endl;
-    // --- ... super !
-
-    return 0;
-    }
+	if (CORBA::is_nil(service_annuaire))
+	{
+		std::cerr << "L'IOR n'est pas une référence sur un service." << std::endl;
+	}
+	
+	std::cout << "Ajout..." << std::endl ;
+	service_annuaire->ajouter(40);
+	std::cout << "Ajout coté client effectué ..." << std::endl ;
+}
 

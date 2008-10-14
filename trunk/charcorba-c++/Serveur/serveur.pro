@@ -4,11 +4,11 @@ DESTDIR = bin
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
-HEADERS = src/Compteur_impl.h src/serveur.h ../ORB/src/orb.h
+HEADERS = src/serveur.h ../ORB/src/orb.h src/annuaire_impl.h
 SOURCES = src/main.cpp \
- src/Compteur_impl.cpp \
  src/serveur.cpp \
  ../ORB/src/orb.cpp \
- ../ORB/src/Compteur.cpp
+ src/annuaire_impl.cpp \
+ ../ORB/src/annuaire.cpp
 LIBS += -lmicocoss2.3.13 -lmico2.3.13 -lssl -lboost_thread
 INCLUDEPATH += ../ORB/src src

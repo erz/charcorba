@@ -1,0 +1,5 @@
+// -*- c++ -*-
+
+interface Annuaire {
+    void ajouter ( in unsigned long id );
+};
