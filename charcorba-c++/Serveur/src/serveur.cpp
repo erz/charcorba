@@ -1,9 +1,9 @@
 // Libs perso
-#include "Compteur_impl.h"
-#include "serveur.h"
+#include <annuaire_impl.h>
+#include <serveur.h>
 
 // Libs systeme
-#include "orb.h"
+#include <orb.h>
 #include <string>
 
 #include <boost/thread/thread.hpp>
@@ -19,7 +19,7 @@ Serveur::~Serveur()
 Serveur::Serveur(int argc, char ** argv) 
 {
 	m_MICO_ORB = new ORB (argc,argv) ;
-	m_MICO_ORB->ajout_service(new Compteur_impl (),"Compteur");
+	m_MICO_ORB->ajout_service(new Annuaire_impl (),"Annuaire");
 }
 
 void Serveur::demarrer()
