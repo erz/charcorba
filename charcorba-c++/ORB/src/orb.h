@@ -18,13 +18,12 @@ private:
 	CORBA::ORB_var m_ORB ;
 	PortableServer::POA_var m_POA ;
 	CosNaming::NamingContext_var m_serveur_de_noms ;
-	std::vector <PortableServer::Servant> m_vect_services ;
 
 public:
 
 	ORB();
 	~ORB();
-	ORB(int ,char **);
+	ORB(int argc, char ** argv, bool) ;
 	void demarrer();
 	void arreter();
 	void ajout_service(PortableServer::Servant,std::string);

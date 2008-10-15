@@ -16,21 +16,23 @@ ORB::ORB()
 ORB::~ORB()
 {}
 	
-ORB::ORB(int argc, char ** argv) 
+ORB::ORB(int argc, char ** argv, bool activer_POA) 
 {	
 	m_ORB = CORBA::ORB_init (argc,argv);
 
 	cout << "Initialisation ORB ok" << endl ;
 	cout << "Démarrage de l'ORB ..." << endl ;
 
-	m_POA = PortableServer::POA::_narrow (m_ORB->resolve_initial_references("RootPOA"));
-	cout << "Initialisation POA ok" << endl ;
+	if ( activer_POA ) 
+	{
+		m_POA = PortableServer::POA::_narrow (m_ORB->resolve_initial_references("RootPOA"));
+		m_POA->the_POAManager()->activate();
+		cout << "Initialisation POA ok" << endl ;	
+	}
 	
 	m_serveur_de_noms  = CosNaming::NamingContext::_narrow (m_ORB->resolve_initial_references("NameService"));
 	cout << "Initialisation NameService ok" << endl ;
 	assert(!CORBA::is_nil(m_serveur_de_noms.in()));	
-
-	m_POA->the_POAManager()->activate();
 
 	cout << "Initilisation terminée" << endl ;
 }
@@ -59,11 +61,6 @@ void ORB::demarrer ()
 void ORB::arreter ()
 {
 	m_POA->destroy (TRUE,TRUE);
-		
-	for(int i=0;i<m_vect_services.size();++i)
-	{
-		delete m_vect_services[i];
-	}
 }
 
 CORBA::Object_var ORB::connecter_servive  (std::string nom_service)
@@ -88,6 +85,5 @@ void ORB::ajout_service(PortableServer::Servant service, std::string nom_service
 	m_POA->activate_object (service);
 	CORBA::Object_var ref_service_Annuaire = service->_this();
 	m_serveur_de_noms->rebind (c_nom_service, ref_service_Annuaire.in());
-	m_vect_services.push_back(service);
 	cout << "Fin ajout du service" << endl ;
 }

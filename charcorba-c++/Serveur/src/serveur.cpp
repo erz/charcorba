@@ -18,7 +18,7 @@ Serveur::~Serveur()
 
 Serveur::Serveur(int argc, char ** argv) 
 {
-	m_MICO_ORB = new ORB (argc,argv) ;
+	m_MICO_ORB = new ORB (argc,argv,true) ;
 	m_MICO_ORB->ajout_service(new Annuaire_impl (),"Annuaire");
 }
 

@@ -1,5 +1,10 @@
 // -*- c++ -*-
 
 interface Annuaire {
-    void ajouter ( in unsigned long id );
+
+   typedef sequence <string> t_liste_string ;
+   boolean inscrire_serveur ( in string pseudo ) ;
+   boolean nouveau_tag( in string pseudo, in string tag );
+   t_liste_string get_amis_par_tag ( in string tag );
+
 };

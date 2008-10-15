@@ -53,7 +53,13 @@ class Annuaire :
 
     virtual void *_narrow_helper( const char *repoid );
 
-    virtual void ajouter( CORBA::ULong id ) = 0;
+    typedef StringSequenceTmpl<CORBA::String_var> t_liste_string;
+    typedef TSeqVar< StringSequenceTmpl<CORBA::String_var> > t_liste_string_var;
+    typedef TSeqOut< StringSequenceTmpl<CORBA::String_var> > t_liste_string_out;
+
+    virtual CORBA::Boolean inscrire_serveur( const char* pseudo ) = 0;
+    virtual CORBA::Boolean nouveau_tag( const char* pseudo, const char* tag ) = 0;
+    virtual ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag ) = 0;
 
   protected:
     Annuaire() {};
@@ -68,7 +74,9 @@ class Annuaire_stub:
 {
   public:
     virtual ~Annuaire_stub();
-    void ajouter( CORBA::ULong id );
+    CORBA::Boolean inscrire_serveur( const char* pseudo );
+    CORBA::Boolean nouveau_tag( const char* pseudo, const char* tag );
+    ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag );
 
   private:
     void operator=( const Annuaire_stub& );
@@ -83,7 +91,9 @@ class Annuaire_stub_clp :
   public:
     Annuaire_stub_clp (PortableServer::POA_ptr, CORBA::Object_ptr);
     virtual ~Annuaire_stub_clp ();
-    void ajouter( CORBA::ULong id );
+    CORBA::Boolean inscrire_serveur( const char* pseudo );
+    CORBA::Boolean nouveau_tag( const char* pseudo, const char* tag );
+    ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag );
 
   protected:
     Annuaire_stub_clp ();
@@ -110,7 +120,9 @@ class POA_Annuaire : virtual public PortableServer::StaticImplementation
     static POA_Annuaire * _narrow (PortableServer::Servant);
     virtual CORBA::Object_ptr _make_stub (PortableServer::POA_ptr, CORBA::Object_ptr);
 
-    virtual void ajouter( CORBA::ULong id ) = 0;
+    virtual CORBA::Boolean inscrire_serveur( const char* pseudo ) = 0;
+    virtual CORBA::Boolean nouveau_tag( const char* pseudo, const char* tag ) = 0;
+    virtual ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag ) = 0;
 
   protected:
     POA_Annuaire () {};
