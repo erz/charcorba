@@ -7,7 +7,7 @@ Client::Client()
 
 Client::Client(int argc, char ** argv)  
 {
-	m_MICO_ORB = new ORB (argc,argv) ;		
+	m_MICO_ORB = new ORB (argc,argv,false) ;		
 }
 
 Client::~Client()
@@ -28,8 +28,8 @@ void Client::ajout_annuaire()
 		std::cerr << "L'IOR n'est pas une référence sur un service." << std::endl;
 	}
 	
-	std::cout << "Ajout..." << std::endl ;
-	service_annuaire->ajouter(40);
+    service_annuaire->inscrire_serveur("trix");
+	service_annuaire->nouveau_tag("trix","geek");
 	std::cout << "Ajout coté client effectué ..." << std::endl ;
 }
 
