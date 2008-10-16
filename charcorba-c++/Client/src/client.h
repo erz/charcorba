@@ -18,8 +18,8 @@ public:
 	Client(int, char **,std::string); 
 	~Client();
 
-	void ajout_annuaire();
-	void nouveau_tag (std::string tag);
+	void joindre_annuaire();
+	void ajouter_tag (std::string tag);
 	void get_amis_par_tag (std::string tag);
 };
 #endif

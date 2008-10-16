@@ -3,8 +3,13 @@
 interface Annuaire {
 
    typedef sequence <string> t_liste_string ;
-   boolean inscrire_serveur ( in string pseudo ) ;
-   boolean nouveau_tag( in string pseudo, in string tag );
+
+   boolean joindre_annuaire ( in string pseudo ) ;
+   boolean quitter_annuaire ( in string pseudo ) ; //A écrire !
+
+   boolean ajouter_tag ( in string pseudo, in string tag );
+   boolean enlever_tag ( in string pseudo, in string tag ); //A écrire ! 
+
    t_liste_string get_amis_par_tag ( in string tag );
 
 };

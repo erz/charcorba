@@ -8,7 +8,7 @@ using namespace std ;
 // Implementation for interface Annuaire
 
 CORBA::Boolean
-Annuaire_impl::inscrire_serveur( const char* pseudo )
+Annuaire_impl::joindre_serveur( const char* pseudo )
   throw(
     ::CORBA::SystemException)
 {
@@ -20,7 +20,7 @@ Annuaire_impl::inscrire_serveur( const char* pseudo )
 }
 
 CORBA::Boolean
-Annuaire_impl::nouveau_tag( const char* pseudo, const char* tag )
+Annuaire_impl::ajouter_tag( const char* pseudo, const char* tag )
   throw(
     ::CORBA::SystemException)
 

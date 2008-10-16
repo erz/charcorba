@@ -19,12 +19,12 @@ class Annuaire_impl : virtual public POA_Annuaire
 	// Clef = tags, valeurs = pseudo
 	std::multimap <std::string,std::string> annuaire_tags ;
 
-    CORBA::Boolean inscrire_serveur( const char* pseudo )
+    CORBA::Boolean joindre_serveur( const char* pseudo )
       throw(
         ::CORBA::SystemException)
     ;
 
-    CORBA::Boolean nouveau_tag( const char* pseudo, const char* tag )
+    CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag )
       throw(
         ::CORBA::SystemException)
     ;
