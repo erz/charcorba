@@ -4,6 +4,8 @@
 #include <string>
 #include "orb.h"
 
+#include <set>
+
 class Client  
 {
 
@@ -12,6 +14,9 @@ private:
 
 	Annuaire_var m_service_annuaire ; 
 	std::string m_pseudo ;
+
+	std::set <std::string> liste_amis ;
+	std::set <std::string> liste_tags ;
 
 public:
 	Client();
