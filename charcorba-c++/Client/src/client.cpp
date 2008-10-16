@@ -3,6 +3,8 @@
 #include "orb.h"
 
 #include <string>
+#include <set>
+
 using namespace std;
  
 Client::Client()
@@ -24,8 +26,8 @@ void Client::joindre_annuaire()
 	CORBA::Object_var service = m_MICO_ORB->connecter_servive("Annuaire");
 	
 	m_service_annuaire = Annuaire::_narrow(service.in()) ;
-    m_service_annuaire->joindre_annuaire(m_pseudo.c_str());
-    
+	m_service_annuaire->joindre_annuaire(m_pseudo.c_str());
+
 	if (CORBA::is_nil(m_service_annuaire))
 	{
 		cerr << "[DEBUG]\tL'IOR n'est pas une référence sur un service." << endl;
@@ -36,6 +38,7 @@ void Client::ajouter_tag (string tag)
 {
 	cout << "[DEBUG]\tNouveau tag : " << tag << endl ;
 	m_service_annuaire->ajouter_tag(m_pseudo.c_str(),tag.c_str());
+	liste_tags.insert(tag);
 }
 
 void Client::get_amis_par_tag (string tag)
@@ -46,6 +49,7 @@ void Client::get_amis_par_tag (string tag)
 	for (i=0;i< retval->length();++i)
 	{
 		CORBA::String_var ami = (*retval)[i] ;
+		liste_amis.insert(string(ami));
 		cout << "[DEBUG]\tNouvel ami : " << ami << endl ;
 	}
 }
