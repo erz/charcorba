@@ -157,13 +157,13 @@ Annuaire_stub_clp::~Annuaire_stub_clp ()
 
 #endif // MICO_CONF_NO_POA
 
-CORBA::Boolean Annuaire_stub::inscrire_serveur( const char* _par_pseudo )
+CORBA::Boolean Annuaire_stub::joindre_annuaire( const char* _par_pseudo )
 {
   CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
   CORBA::Boolean _res;
   CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
 
-  CORBA::StaticRequest __req( this, "inscrire_serveur" );
+  CORBA::StaticRequest __req( this, "joindre_annuaire" );
   __req.add_in_arg( &_sa_pseudo );
   __req.set_result( &__res );
 
@@ -178,7 +178,7 @@ CORBA::Boolean Annuaire_stub::inscrire_serveur( const char* _par_pseudo )
 #ifndef MICO_CONF_NO_POA
 
 CORBA::Boolean
-Annuaire_stub_clp::inscrire_serveur( const char* _par_pseudo )
+Annuaire_stub_clp::joindre_annuaire( const char* _par_pseudo )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
@@ -189,7 +189,7 @@ Annuaire_stub_clp::inscrire_serveur( const char* _par_pseudo )
       #ifdef HAVE_EXCEPTIONS
       try {
       #endif
-        __res = _myserv->inscrire_serveur(_par_pseudo);
+        __res = _myserv->joindre_annuaire(_par_pseudo);
       #ifdef HAVE_EXCEPTIONS
       }
       catch (...) {
@@ -206,19 +206,19 @@ Annuaire_stub_clp::inscrire_serveur( const char* _par_pseudo )
     _postinvoke ();
   }
 
-  return Annuaire_stub::inscrire_serveur(_par_pseudo);
+  return Annuaire_stub::joindre_annuaire(_par_pseudo);
 }
 
 #endif // MICO_CONF_NO_POA
 
-CORBA::Boolean Annuaire_stub::nouveau_tag( const char* _par_pseudo, const char* _par_tag )
+CORBA::Boolean Annuaire_stub::ajouter_tag( const char* _par_pseudo, const char* _par_tag )
 {
   CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
   CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag );
   CORBA::Boolean _res;
   CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
 
-  CORBA::StaticRequest __req( this, "nouveau_tag" );
+  CORBA::StaticRequest __req( this, "ajouter_tag" );
   __req.add_in_arg( &_sa_pseudo );
   __req.add_in_arg( &_sa_tag );
   __req.set_result( &__res );
@@ -234,7 +234,7 @@ CORBA::Boolean Annuaire_stub::nouveau_tag( const char* _par_pseudo, const char* 
 #ifndef MICO_CONF_NO_POA
 
 CORBA::Boolean
-Annuaire_stub_clp::nouveau_tag( const char* _par_pseudo, const char* _par_tag )
+Annuaire_stub_clp::ajouter_tag( const char* _par_pseudo, const char* _par_tag )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
@@ -245,7 +245,7 @@ Annuaire_stub_clp::nouveau_tag( const char* _par_pseudo, const char* _par_tag )
       #ifdef HAVE_EXCEPTIONS
       try {
       #endif
-        __res = _myserv->nouveau_tag(_par_pseudo, _par_tag);
+        __res = _myserv->ajouter_tag(_par_pseudo, _par_tag);
       #ifdef HAVE_EXCEPTIONS
       }
       catch (...) {
@@ -262,7 +262,7 @@ Annuaire_stub_clp::nouveau_tag( const char* _par_pseudo, const char* _par_tag )
     _postinvoke ();
   }
 
-  return Annuaire_stub::nouveau_tag(_par_pseudo, _par_tag);
+  return Annuaire_stub::ajouter_tag(_par_pseudo, _par_tag);
 }
 
 #endif // MICO_CONF_NO_POA
@@ -389,7 +389,7 @@ POA_Annuaire::dispatch (CORBA::StaticServerRequest_ptr __req)
   #ifdef HAVE_EXCEPTIONS
   try {
   #endif
-    if( strcmp( __req->op_name(), "inscrire_serveur" ) == 0 ) {
+    if( strcmp( __req->op_name(), "joindre_annuaire" ) == 0 ) {
       CORBA::String_var _par_pseudo;
       CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
 
@@ -401,11 +401,11 @@ POA_Annuaire::dispatch (CORBA::StaticServerRequest_ptr __req)
       if( !__req->read_args() )
         return true;
 
-      _res = inscrire_serveur( _par_pseudo.inout() );
+      _res = joindre_annuaire( _par_pseudo.inout() );
       __req->write_results();
       return true;
     }
-    if( strcmp( __req->op_name(), "nouveau_tag" ) == 0 ) {
+    if( strcmp( __req->op_name(), "ajouter_tag" ) == 0 ) {
       CORBA::String_var _par_pseudo;
       CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
       CORBA::String_var _par_tag;
@@ -420,7 +420,7 @@ POA_Annuaire::dispatch (CORBA::StaticServerRequest_ptr __req)
       if( !__req->read_args() )
         return true;
 
-      _res = nouveau_tag( _par_pseudo.inout(), _par_tag.inout() );
+      _res = ajouter_tag( _par_pseudo.inout(), _par_tag.inout() );
       __req->write_results();
       return true;
     }

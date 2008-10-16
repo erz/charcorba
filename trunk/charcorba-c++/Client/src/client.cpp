@@ -18,13 +18,13 @@ Client::Client(int argc, char ** argv, string pseudo)
 Client::~Client()
 {}
 
-void Client::ajout_annuaire()
+void Client::joindre_annuaire()
 {
 	std::cout << "[DEBUG]\tConnexion au service d'annuaire" << std::endl ;
 	CORBA::Object_var service = m_MICO_ORB->connecter_servive("Annuaire");
 	
 	m_service_annuaire = Annuaire::_narrow(service.in()) ;
-    m_service_annuaire->inscrire_serveur(m_pseudo.c_str());
+    m_service_annuaire->joindre_annuaire(m_pseudo.c_str());
     
 	if (CORBA::is_nil(m_service_annuaire))
 	{
@@ -32,10 +32,10 @@ void Client::ajout_annuaire()
 	}
 }
 
-void Client::nouveau_tag (string tag)
+void Client::ajouter_tag (string tag)
 {
 	cout << "[DEBUG]\tNouveau tag : " << tag << endl ;
-	m_service_annuaire->nouveau_tag(m_pseudo.c_str(),tag.c_str());
+	m_service_annuaire->ajouter_tag(m_pseudo.c_str(),tag.c_str());
 }
 
 void Client::get_amis_par_tag (string tag)
