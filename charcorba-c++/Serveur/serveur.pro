@@ -4,7 +4,7 @@ DESTDIR = bin
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
-HEADERS = src/serveur.h ../ORB/src/orb.h src/annuaire_impl.h
+HEADERS = src/serveur.h ../ORB/src/orb.h src/annuaire_impl.h ../ORB/src/annuaire.h
 SOURCES = src/main.cpp \
  src/serveur.cpp \
  ../ORB/src/orb.cpp \
