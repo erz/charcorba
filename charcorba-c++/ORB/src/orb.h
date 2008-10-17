@@ -27,7 +27,7 @@ public:
 	void demarrer();
 	void arreter();
 	void ajout_service(PortableServer::Servant,std::string);
-	CORBA::Object_var connecter_servive  (std::string nom_service);
+	CORBA::Object_var connecter_service  (std::string nom_service);
 };
 
 #endif

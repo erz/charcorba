@@ -23,7 +23,7 @@ Client::~Client()
 void Client::joindre_annuaire()
 {
 	std::cout << "[DEBUG]\tConnexion au service d'annuaire" << std::endl ;
-	CORBA::Object_var service = m_MICO_ORB->connecter_servive("Annuaire");
+	CORBA::Object_var service = m_MICO_ORB->connecter_service("Annuaire");
 	
 	m_service_annuaire = Annuaire::_narrow(service.in()) ;
 	m_service_annuaire->joindre_annuaire(m_pseudo.c_str());

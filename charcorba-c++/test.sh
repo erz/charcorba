@@ -18,7 +18,7 @@ nsd -ORBIIOPAddr inet:localhost:2809 &
 # Lancement du serveur d'annuaire
 xterm -e "Serveur/bin/serveur -ORBInitRef NameService=corbaloc::localhost:2809/NameService ; sleep 10" &
 
-sleep 2
+sleep 5
 
 # Lancement des clients
 xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:2809/NameService ; sleep 10"  &

@@ -33,6 +33,7 @@ class Annuaire_impl : virtual public POA_Annuaire
       throw(
         ::CORBA::SystemException)
     ;
+
 };
 
 
