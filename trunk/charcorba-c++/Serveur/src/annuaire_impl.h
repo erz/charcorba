@@ -11,12 +11,14 @@ class Annuaire_impl : virtual public POA_Annuaire
   public:
 
 	// Clef = pseudo, valeur= dernier ping
-	std::multimap <std::string,unsigned int> ping_utilisateurs ; 
+	std::map <std::string,unsigned int> ping_utilisateurs ; 
 
 	// Clef = pseudo, valeurs = tags
+    // Utilisée pour l'ajout / la suppression / la recherche d'un client
     std::multimap <std::string,std::string> annuaire_utilisateurs ;
 	
 	// Clef = tags, valeurs = pseudo
+	// Utilisée afin de connaitre les clients associés à un tag
 	std::multimap <std::string,std::string> annuaire_tags ;
 
     CORBA::Boolean joindre_annuaire( const char* pseudo )
