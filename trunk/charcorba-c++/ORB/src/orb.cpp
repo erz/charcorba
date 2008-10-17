@@ -59,15 +59,13 @@ void ORB::arreter ()
 	m_POA->destroy (TRUE,TRUE);
 }
 
-CORBA::Object_var ORB::connecter_servive  (std::string nom_service)
+CORBA::Object_var ORB::connecter_service  (std::string nom_service)
 {
 	CosNaming::Name c_nom_service;
 	c_nom_service.length (1);
 	c_nom_service[0].id = CORBA::string_dup (nom_service.c_str());	
 
 	CORBA::Object_var obj1 = m_serveur_de_noms->resolve(c_nom_service);
-	assert(!CORBA::is_nil(obj1.in()));
-
 	return obj1 ;
 }
 
