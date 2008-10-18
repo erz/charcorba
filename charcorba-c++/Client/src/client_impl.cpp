@@ -13,7 +13,8 @@ Client_Distant_impl::ajouter_message( const char* pseudo, const char* message )
 
 {
   CORBA::Boolean retval;
-
+  cout << "[DEBUG]\tAjout du message '" << message << endl ;
+  retval = true;
   client_message.insert(pair<string,string>(string(pseudo),string(message)));
 
   return retval; 
