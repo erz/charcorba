@@ -5,8 +5,8 @@
 #include <client.h>
 
 
-// Implementation for interface Client
-class Client_impl : virtual public POA_Client
+// Implementation for interface Client_Distant
+class Client_Distant_impl : virtual public POA_Client_Distant
 {
   public:
 
@@ -15,7 +15,7 @@ class Client_impl : virtual public POA_Client
         ::CORBA::SystemException)
     ;
 
-    ::Client::t_liste_string* get_tag( const char* pseudo )
+    ::Client_Distant::t_liste_string* get_tag( const char* pseudo )
       throw(
         ::CORBA::SystemException)
     ;

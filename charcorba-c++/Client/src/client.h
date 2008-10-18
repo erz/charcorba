@@ -4,6 +4,7 @@
 #include <string>
 #include "orb.h"
 
+#include "client_impl.h"
 #include <set>
 
 class Client  

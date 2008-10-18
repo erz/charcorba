@@ -1,6 +1,6 @@
 // -*- c++ -*-
 
-interface Client {
+interface Client_Distant {
 
    typedef sequence <string> t_liste_string ;
 

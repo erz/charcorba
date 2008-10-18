@@ -2,10 +2,10 @@
 #include <client_impl.h>
 
 
-// Implementation for interface Client
+// Implementation for interface Client_Distant
 
 CORBA::Boolean
-Client_impl::ajouter_message( const char* pseudo, const char* message )
+Client_Distant_impl::ajouter_message( const char* pseudo, const char* message )
   throw(
     ::CORBA::SystemException)
 
@@ -21,13 +21,13 @@ Client_impl::ajouter_message( const char* pseudo, const char* message )
 }
 
 
-::Client::t_liste_string*
-Client_impl::get_tag( const char* pseudo )
+::Client_Distant::t_liste_string*
+Client_Distant_impl::get_tag( const char* pseudo )
   throw(
     ::CORBA::SystemException)
 
 {
-  ::Client::t_liste_string* retval;
+  ::Client_Distant::t_liste_string* retval;
 
   // add your implementation here
     // REMOVE  
