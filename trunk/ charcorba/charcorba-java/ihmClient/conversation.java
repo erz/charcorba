@@ -50,6 +50,10 @@ public class conversation extends JFrame implements ActionListener{
 		
 	}
 	
+	public void ouvrirNouvelOnglet(){
+		
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 	}	
 	
