@@ -9,7 +9,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 
-public class Accueil implements ActionListener{
+public class Accueil extends JFrame implements ActionListener{
 	
 	public String listePersonnesConnectees;
 	public String identifiant;
