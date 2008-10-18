@@ -15,11 +15,11 @@ public class Accueil implements ActionListener{
 	public String identifiant;
 	public String tags;
 	
-	public void setListePersonnesConnectees(String liste){
+	public void getListePersonnesConnectees(){
 		
 	}
 	
-	public void envoyerMessage(){
+	public void envoyerMessage(String m){
 		
 	}
 	

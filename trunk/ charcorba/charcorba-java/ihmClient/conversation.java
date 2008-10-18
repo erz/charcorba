@@ -46,6 +46,10 @@ public class conversation extends JFrame implements ActionListener{
 		panel.setBackground(Color.ORANGE);
 	}
 	
+	public void envoyerMessage(String m){
+		
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 	}	
 	
