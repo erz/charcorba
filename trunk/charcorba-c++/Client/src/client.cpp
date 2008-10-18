@@ -2,6 +2,7 @@
 #include "annuaire.h"
 #include "orb.h"
 
+#include "client_impl.h"
 #include <string>
 #include <set>
 
