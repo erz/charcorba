@@ -211,60 +211,6 @@ Annuaire_stub_clp::joindre_annuaire( const char* _par_pseudo )
 
 #endif // MICO_CONF_NO_POA
 
-CORBA::Boolean Annuaire_stub::quitter_annuaire( const char* _par_pseudo )
-{
-  CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
-  CORBA::Boolean _res;
-  CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-
-  CORBA::StaticRequest __req( this, "quitter_annuaire" );
-  __req.add_in_arg( &_sa_pseudo );
-  __req.set_result( &__res );
-
-  __req.invoke();
-
-  mico_sii_throw( &__req, 
-    0);
-  return _res;
-}
-
-
-#ifndef MICO_CONF_NO_POA
-
-CORBA::Boolean
-Annuaire_stub_clp::quitter_annuaire( const char* _par_pseudo )
-{
-  PortableServer::Servant _serv = _preinvoke ();
-  if (_serv) {
-    POA_Annuaire * _myserv = POA_Annuaire::_narrow (_serv);
-    if (_myserv) {
-      CORBA::Boolean __res;
-
-      #ifdef HAVE_EXCEPTIONS
-      try {
-      #endif
-        __res = _myserv->quitter_annuaire(_par_pseudo);
-      #ifdef HAVE_EXCEPTIONS
-      }
-      catch (...) {
-        _myserv->_remove_ref();
-        _postinvoke();
-        throw;
-      }
-      #endif
-
-      _myserv->_remove_ref();
-      _postinvoke ();
-      return __res;
-    }
-    _postinvoke ();
-  }
-
-  return Annuaire_stub::quitter_annuaire(_par_pseudo);
-}
-
-#endif // MICO_CONF_NO_POA
-
 CORBA::Boolean Annuaire_stub::ajouter_tag( const char* _par_pseudo, const char* _par_tag )
 {
   CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
@@ -317,62 +263,6 @@ Annuaire_stub_clp::ajouter_tag( const char* _par_pseudo, const char* _par_tag )
   }
 
   return Annuaire_stub::ajouter_tag(_par_pseudo, _par_tag);
-}
-
-#endif // MICO_CONF_NO_POA
-
-CORBA::Boolean Annuaire_stub::enlever_tag( const char* _par_pseudo, const char* _par_tag )
-{
-  CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
-  CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag );
-  CORBA::Boolean _res;
-  CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-
-  CORBA::StaticRequest __req( this, "enlever_tag" );
-  __req.add_in_arg( &_sa_pseudo );
-  __req.add_in_arg( &_sa_tag );
-  __req.set_result( &__res );
-
-  __req.invoke();
-
-  mico_sii_throw( &__req, 
-    0);
-  return _res;
-}
-
-
-#ifndef MICO_CONF_NO_POA
-
-CORBA::Boolean
-Annuaire_stub_clp::enlever_tag( const char* _par_pseudo, const char* _par_tag )
-{
-  PortableServer::Servant _serv = _preinvoke ();
-  if (_serv) {
-    POA_Annuaire * _myserv = POA_Annuaire::_narrow (_serv);
-    if (_myserv) {
-      CORBA::Boolean __res;
-
-      #ifdef HAVE_EXCEPTIONS
-      try {
-      #endif
-        __res = _myserv->enlever_tag(_par_pseudo, _par_tag);
-      #ifdef HAVE_EXCEPTIONS
-      }
-      catch (...) {
-        _myserv->_remove_ref();
-        _postinvoke();
-        throw;
-      }
-      #endif
-
-      _myserv->_remove_ref();
-      _postinvoke ();
-      return __res;
-    }
-    _postinvoke ();
-  }
-
-  return Annuaire_stub::enlever_tag(_par_pseudo, _par_tag);
 }
 
 #endif // MICO_CONF_NO_POA
@@ -499,105 +389,58 @@ POA_Annuaire::dispatch (CORBA::StaticServerRequest_ptr __req)
   #ifdef HAVE_EXCEPTIONS
   try {
   #endif
-    switch (mico_string_hash (__req->op_name(), 7)) {
-    case 0:
-      if( strcmp( __req->op_name(), "enlever_tag" ) == 0 ) {
-        CORBA::String_var _par_pseudo;
-        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
-        CORBA::String_var _par_tag;
-        CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag._for_demarshal() );
+    if( strcmp( __req->op_name(), "joindre_annuaire" ) == 0 ) {
+      CORBA::String_var _par_pseudo;
+      CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
 
-        CORBA::Boolean _res;
-        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-        __req->add_in_arg( &_sa_pseudo );
-        __req->add_in_arg( &_sa_tag );
-        __req->set_result( &__res );
+      CORBA::Boolean _res;
+      CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+      __req->add_in_arg( &_sa_pseudo );
+      __req->set_result( &__res );
 
-        if( !__req->read_args() )
-          return true;
-
-        _res = enlever_tag( _par_pseudo.inout(), _par_tag.inout() );
-        __req->write_results();
+      if( !__req->read_args() )
         return true;
-      }
-      break;
-    case 2:
-      if( strcmp( __req->op_name(), "get_amis_par_tag" ) == 0 ) {
-        CORBA::String_var _par_tag;
-        CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag._for_demarshal() );
 
-        ::Annuaire::t_liste_string* _res;
-        CORBA::StaticAny __res( CORBA::_stcseq_string );
-        __req->add_in_arg( &_sa_tag );
-        __req->set_result( &__res );
+      _res = joindre_annuaire( _par_pseudo.inout() );
+      __req->write_results();
+      return true;
+    }
+    if( strcmp( __req->op_name(), "ajouter_tag" ) == 0 ) {
+      CORBA::String_var _par_pseudo;
+      CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
+      CORBA::String_var _par_tag;
+      CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag._for_demarshal() );
 
-        if( !__req->read_args() )
-          return true;
+      CORBA::Boolean _res;
+      CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+      __req->add_in_arg( &_sa_pseudo );
+      __req->add_in_arg( &_sa_tag );
+      __req->set_result( &__res );
 
-        _res = get_amis_par_tag( _par_tag.inout() );
-        __res.value( CORBA::_stcseq_string, _res );
-        __req->write_results();
-        delete _res;
+      if( !__req->read_args() )
         return true;
-      }
-      break;
-    case 3:
-      if( strcmp( __req->op_name(), "joindre_annuaire" ) == 0 ) {
-        CORBA::String_var _par_pseudo;
-        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
 
-        CORBA::Boolean _res;
-        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-        __req->add_in_arg( &_sa_pseudo );
-        __req->set_result( &__res );
+      _res = ajouter_tag( _par_pseudo.inout(), _par_tag.inout() );
+      __req->write_results();
+      return true;
+    }
+    if( strcmp( __req->op_name(), "get_amis_par_tag" ) == 0 ) {
+      CORBA::String_var _par_tag;
+      CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag._for_demarshal() );
 
-        if( !__req->read_args() )
-          return true;
+      ::Annuaire::t_liste_string* _res;
+      CORBA::StaticAny __res( CORBA::_stcseq_string );
+      __req->add_in_arg( &_sa_tag );
+      __req->set_result( &__res );
 
-        _res = joindre_annuaire( _par_pseudo.inout() );
-        __req->write_results();
+      if( !__req->read_args() )
         return true;
-      }
-      break;
-    case 5:
-      if( strcmp( __req->op_name(), "ajouter_tag" ) == 0 ) {
-        CORBA::String_var _par_pseudo;
-        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
-        CORBA::String_var _par_tag;
-        CORBA::StaticAny _sa_tag( CORBA::_stc_string, &_par_tag._for_demarshal() );
 
-        CORBA::Boolean _res;
-        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-        __req->add_in_arg( &_sa_pseudo );
-        __req->add_in_arg( &_sa_tag );
-        __req->set_result( &__res );
-
-        if( !__req->read_args() )
-          return true;
-
-        _res = ajouter_tag( _par_pseudo.inout(), _par_tag.inout() );
-        __req->write_results();
-        return true;
-      }
-      break;
-    case 6:
-      if( strcmp( __req->op_name(), "quitter_annuaire" ) == 0 ) {
-        CORBA::String_var _par_pseudo;
-        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
-
-        CORBA::Boolean _res;
-        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-        __req->add_in_arg( &_sa_pseudo );
-        __req->set_result( &__res );
-
-        if( !__req->read_args() )
-          return true;
-
-        _res = quitter_annuaire( _par_pseudo.inout() );
-        __req->write_results();
-        return true;
-      }
-      break;
+      _res = get_amis_par_tag( _par_tag.inout() );
+      __res.value( CORBA::_stcseq_string, _res );
+      __req->write_results();
+      delete _res;
+      return true;
     }
   #ifdef HAVE_EXCEPTIONS
   } catch( CORBA::SystemException_catch &_ex ) {
@@ -627,4 +470,3 @@ POA_Annuaire::invoke (CORBA::StaticServerRequest_ptr __req)
   __req->set_exception (ex);
   __req->write_results();
 }
-

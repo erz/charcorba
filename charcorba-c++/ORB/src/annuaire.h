@@ -58,9 +58,7 @@ class Annuaire :
     typedef TSeqOut< StringSequenceTmpl<CORBA::String_var> > t_liste_string_out;
 
     virtual CORBA::Boolean joindre_annuaire( const char* pseudo ) = 0;
-    virtual CORBA::Boolean quitter_annuaire( const char* pseudo ) = 0;
     virtual CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag ) = 0;
-    virtual CORBA::Boolean enlever_tag( const char* pseudo, const char* tag ) = 0;
     virtual ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag ) = 0;
 
   protected:
@@ -77,9 +75,7 @@ class Annuaire_stub:
   public:
     virtual ~Annuaire_stub();
     CORBA::Boolean joindre_annuaire( const char* pseudo );
-    CORBA::Boolean quitter_annuaire( const char* pseudo );
     CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag );
-    CORBA::Boolean enlever_tag( const char* pseudo, const char* tag );
     ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag );
 
   private:
@@ -96,9 +92,7 @@ class Annuaire_stub_clp :
     Annuaire_stub_clp (PortableServer::POA_ptr, CORBA::Object_ptr);
     virtual ~Annuaire_stub_clp ();
     CORBA::Boolean joindre_annuaire( const char* pseudo );
-    CORBA::Boolean quitter_annuaire( const char* pseudo );
     CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag );
-    CORBA::Boolean enlever_tag( const char* pseudo, const char* tag );
     ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag );
 
   protected:
@@ -127,9 +121,7 @@ class POA_Annuaire : virtual public PortableServer::StaticImplementation
     virtual CORBA::Object_ptr _make_stub (PortableServer::POA_ptr, CORBA::Object_ptr);
 
     virtual CORBA::Boolean joindre_annuaire( const char* pseudo ) = 0;
-    virtual CORBA::Boolean quitter_annuaire( const char* pseudo ) = 0;
     virtual CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag ) = 0;
-    virtual CORBA::Boolean enlever_tag( const char* pseudo, const char* tag ) = 0;
     virtual ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag ) = 0;
 
   protected:
