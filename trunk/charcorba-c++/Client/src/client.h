@@ -7,8 +7,7 @@
 #include "client_impl.h"
 #include <set>
 
-class Client  
-{
+class Client{
 
 private:
 	ORB * m_MICO_ORB ;

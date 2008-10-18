@@ -9,7 +9,10 @@
 class Client_Distant_impl : virtual public POA_Client_Distant
 {
   public:
-
+    
+    //Messages : pseudo/messsage
+    std::multimap <std::string,std::string>client_message ;
+    
     CORBA::Boolean ajouter_message( const char* pseudo, const char* message )
       throw(
         ::CORBA::SystemException)
