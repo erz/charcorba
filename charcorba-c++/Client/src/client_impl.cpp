@@ -1,7 +1,9 @@
-
+#include <iostream>
+#include <string>
+#include <map>
 #include <client_impl.h>
 
-
+using namespace std ;
 // Implementation for interface Client_Distant
 
 CORBA::Boolean
@@ -12,10 +14,7 @@ Client_Distant_impl::ajouter_message( const char* pseudo, const char* message )
 {
   CORBA::Boolean retval;
 
-  // add your implementation here
-    // REMOVE  
-    mico_throw(::CORBA::NO_IMPLEMENT());
-    // REMOVE 
+  client_message.insert(pair<string,string>(string(pseudo),string(message)));
 
   return retval; 
 }

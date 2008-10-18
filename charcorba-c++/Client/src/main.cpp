@@ -7,7 +7,7 @@
 
 int main(int argc, char ** argv )
 {
-	Client * client_chat = new Client(argc,argv,"trix") ;
+	Client * client_chat = new Client(argc,argv,"trix");
 	client_chat->joindre_annuaire();
 	client_chat->ajouter_tag("geek");
 	client_chat->ajouter_tag("chuck norris");
@@ -22,3 +22,4 @@ int main(int argc, char ** argv )
 	return app.exec();*/
 	return 0 ;
 }
+
