@@ -14,7 +14,7 @@ int main(int argc, char ** argv )
 	{
 		client_chat->ajouter_tag(argv[i]);
 	}
-	
+	client_chat->get_amis_par_tag("anti-java");
 /*	QApplication app( argc, argv );
 	MainWindowImpl win;
 	win.show(); 
