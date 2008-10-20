@@ -1,4 +1,5 @@
 
+#include <client_annuaire.h>
 #include <annuaire_impl.h>
 #include <map>
 #include <string>
@@ -6,6 +7,13 @@
 
 using namespace std ;
 // Implementation for interface Annuaire
+
+Annuaire_impl * Annuaire_impl::m_static_annuaire = 0 ;
+
+Annuaire_impl::Annuaire_impl()
+{
+	Annuaire_impl::m_static_annuaire = this ;
+}
 
 CORBA::Boolean
 Annuaire_impl::joindre_annuaire( const char* pseudo )
@@ -15,7 +23,7 @@ Annuaire_impl::joindre_annuaire( const char* pseudo )
   cout << "[DEBUG]\tInscription du client '" << pseudo << "' dans l'annuaire " << endl ;
   CORBA::Boolean retval ;
   retval = true;
-  ping_utilisateurs.insert(pair<string,int>(string(pseudo),0));
+  m_liste_clients.insert(pair<string,Client_annuaire>(string(pseudo),Client_annuaire(string(pseudo))));
   return retval; 
 }
 
@@ -28,8 +36,7 @@ Annuaire_impl::ajouter_tag( const char* pseudo, const char* tag )
   cout << "[DEBUG]\tAjout du tag '" << tag << "' pour l'utilisateur '" << pseudo << "'" << endl ;
   CORBA::Boolean retval;
   retval = true;
-  annuaire_utilisateurs.insert(pair<string,string>(string(pseudo),string(tag)));
-  annuaire_tags.insert(pair<string,string>(string(tag),string(pseudo)));
+  m_liste_clients[pseudo].ajouter_tag(string(tag));
   return retval; 
 }
 
@@ -40,21 +47,20 @@ Annuaire_impl::get_amis_par_tag( const char* tag )
     ::CORBA::SystemException)
 
 {
-  cout << "[DEBUG]\tRecherche des clients possédants le tag : '" << tag << "'" << endl ;
-  ::Annuaire::t_liste_string * retval;
-  retval = new ::Annuaire::t_liste_string (annuaire_tags.count(tag)) ;
-  retval->length(annuaire_tags.count(tag));
-  
-  multimap<string,string>::iterator i;
-  CORBA::ULong n=0;
-  for (i = annuaire_tags.lower_bound(tag);
-       i!= annuaire_tags.upper_bound(tag);
-       i++)
-   {
-      const char * c_tag = (*i).second.c_str() ;
-      CORBA::String_var s_tag (c_tag);
-      (*retval)[n] = s_tag;
-      n++;
-   }
-   return retval; 
+	cout << "[DEBUG]\tRecherche des clients possédants le tag : '" << tag << "'" << endl ;
+	::Annuaire::t_liste_string * retval = new ::Annuaire::t_liste_string ();
+
+	int n=0;
+	for( map<string,Client_annuaire>::iterator i=m_liste_clients.begin(); i!=m_liste_clients.end(); ++i)
+	{
+		if ( (*i).second.possede_tag(tag) )
+		{
+			retval->length(n+1);
+			const char * c_tag = (*i).second.m_pseudo.c_str() ;
+			CORBA::String_var s_tag (c_tag);
+			(*retval)[n] = s_tag;
+			++n;
+		}
+	}
+	return retval; 
 }

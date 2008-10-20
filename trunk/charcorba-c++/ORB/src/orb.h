@@ -10,16 +10,16 @@
 class ORB  
 {
 
-private:
+public:
 
+	static ORB * static_ORB ;
+	
 	int m_argc ;
 	char ** m_argv ;
 
 	CORBA::ORB_var m_ORB ;
 	PortableServer::POA_var m_POA ;
 	CosNaming::NamingContext_var m_serveur_de_noms ;
-
-public:
 
 	ORB();
 	~ORB();

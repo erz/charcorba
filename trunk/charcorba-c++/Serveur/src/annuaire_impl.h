@@ -2,24 +2,25 @@
 #ifndef __ANNUAIRE_IMPL_H__
 #define __ANNUAIRE_IMPL_H__
 
+#include <boost/progress.hpp>
 #include <annuaire.h>
 #include <map>
+
+#include <client_annuaire.h>
+
+using boost::timer;
 
 // Implementation for interface Annuaire
 class Annuaire_impl : virtual public POA_Annuaire
 {
   public:
 
-	// Clef = pseudo, valeur= dernier ping
-	std::map <std::string,unsigned int> ping_utilisateurs ; 
+	static Annuaire_impl * m_static_annuaire  ;
 
-	// Clef = pseudo, valeurs = tags
-    // Utilisée pour l'ajout / la suppression / la recherche d'un client
-    std::multimap <std::string,std::string> annuaire_utilisateurs ;
-	
-	// Clef = tags, valeurs = pseudo
-	// Utilisée afin de connaitre les clients associés à un tag
-	std::multimap <std::string,std::string> annuaire_tags ;
+	// Clef = pseudo, valeur= dernier ping
+	std::map <std::string,Client_annuaire> m_liste_clients ; 
+
+	Annuaire_impl();
 
     CORBA::Boolean joindre_annuaire( const char* pseudo )
       throw(

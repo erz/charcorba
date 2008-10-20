@@ -8,10 +8,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+ORB * ORB::static_ORB = NULL ;
+
 using namespace std;
 
 ORB::ORB() 
-{}
+{
+}
 
 ORB::~ORB()
 {}
@@ -20,7 +23,7 @@ ORB::ORB(int argc, char ** argv, bool activer_POA)
 {	
 	cout << "[DEBUG]\tInitialisation ORB" << endl ;
 	m_ORB = CORBA::ORB_init (argc,argv);
-
+	ORB::static_ORB = this ;
 	if ( activer_POA ) 
 	{
 		cout << "[DEBUG]\tActivation POA" << endl ;		
@@ -64,8 +67,16 @@ CORBA::Object_var ORB::connecter_service  (std::string nom_service)
 	CosNaming::Name c_nom_service;
 	c_nom_service.length (1);
 	c_nom_service[0].id = CORBA::string_dup (nom_service.c_str());	
-
-	CORBA::Object_var obj1 = m_serveur_de_noms->resolve(c_nom_service);
+	
+	CORBA::Object_var obj1 ;
+	try
+	{
+		obj1 = m_serveur_de_noms->resolve(c_nom_service);
+	}
+	catch(CosNaming::NamingContext::NotFound &exc)
+	{
+		cout << "[DEBUG]\tService '" << nom_service << "' non trouvé ..." << endl;	
+	}
 	return obj1 ;
 }
 
