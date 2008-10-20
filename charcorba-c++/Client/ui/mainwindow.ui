@@ -1,34 +1,86 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>598</width>
-    <height>388</height>
+    <width>233</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget" />
+  <widget class="QWidget" name="centralwidget" >
+   <widget class="QWidget" name="verticalLayout" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>231</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" >
+     <item>
+      <widget class="QListView" name="listView" />
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>598</width>
-     <height>28</height>
+     <width>233</width>
+     <height>30</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuServeur" >
+    <property name="title" >
+     <string>Serveur</string>
+    </property>
+    <addaction name="actionConnection" />
+   </widget>
+   <widget class="QMenu" name="menuContacts" >
+    <property name="title" >
+     <string>Contacts</string>
+    </property>
+    <addaction name="actionTags" />
+   </widget>
+   <addaction name="menuServeur" />
+   <addaction name="menuContacts" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
+  <widget class="QToolBar" name="toolBar" >
+   <property name="windowTitle" >
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionConnection" >
+   <property name="text" >
+    <string>Connection</string>
+   </property>
+  </action>
+  <action name="actionFiltres" >
+   <property name="text" >
+    <string>Filtres</string>
+   </property>
+  </action>
+  <action name="actionTags" >
+   <property name="text" >
+    <string>Filtres</string>
+   </property>
+  </action>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections/>
 </ui>
