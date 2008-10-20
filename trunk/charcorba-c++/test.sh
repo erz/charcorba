@@ -1,4 +1,3 @@
-
 #!/bin/sh
 
 killall -9 sleep
@@ -18,8 +17,9 @@ nsd -ORBIIOPAddr inet:localhost:2809 &
 # Lancement du serveur d'annuaire
 xterm -e "Serveur/bin/serveur -ORBInitRef NameService=corbaloc::localhost:2809/NameService ; sleep 10" &
 
-sleep 5
+# Lancement des clients
+xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:2809/NameService trix geek informatique anti-java ; sleep 10"  &
 
 # Lancement des clients
-xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:2809/NameService ; sleep 10"  &
+xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:2809/NameService tony echangisme 19cm fetching  anulingus bukkake auto-sodomie anti-c++ ; sleep 10"  &
 
