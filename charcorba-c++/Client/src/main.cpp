@@ -7,6 +7,7 @@
 
 int main(int argc, char ** argv )
 {
+	//std::cout << argc << std::endl  ;
 	Client * client_chat = new Client(argc,argv,"trix");
 	client_chat->joindre_annuaire();
 	client_chat->ajouter_tag("geek");
