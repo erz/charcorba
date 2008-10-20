@@ -1,5 +1,6 @@
 #include "client.h"
 #include "annuaire.h"
+#include "standard_impl.h"
 #include "orb.h"
 
 #include <string>
@@ -14,7 +15,9 @@ Client::Client(int argc, char ** argv, string pseudo)
 	: m_pseudo (pseudo)
 {
 	cout << "[DEBUG]\tPseudo client : " << pseudo << endl;
-	m_MICO_ORB = new ORB (argc,argv,false) ;		
+	m_MICO_ORB = new ORB (argc,argv,true) ;	
+	m_client = new Standard_impl () ;
+	m_MICO_ORB->ajout_service(m_client,pseudo);	
 }
 
 Client::~Client()
