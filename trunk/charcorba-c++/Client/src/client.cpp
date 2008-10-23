@@ -64,10 +64,19 @@ void Client::get_amis_par_tag (string tag)
 
 void Client::ecrire_message(const char* pseudo,string message)
 {
-	cout<<"On ecrit le message : "<< message<<"\t venant de "<<pseudo<<endl;
+	cout<<"On envoie le message : "<< message<<"\t vers  "<<pseudo<<endl;
 	CORBA::Object_var servicedist = m_MICO_ORB->connecter_service(pseudo);
+	//CORBA::Object_var servicedist = ::ORB::static_ORB->connecter_service (pseudo);
 	m_service_client = Standard::_narrow(servicedist.in()) ;
+	
+	
+	if (CORBA::is_nil(m_service_client))
+	{
+		cerr << "[DEBUG]\tL'IOR n'est pas une référence sur un service." << endl;
+	}
 	m_service_client->ajouter_message(pseudo,message.c_str());
+
+	//cout<<"DEBUG"<<endl;
 	
 }
 
