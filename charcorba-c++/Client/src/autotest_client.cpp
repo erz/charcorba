@@ -29,8 +29,8 @@ void Autotest_client::demarrer()
 		else if(cmd == "envoyer_message") m_client->ecrire_message("sylvain",arguments);
 		else if (cmd == "afficher_message") 
 											{
-												sleep(1);
-												m_client->afficher_message();
+												
+												m_client->afficher_message_distant();
 											}
 										
 			

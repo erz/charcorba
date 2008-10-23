@@ -64,12 +64,14 @@ void Client::get_amis_par_tag (string tag)
 
 void Client::ecrire_message(const char* pseudo,string message)
 {
-	cout<<"J'utilise la fonction de standard pour ecrire"<<endl;
-	m_standard->ajouter_message(pseudo,message.c_str());
+	cout<<"On ecrit le message : "<< message<<"\t venant de "<<pseudo<<endl;
+	CORBA::Object_var servicedist = m_MICO_ORB->connecter_service(pseudo);
+	m_service_client = Standard::_narrow(servicedist.in()) ;
+	m_service_client->ajouter_message(pseudo,message.c_str());
 	
 }
 
-void Client::afficher_message()
+void Client::afficher_message_distant()
 {
 	cout<<"On va afficher les messages distants\n"<<endl;
 	multimap<string,string> tmp = m_standard->Liste_Messages;
