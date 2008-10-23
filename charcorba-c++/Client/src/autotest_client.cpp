@@ -30,8 +30,6 @@ void Autotest_client::demarrer()
 		else if (cmd == "afficher_message") {m_client->afficher_message_distant();}
 		else if (cmd == "sleep") sleep(10);
 										
-			
-
 	}
 }
 

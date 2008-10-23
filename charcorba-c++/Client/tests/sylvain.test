@@ -3,5 +3,6 @@ joindre_annuaire
 ajouter_tag geek
 ajouter_tag c++
 ajouter_tag pieton
+sleep 10
 ajouter_tag anti-java
 sleep 10
