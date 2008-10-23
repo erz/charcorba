@@ -22,6 +22,9 @@ private:
 	// Annuaire ( service distant )
 	Annuaire_var m_service_annuaire ;
 	
+	//Client Distant
+	Standard_var m_service_client;
+	
 	std::string m_pseudo ;
 
 	std::set <std::string> liste_amis ;
@@ -43,5 +46,6 @@ public:
 	
 	void ecrire_message(const char * pseudo,string message);
 	void afficher_message();
+	void afficher_message_distant();
 };
 #endif
