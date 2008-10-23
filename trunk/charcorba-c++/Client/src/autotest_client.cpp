@@ -27,11 +27,8 @@ void Autotest_client::demarrer()
 		else if (cmd == "set_pseudo" )		m_client->set_pseudo(arguments);
 		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire();
 		else if(cmd == "envoyer_message") m_client->ecrire_message("sylvain",arguments);
-		else if (cmd == "afficher_message") 
-											{
-												
-												m_client->afficher_message_distant();
-											}
+		else if (cmd == "afficher_message") {m_client->afficher_message_distant();}
+		else if (cmd == "sleep") sleep(10);
 										
 			
 

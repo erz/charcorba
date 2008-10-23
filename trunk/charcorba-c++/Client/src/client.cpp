@@ -64,6 +64,7 @@ void Client::get_amis_par_tag (string tag)
 
 void Client::ecrire_message(const char* pseudo,string message)
 {
+	
 	cout<<"[DEBUG]\tOn envoie le message : "<< message<<"\t vers  "<<pseudo<<endl;
 	CORBA::Object_var servicedist = m_MICO_ORB->connecter_service(pseudo);
 	cout<<"[DEBUG]\tservice distant"<<servicedist<<endl;
