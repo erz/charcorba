@@ -8,13 +8,14 @@
 #include <map>
 #include <standard.h>
 #include <standard_impl.h>
+using namespace std;
 
 class Client{
 
 private:
-
+	Client * m_client;
 	// Objet qui implémente la gestion des messages entrants
-	Standard_impl * m_client ; 
+	Standard_impl * m_standard ; 
 	
 	ORB * m_MICO_ORB ;
 
@@ -39,5 +40,8 @@ public:
 	void joindre_annuaire();
 	void ajouter_tag (std::string tag);
 	void get_amis_par_tag (std::string tag);
+	
+	void ecrire_message(const char * pseudo,string message);
+	void afficher_message();
 };
 #endif

@@ -10,6 +10,10 @@ using namespace std;
 class Standard_impl : virtual public POA_Standard
 {
   public:
+  
+  	static Standard_impl * m_static_standard  ;
+  	
+  	Standard_impl();
     // Clef = pseudo, message= dernier message
     //je laisse une map au cas ou on voudrait implementer une communication de groupe pour l'ordonancement des messages
 	multimap <string,string> Liste_Messages ;

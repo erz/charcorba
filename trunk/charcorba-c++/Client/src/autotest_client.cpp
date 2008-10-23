@@ -22,10 +22,19 @@ void Autotest_client::demarrer()
 	{
 		string arguments ;
 		getline(cin,arguments,'\n');
-		cout << "[DEBUG]\tAppel '" << cmd << "(" << arguments << ")'" << endl ; 
+		cout << "[DEBUG]\tAppel '" << cmd << "(" << arguments << ")'" << endl; 
 		if (cmd == "ajouter_tag" )			m_client->ajouter_tag(arguments);
 		else if (cmd == "set_pseudo" )		m_client->set_pseudo(arguments);
 		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire();
+		else if(cmd == "envoyer_message") m_client->ecrire_message("sylvain",arguments);
+		else if (cmd == "afficher_message") 
+											{
+												sleep(1);
+												m_client->afficher_message();
+											}
+										
+			
+
 	}
 }
 
