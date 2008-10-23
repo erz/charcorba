@@ -71,7 +71,7 @@ void Client::ecrire_message(const char* pseudo,string message)
 
 void Client::afficher_message()
 {
-	cout<<"On va afficher les messages\n"<<endl;
+	cout<<"On va afficher les messages distants\n"<<endl;
 	multimap<string,string> tmp = m_standard->Liste_Messages;
 	multimap<string,string>::iterator pos;	
 	for (pos = tmp.begin(); pos != tmp.end(); ++pos)
