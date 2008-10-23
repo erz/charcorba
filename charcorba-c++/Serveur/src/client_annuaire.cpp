@@ -19,6 +19,8 @@ void f_thread_ping_utilisateur (Client_annuaire & client_annuaire)
 			Annuaire_impl::m_static_annuaire->m_liste_clients.erase(client_annuaire.m_pseudo);
 			return ;
 		}
+		else
+			cout << "[DEBUG]\tLe client '" << client_annuaire.m_pseudo << "' est toujours présent ..." << endl ;
 		boost::xtime xt;
 		boost::xtime_get(&xt, boost::TIME_UTC);
 		xt.sec += 5 ;

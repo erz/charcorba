@@ -4,17 +4,15 @@
 #include <annuaire.h>
 #include <iostream>
 #include <client.h>
+#include <autotest_client.h>
 
 int main(int argc, char ** argv )
 {
-	Client * client_chat = new Client(argc,argv,argv[3]);
-	client_chat->joindre_annuaire();
+	Client * client_chat = new Client(argc,argv);
+	Autotest_client * autotest_client = new Autotest_client (client_chat);
 	
-	for (int i=2;i<argc-2;++i)
-	{
-		client_chat->ajouter_tag(argv[i]);
-	}
-	client_chat->get_amis_par_tag("anti-java");
+	autotest_client->demarrer();
+	
 /*	QApplication app( argc, argv );
 	MainWindowImpl win;
 	win.show(); 

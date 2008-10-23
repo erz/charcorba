@@ -11,17 +11,21 @@ using namespace std;
 Client::Client()
 {}
 
-Client::Client(int argc, char ** argv, string pseudo)  
-	: m_pseudo (pseudo)
+Client::Client(int argc, char ** argv)  
 {
-	cout << "[DEBUG]\tPseudo client : " << pseudo << endl;
 	m_MICO_ORB = new ORB (argc,argv,true) ;	
 	m_client = new Standard_impl () ;
-	m_MICO_ORB->ajout_service(m_client,pseudo);	
 }
 
 Client::~Client()
 {}
+
+void Client::set_pseudo (string pseudo)
+{	
+	cout << "[DEBUG]\tPseudo client : " << pseudo << endl;
+	m_pseudo = pseudo ;
+	m_MICO_ORB->ajout_service(m_client,pseudo);	
+}
 
 void Client::joindre_annuaire()
 {
