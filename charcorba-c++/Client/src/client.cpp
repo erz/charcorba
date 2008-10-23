@@ -5,6 +5,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
  
@@ -14,7 +15,7 @@ Client::Client()
 Client::Client(int argc, char ** argv)  
 {
 	m_MICO_ORB = new ORB (argc,argv,true) ;	
-	m_client = new Standard_impl () ;
+	m_standard = new Standard_impl() ;
 }
 
 Client::~Client()
@@ -24,7 +25,7 @@ void Client::set_pseudo (string pseudo)
 {	
 	cout << "[DEBUG]\tPseudo client : " << pseudo << endl;
 	m_pseudo = pseudo ;
-	m_MICO_ORB->ajout_service(m_client,pseudo);	
+	m_MICO_ORB->ajout_service(m_standard,pseudo);	
 }
 
 void Client::joindre_annuaire()
@@ -59,4 +60,22 @@ void Client::get_amis_par_tag (string tag)
 		liste_amis.insert(string(ami));
 		cout << "[DEBUG]\tNouvel ami : " << ami << endl ;
 	}
+}
+
+void Client::ecrire_message(const char* pseudo,string message)
+{
+	cout<<"J'utilise la fonction de standard pour ecrire"<<endl;
+	m_standard->ajouter_message(pseudo,message.c_str());
+	
+}
+
+void Client::afficher_message()
+{
+	cout<<"On va afficher les messages\n"<<endl;
+	multimap<string,string> tmp = m_standard->Liste_Messages;
+	multimap<string,string>::iterator pos;	
+	for (pos = tmp.begin(); pos != tmp.end(); ++pos)
+		 {
+        	cout << "message :\t" << pos->first.c_str()<< pos->second << endl;
+    	}
 }

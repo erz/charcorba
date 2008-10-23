@@ -6,6 +6,13 @@
 
 using namespace std ;
 // Implementation for interface Standard
+Standard_impl * Standard_impl::m_static_standard = 0 ;
+
+Standard_impl::Standard_impl()
+{
+	Standard_impl::m_static_standard = this ;
+}
+
 
 CORBA::Boolean
 Standard_impl::ajouter_message( const char* pseudo, const char* message )
@@ -13,7 +20,7 @@ Standard_impl::ajouter_message( const char* pseudo, const char* message )
     ::CORBA::SystemException)
 
 {
-  cout << "[DEBUG]\tEnvoie Message '" << message << endl ;
+  cout << "[DEBUG]\tEnvoie Message '\n" << message << endl ;
   CORBA::Boolean retval ;
   retval = true;
   Liste_Messages.insert(pair<string,string>(string(pseudo),string(message)));

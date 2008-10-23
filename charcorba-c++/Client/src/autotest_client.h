@@ -2,6 +2,7 @@
 #define AUTOTEST_CLIENT_H
 #include <client.h>
 
+
 class Autotest_client  
 {
 
