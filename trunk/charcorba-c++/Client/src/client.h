@@ -31,9 +31,11 @@ private:
 
 public:
 	Client();
-	Client(int, char **,std::string); 
+	Client(int, char **); 
 	~Client();
-
+	
+	void set_pseudo(std::string);
+	
 	void joindre_annuaire();
 	void ajouter_tag (std::string tag);
 	void get_amis_par_tag (std::string tag);
