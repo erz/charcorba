@@ -64,8 +64,9 @@ void Client::get_amis_par_tag (string tag)
 
 void Client::ecrire_message(const char* pseudo,string message)
 {
-	cout<<"On envoie le message : "<< message<<"\t vers  "<<pseudo<<endl;
+	cout<<"[DEBUG]\tOn envoie le message : "<< message<<"\t vers  "<<pseudo<<endl;
 	CORBA::Object_var servicedist = m_MICO_ORB->connecter_service(pseudo);
+	cout<<"[DEBUG]\tservice distant"<<servicedist<<endl;
 	//CORBA::Object_var servicedist = ::ORB::static_ORB->connecter_service (pseudo);
 	m_service_client = Standard::_narrow(servicedist.in()) ;
 	
@@ -80,13 +81,18 @@ void Client::ecrire_message(const char* pseudo,string message)
 	
 }
 
-void Client::afficher_message_distant()
+void Client::afficher_message()
 {
-	cout<<"On va afficher les messages distants\n"<<endl;
+	cout<<"[DEBUG]\tOn va afficher les messages distants\n"<<endl;
 	multimap<string,string> tmp = m_standard->Liste_Messages;
 	multimap<string,string>::iterator pos;	
 	for (pos = tmp.begin(); pos != tmp.end(); ++pos)
 		 {
         	cout << "message :\t" << pos->first.c_str()<< pos->second << endl;
     	}
+}
+
+void Client::afficher_message_distant()
+{
+	
 }
