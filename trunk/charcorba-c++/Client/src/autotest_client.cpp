@@ -26,9 +26,13 @@ void Autotest_client::demarrer()
 		if (cmd == "ajouter_tag" )			m_client->ajouter_tag(arguments);
 		else if (cmd == "set_pseudo" )		m_client->set_pseudo(arguments);
 		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire();
-		else if(cmd == "envoyer_message") m_client->ecrire_message("sylvain",arguments);
-		else if (cmd == "afficher_message") {m_client->afficher_message_distant();}
-		else if (cmd == "sleep") sleep(10);
+		else if(cmd == "envoyer_message")   
+			{
+				m_client->ecrire_message("sylvain",arguments);
+				m_client->thread_ecrire_message->join();
+			}
+		else if (cmd == "afficher_message") {m_client->afficher_message();}
+		else if (cmd == "sleep") sleep(arguments);
 										
 	}
 }
