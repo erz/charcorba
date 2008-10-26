@@ -8,6 +8,10 @@
 #include <map>
 #include <standard.h>
 #include <standard_impl.h>
+
+#include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
+
 using namespace std;
 
 class Client{
@@ -25,6 +29,7 @@ private:
 	//Client Distant
 	Standard_var m_service_client;
 	
+	
 	std::string m_pseudo ;
 
 	std::set <std::string> liste_amis ;
@@ -37,6 +42,10 @@ public:
 	Client();
 	Client(int, char **); 
 	~Client();
+	
+	
+	
+	boost::thread * thread_ecrire_message ;
 	
 	void set_pseudo(std::string);
 	

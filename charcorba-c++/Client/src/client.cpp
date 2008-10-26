@@ -7,6 +7,10 @@
 #include <set>
 #include <map>
 
+#include <boost/thread/xtime.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
+
 using namespace std;
  
 Client::Client()
@@ -62,29 +66,32 @@ void Client::get_amis_par_tag (string tag)
 	}
 }
 
-void Client::ecrire_message(const char* pseudo,string message)
+void f_thread_ecrire_message(Standard_var m_service_client,const char* pseudo,string message)
 {
-	
-	cout<<"[DEBUG]\tOn envoie le message : "<< message<<"\t vers  "<<pseudo<<endl;
-	CORBA::Object_var servicedist = m_MICO_ORB->connecter_service(pseudo);
-	cout<<"[DEBUG]\tservice distant"<<servicedist<<endl;
-	//CORBA::Object_var servicedist = ::ORB::static_ORB->connecter_service (pseudo);
-	m_service_client = Standard::_narrow(servicedist.in()) ;
-	
-	
+	cout << "[DEBUG]\tThread Ecriture Message" << endl ;
 	if (CORBA::is_nil(m_service_client))
 	{
 		cerr << "[DEBUG]\tL'IOR n'est pas une référence sur un service." << endl;
 	}
+	cout<<"[DEBUG]\tEnvoie du message : "<< message<<"\t vers  "<<pseudo<<endl;
 	m_service_client->ajouter_message(pseudo,message.c_str());
+}
 
-	//cout<<"DEBUG"<<endl;
+void Client::ecrire_message(const char* pseudo,string message)
+{
+	
+	
+	CORBA::Object_var servicedist = m_MICO_ORB->connecter_service(pseudo);
+	cout<<"[DEBUG]\tConnection au service"<<servicedist<<endl;
+	
+	m_service_client = Standard::_narrow(servicedist.in()) ;
+	thread_ecrire_message = new boost::thread (boost::bind( &f_thread_ecrire_message, m_service_client,pseudo,message) );	
 	
 }
 
 void Client::afficher_message()
 {
-	cout<<"[DEBUG]\tOn va afficher les messages distants\n"<<endl;
+	cout<<"[DEBUG]\tOn va afficher les messages\n"<<endl;
 	multimap<string,string> tmp = m_standard->Liste_Messages;
 	multimap<string,string>::iterator pos;	
 	for (pos = tmp.begin(); pos != tmp.end(); ++pos)
