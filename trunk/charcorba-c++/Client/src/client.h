@@ -21,8 +21,6 @@ private:
 	// Objet qui implémente la gestion des messages entrants
 	Standard_impl * m_standard ; 
 	
-	ORB * m_MICO_ORB ;
-
 	// Annuaire ( service distant )
 	Annuaire_var m_service_annuaire ;
 	
@@ -39,22 +37,22 @@ private:
 	std::map <std::string,Standard_var> liste_client_distants ;
 
 public:
+
+	ORB * m_MICO_ORB ;
+	
 	Client();
 	Client(int, char **); 
 	~Client();
 	
-	
-	
 	boost::thread * thread_ecrire_message ;
 	
+	void demarrer();
 	void set_pseudo(std::string);
 	
 	void joindre_annuaire();
 	void ajouter_tag (std::string tag);
 	void get_amis_par_tag (std::string tag);
 	
-	void ecrire_message(const char * pseudo,string message);
-	void afficher_message();
-	void afficher_message_distant();
+	void ajouter_message(string pseudo,string message);
 };
 #endif

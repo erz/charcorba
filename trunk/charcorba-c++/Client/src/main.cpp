@@ -9,10 +9,12 @@
 int main(int argc, char ** argv )
 {
 	Client * client_chat = new Client(argc,argv);
+	client_chat->demarrer();
+	
 	Autotest_client * autotest_client = new Autotest_client (client_chat);
-	
 	autotest_client->demarrer();
-	
+	client_chat->m_MICO_ORB->thread_lancement_orb->join();
+
 /*	QApplication app( argc, argv );
 	MainWindowImpl win;
 	win.show(); 

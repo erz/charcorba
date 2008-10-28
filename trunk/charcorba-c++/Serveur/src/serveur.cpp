@@ -29,14 +29,8 @@ Serveur::Serveur(int argc, char ** argv)
 	m_MICO_ORB->connecter_service("Annuaire");
 }
 
-void f_thread_lancement_orb (ORB * MICO_ORB )
-{
-	cout << "[DEBUG]\tThread lancement ORB" << endl ;
-	MICO_ORB->demarrer();
-}
-
 void Serveur::demarrer()
 {
 	cout << "[DEBUG]\tDémarrage du serveur" << endl;
-	thread_lancement_orb = new boost::thread ( boost::bind( &f_thread_lancement_orb, m_MICO_ORB) );	
+	m_MICO_ORB->demarrer();
 }
