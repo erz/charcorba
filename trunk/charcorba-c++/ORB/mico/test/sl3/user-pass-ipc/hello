@@ -1,8 +1,0 @@
-#!/bin/sh
-
-MICORC=/dev/null
-export MICORC
-
-# run main
-./main -ORBSL3 -ORBCSIv2
-
