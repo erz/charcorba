@@ -51,8 +51,9 @@ public:
 	
 	void joindre_annuaire();
 	void ajouter_tag (std::string tag);
-	void get_amis_par_tag (std::string tag);
+	void enlever_tag (std::string tag);
 	
+	void get_amis_par_tag (std::string tag);
 	void ajouter_message(string pseudo,string message);
 };
 #endif

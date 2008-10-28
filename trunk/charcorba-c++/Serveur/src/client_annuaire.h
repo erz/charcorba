@@ -28,6 +28,8 @@ public:
 	Client_annuaire(std::string pseudo);
 	
 	void ajouter_tag (std::string tag);
+	void enlever_tag (std::string tag);
+	
 	bool possede_tag (std::string tag);
 };
 #endif

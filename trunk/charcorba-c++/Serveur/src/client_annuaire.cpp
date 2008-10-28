@@ -42,6 +42,11 @@ void Client_annuaire::ajouter_tag (std::string tag)
 	liste_tags.insert(tag);
 }
 
+void Client_annuaire::enlever_tag (std::string tag)
+{
+	liste_tags.erase(tag);
+}
+
 bool Client_annuaire::possede_tag (std::string tag)
 {
 	return liste_tags.end() != liste_tags.find(tag);

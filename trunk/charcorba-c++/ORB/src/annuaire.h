@@ -58,7 +58,11 @@ class Annuaire :
     typedef TSeqOut< StringSequenceTmpl<CORBA::String_var> > t_liste_string_out;
 
     virtual CORBA::Boolean joindre_annuaire( const char* pseudo ) = 0;
+    //virtual CORBA::Boolean quitter_annuaire( const char* pseudo ) = 0;
+    
     virtual CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag ) = 0;
+    //virtual CORBA::Boolean enlever_tag( const char* pseudo, const char* tag ) = 0;    
+    
     virtual ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag ) = 0;
 
   protected:
