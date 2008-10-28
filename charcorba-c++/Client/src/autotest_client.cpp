@@ -15,25 +15,29 @@ Autotest_client::Autotest_client( Client * mon_client )
 {
 }
 
+string getstring (istream & flux,char delim)
+{
+	string tmp;
+	getline(flux,tmp,delim);
+	return tmp ;
+}
+
 void Autotest_client::demarrer()
 {
 	string cmd;
 	while( getline(cin,cmd,' ') )
 	{
-		string arguments ;
-		getline(cin,arguments,'\n');
-		cout << "[DEBUG]\tAppel '" << cmd << "(" << arguments << ")'" << endl; 
-		if (cmd == "ajouter_tag" )			m_client->ajouter_tag(arguments);
-		else if (cmd == "set_pseudo" )		m_client->set_pseudo(arguments);
-		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire();
-		else if(cmd == "envoyer_message")   
-			{
-				m_client->ecrire_message("sylvain",arguments);
-				m_client->thread_ecrire_message->join();
-			}
-		else if (cmd == "afficher_message") {m_client->afficher_message();}
-		else if (cmd == "sleep") sleep(arguments);
-										
+		cout << "[DEBUG]\tAppel '" << cmd  << "'" << endl; 
+		if      (cmd == "ajouter_tag" )		m_client->ajouter_tag(getstring(cin,'\n'));
+		else if (cmd == "set_pseudo" )		m_client->set_pseudo(getstring(cin,'\n'));
+		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire(),getstring(cin,'\n');
+		else if (cmd == "ajouter_message")	
+		{
+			string client_distant = getstring(cin,' ') ;
+			string message = getstring(cin,'\n') ;
+			m_client->ajouter_message(client_distant,message);	
+		}
+		else if (cmd == "sleep")			sleep(atoi(getstring(cin,'\n').c_str()));
 	}
 }
 

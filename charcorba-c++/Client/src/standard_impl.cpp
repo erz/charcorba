@@ -20,7 +20,7 @@ Standard_impl::ajouter_message(const char* pseudo,const char* message)
     ::CORBA::SystemException)
 
 {
-  cout << "[DEBUG]\tAjout Message " << message << endl ;
+  cout << "[DEBUG]\tAjout du message '" << message << "' venant de '" << pseudo << "'" << endl ;
   CORBA::Boolean retval ;
   retval = true;
   Liste_Messages.insert(pair<string,string>(string(pseudo),string(message)));

@@ -36,12 +36,13 @@ ORB::ORB(int argc, char ** argv, bool activer_POA)
 	assert(!CORBA::is_nil(m_serveur_de_noms.in()));	
 }
 
-void ORB::demarrer ()
+void f_thread_lancement_orb (ORB * MICO_ORB )
 {
+	cout << "[DEBUG]\tThread lancement ORB" << endl ;
 	try
 	{
 		cout << "[DEBUG]\tDémarrage de l'ORB" << endl;
-		m_ORB->run();
+		MICO_ORB->m_ORB->run();
 	}
 	catch(CORBA::SystemException&)
 	{
@@ -55,11 +56,6 @@ void ORB::demarrer ()
 	{
 		cerr << "[DEBUG]\tException inconnue" << endl;
 	}
-}
-
-void ORB::arreter ()
-{
-	m_POA->destroy (TRUE,TRUE);
 }
 
 CORBA::Object_var ORB::connecter_service  (std::string nom_service)
@@ -78,6 +74,16 @@ CORBA::Object_var ORB::connecter_service  (std::string nom_service)
 		cout << "[DEBUG]\tService '" << nom_service << "' non trouvé ..." << endl;	
 	}
 	return obj1 ;
+}
+
+void ORB::demarrer ()
+{
+	thread_lancement_orb = new boost::thread ( boost::bind( &f_thread_lancement_orb, this) );	
+}
+
+void ORB::arreter ()
+{
+	m_POA->destroy (TRUE,TRUE);
 }
 
 void ORB::ajout_service(PortableServer::Servant service, std::string nom_service)

@@ -7,6 +7,9 @@
 #include <annuaire.h>
 #include <vector>
 
+#include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
+
 class ORB  
 {
 
@@ -14,6 +17,8 @@ public:
 
 	static ORB * static_ORB ;
 	
+	boost::thread * thread_lancement_orb ;
+		
 	int m_argc ;
 	char ** m_argv ;
 
