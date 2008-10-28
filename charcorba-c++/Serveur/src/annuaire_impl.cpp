@@ -27,6 +27,18 @@ Annuaire_impl::joindre_annuaire( const char* pseudo )
   return retval; 
 }
 
+/*CORBA::Boolean
+Annuaire_impl::quitter_annuaire( const char* pseudo )
+  throw(
+    ::CORBA::SystemException)
+{
+  cout << "[DEBUG]\nRetrait du client '" << pseudo << "' de l'annuaire " << endl ;
+  CORBA::Boolean retval ;
+  retval = true;
+  m_liste_clients.erase(string(pseudo));
+  return retval; 
+}*/
+
 CORBA::Boolean
 Annuaire_impl::ajouter_tag( const char* pseudo, const char* tag )
   throw(
@@ -40,6 +52,18 @@ Annuaire_impl::ajouter_tag( const char* pseudo, const char* tag )
   return retval; 
 }
 
+/*CORBA::Boolean
+Annuaire_impl::enlever_tag( const char* pseudo, const char* tag )
+  throw(
+    ::CORBA::SystemException)
+
+{
+  cout << "[DEBUG]\tRetrait du tag '" << tag << "' pour l'utilisateur '" << pseudo << "'" << endl ;
+  CORBA::Boolean retval;
+  retval = true;
+  m_liste_clients[pseudo].enlever_tag(string(tag));
+  return retval; 
+}*/
 
 ::Annuaire::t_liste_string*
 Annuaire_impl::get_amis_par_tag( const char* tag )

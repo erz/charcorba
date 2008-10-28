@@ -1,7 +1,6 @@
 #include "autotest_client.h"
 #include <string>
 #include <iostream>
-
 #include <client.h>
 
 using namespace std;
@@ -33,11 +32,12 @@ void Autotest_client::demarrer()
 		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire(),getstring(cin,'\n');
 		else if (cmd == "ajouter_message")	
 		{
-			string client_distant = getstring(cin,' ') ;
-			string message = getstring(cin,'\n') ;
-			m_client->ajouter_message(client_distant,message);	
+			string client_distant = getstring(cin,' ');
+			string message = getstring(cin,'\n');
+			m_client->ajouter_message(client_distant,message);
 		}
 		else if (cmd == "sleep")			sleep(atoi(getstring(cin,'\n').c_str()));
+		else if (cmd == "get_amis_par_tag")	m_client->get_amis_par_tag (getstring(cin,'\n'));
 	}
 }
 

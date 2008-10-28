@@ -48,9 +48,16 @@ void Client::joindre_annuaire()
 
 void Client::ajouter_tag (string tag)
 {
-	cout << "[DEBUG]\tNouveau tag : " << tag << endl ;
+	cout << "[DEBUG]\tAjouter tag : " << tag << endl ;
 	m_service_annuaire->ajouter_tag(m_pseudo.c_str(),tag.c_str());
 	liste_tags.insert(tag);
+}
+
+void Client::enlever_tag (string tag)
+{
+	cout << "[DEBUG]\tEnlever tag : " << tag << endl ;
+	//m_service_annuaire->ajouter_tag(m_pseudo.c_str(),tag.c_str());
+	liste_tags.erase(tag);
 }
 
 void Client::get_amis_par_tag (string tag)
@@ -61,8 +68,11 @@ void Client::get_amis_par_tag (string tag)
 	for (i=0;i< retval->length();++i)
 	{
 		CORBA::String_var ami = (*retval)[i] ;
-		liste_amis.insert(string(ami));
-		cout << "[DEBUG]\tNouvel ami : " << ami << endl ;
+		if (string(ami) != m_pseudo) 
+		{
+			liste_amis.insert(string(ami));	
+			cout << "[DEBUG]\tNouvel ami : '" << ami << "'" << endl ;
+		}
 	}
 }
 
