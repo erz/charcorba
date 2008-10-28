@@ -17,6 +17,7 @@ public:
 public slots:
 	//void Connection();
 	void Initialiser();
+	void afficherBoite();
 private slots:
 
 private:
