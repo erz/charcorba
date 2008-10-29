@@ -15,31 +15,25 @@ Standard_impl::Standard_impl()
 
 
 CORBA::Boolean
-Standard_impl::ajouter_message(const char* pseudo,const char* message)
+Standard_impl::afficher_message(const char* pseudo,const char* message)
   throw(
     ::CORBA::SystemException)
-
 {
-  cout << "[DEBUG]\tAjout du message '" << message << "' venant de '" << pseudo << "'" << endl ;
+  cout << "[DEBUG]\tAffichage du message '" << message << "' venant de '" << pseudo << "'" << endl ;
   CORBA::Boolean retval ;
   retval = true;
-  Liste_Messages.insert(pair<string,string>(string(pseudo),string(message)));
   return retval; 
 }
 
-
-::Standard::t_liste_string*
-Standard_impl::get_tag( const char* pseudo )
+CORBA::Boolean
+Standard_impl::inviter_client( const char* chatroom )
   throw(
     ::CORBA::SystemException)
 
 {
-  ::Standard::t_liste_string* retval;
-
-  // add your implementation here
-    // REMOVE  
-    mico_throw(::CORBA::NO_IMPLEMENT());
-    // REMOVE 
-
-  return retval; 
+  CORBA::Boolean retval = true ;
+  mico_throw(::CORBA::NO_IMPLEMENT());
+  return retval;
 }
+
+
