@@ -45,7 +45,12 @@ void Autotest_client::demarrer()
 			string chatroom = getstring(cin,'\n');
 			m_client->inviter_client_chatroom(pseudo,chatroom);
 		}
-		else if (cmd == "ajouter_message")	m_client->ajouter_message(getstring(cin,' '),getstring(cin,'\n'));
+		else if (cmd == "ajouter_message")
+		{
+			string nom_chatroom = getstring(cin,' ');
+			string message = getstring(cin,'\n');
+			m_client->ajouter_message(nom_chatroom,message);
+		}
 	}
 }
 

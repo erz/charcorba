@@ -20,7 +20,7 @@ Chatroom_impl::ajouter_message( const char* pseudo, const char* message )
 
 {
 	cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tAjout d'un message venant de '" << pseudo << "' sur le chat '" << m_nom_chatroom << endl;
-	CORBA::Boolean retval;
+	CORBA::Boolean retval = true ;
 	Message msg;
 	msg.auteur = string(pseudo) ;
 	msg.message = string(message) ;
