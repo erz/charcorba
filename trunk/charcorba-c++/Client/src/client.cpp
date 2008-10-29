@@ -80,8 +80,8 @@ void Client::afficher_message(string pseudo,string message)
 {
 	CORBA::Object_var service_distant = m_MICO_ORB->connecter_service(pseudo);
 
-	m_service_client = Standard::_narrow(service_distant.in()) ;
-	m_service_client->afficher_message(m_pseudo.c_str(),message.c_str());
+	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
+	standard_distant->afficher_message(m_pseudo.c_str(),message.c_str());
 }
 
 void Client::demarrer()

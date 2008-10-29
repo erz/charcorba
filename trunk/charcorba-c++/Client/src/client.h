@@ -18,6 +18,7 @@ using namespace std;
 class Client{
 
 private:
+	// Singleton
 	Client * m_client;
 	
 	// Objet qui implémente la gestion des messages entrants
@@ -26,8 +27,6 @@ private:
 	// Annuaire ( service distant )
 	Annuaire_var m_service_annuaire ;
 	
-	//Client Distant
-	Standard_var m_service_client;
 	std::string m_pseudo ;
 
 	std::set <std::string> liste_amis ;
@@ -37,9 +36,10 @@ private:
 	std::map <std::string,Chatroom_impl> liste_chatrooms_locales ;
 
 	// Liste des chatrooms distantes 
-	std::map <std::string,Chatroom_var> liste_chatrooms_distantes ;
+	//std::map <std::string,Chatroom_var> liste_chatrooms_distantes ;
 
-public:
+public
+:
 
 	ORB * m_MICO_ORB ;
 	
