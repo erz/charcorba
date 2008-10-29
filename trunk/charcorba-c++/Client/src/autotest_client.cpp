@@ -38,6 +38,13 @@ void Autotest_client::demarrer()
 		}
 		else if (cmd == "sleep")			sleep(atoi(getstring(cin,'\n').c_str()));
 		else if (cmd == "get_amis_par_tag")	m_client->get_amis_par_tag (getstring(cin,'\n'));
+		else if (cmd == "creer_chatroom" )	m_client->creer_chatroom(getstring(cin,'\n'));
+		else if (cmd == "inviter_client_chatroom")
+		{
+			string pseudo = getstring(cin,' ');
+			string chatroom = getstring(cin,'\n');
+			m_client->inviter_client_chatroom(pseudo,chatroom);
+		}
 	}
 }
 

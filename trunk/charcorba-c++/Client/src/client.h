@@ -20,11 +20,16 @@ class Client
 
 private:
 
+	// Singleton Client
+	static Client * singleton_client ;
+
 	// Objet qui implémente la gestion des messages entrants
 	Standard_impl * m_standard ; 
 	
 	// Annuaire ( service distant )
 	Annuaire_var m_service_annuaire ;
+
+public:
 	
 	std::string m_pseudo ;
 
@@ -35,15 +40,15 @@ private:
 	std::map <std::string,Chatroom_impl *> m_liste_chatrooms_locales ;
 
 	// Liste des chatrooms distantes 
-	std::map <std::string,Chatroom_var> liste_chatrooms_distantes ;
-
-public:
+	std::map <std::string,Chatroom_var> m_liste_chatrooms_distantes ;
 
 	ORB * m_MICO_ORB ;
 	
 	Client();
 	Client(int, char **); 
 	~Client();
+	
+	static Client * get_instance ();
 	
 	boost::thread * thread_ecrire_message ;
 	
