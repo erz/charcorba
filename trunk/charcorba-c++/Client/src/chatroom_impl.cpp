@@ -1,5 +1,6 @@
 #include <string>
 #include <chatroom_impl.h>
+#include <client.h>
 
 using namespace std;
 
@@ -18,12 +19,13 @@ Chatroom_impl::ajouter_message( const char* pseudo, const char* message )
     ::CORBA::SystemException)
 
 {
-  CORBA::Boolean retval;
-  Message msg;
-  msg.auteur = string(pseudo) ;
-  msg.message = string(message) ;
-  m_liste_messages.push_back(msg);
-  return retval; 
+	cout << "[DEBUG]\t Ajout d'un message venant de '" << pseudo << "' sur le chat '" << m_nom_chatroom << endl;
+	CORBA::Boolean retval;
+	Message msg;
+	msg.auteur = string(pseudo) ;
+	msg.message = string(message) ;
+	m_liste_messages.push_back(msg);
+	return retval; 
 }
 
 
@@ -33,6 +35,7 @@ Chatroom_impl::get_message( CORBA::ULong idmessage )
     ::CORBA::SystemException)
 
 {
+  cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tDemande de réception du message " << idmessage << endl ;
   ::Chatroom::t_string_auteur* retval = new ::Chatroom::t_string_auteur ();
   retval->length(2);
   
@@ -47,3 +50,11 @@ Chatroom_impl::get_message( CORBA::ULong idmessage )
   return retval; 
 }
 
+void Chatroom_impl::inviter_client (string pseudo)
+{
+	cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tOn invite le client '" << pseudo << "'" << endl ;
+/*	CORBA::Object_var service_distant = Client::m_client->m_MICO_ORB->connecter_service(pseudo);
+
+	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
+	standard_distant->inviter_client(pseudo.c_str());*/
+}

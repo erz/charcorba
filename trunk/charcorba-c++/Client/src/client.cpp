@@ -93,7 +93,13 @@ void Client::demarrer()
 
 void Client::creer_chatroom (string nom_chatroom)
 {
+	cout << "[DEBUG]\tCréation de la chatroom '" << nom_chatroom << "'" << endl ;
 	Chatroom_impl * chatroom = new Chatroom_impl(nom_chatroom);
 	m_liste_chatrooms_locales.insert( pair<string,Chatroom_impl *>(nom_chatroom,chatroom));
 	m_MICO_ORB->ajout_service(chatroom,nom_chatroom);
+}
+
+void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)
+{
+	m_liste_chatrooms_locales[nom_chatroom]->inviter_client(pseudo) ;
 }
