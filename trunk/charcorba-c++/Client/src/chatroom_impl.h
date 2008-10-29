@@ -8,7 +8,17 @@
 // Implementation for interface Chatroom
 class Chatroom_impl : virtual public POA_Chatroom
 {
+	
+  private:
+  
+  std::string m_nom_chatroom ;
+  
   public:
+
+	Chatroom_impl ();
+	Chatroom_impl (std::string nom_chatroom);
+
+	void demarrer ();
 
     CORBA::Boolean ajouter_message( const char* pseudo, const char* message )
       throw(

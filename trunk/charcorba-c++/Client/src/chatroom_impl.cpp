@@ -1,7 +1,15 @@
-
+#include <string>
 #include <chatroom_impl.h>
 
+using namespace std;
 
+Chatroom_impl::Chatroom_impl ()
+{}
+
+Chatroom_impl::Chatroom_impl (string nom_chatroom)
+	: m_nom_chatroom (nom_chatroom)
+{}
+	
 // Implementation for interface Chatroom
 
 CORBA::Boolean
