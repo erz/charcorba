@@ -1,24 +1,24 @@
 #include <QApplication>
 #include "mainwindowimpl.h"
-
+#include <client.h>
+#include <autotest_client.h>
 
 int main(int argc, char ** argv )
 {
-/*	Client * client_chat = new Client(argc,argv);
+	// Initialisation du client
+	Client * client_chat = new Client(argc,argv);
 	client_chat->demarrer();
 	
 	Autotest_client * autotest_client = new Autotest_client (client_chat);
 	autotest_client->demarrer();
-	client_chat->m_MICO_ORB->thread_lancement_orb->join();
-*/
-	QApplication app( argc, argv );
-	MainWindowImpl win;
-	win.ARGC=argc;
-	win.ARGV=argv;
+	
+	// Initialisation de la GUI
+	QApplication qapplication( argc, argv );
+	MainWindowImpl fenetre;
+	fenetre.ARGC=argc;
+	fenetre.ARGV=argv;
+	fenetre.show(); 
 
-	win.show(); 
-	app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
-	return app.exec();
-	return 0 ;
+	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
+	return qapplication.exec();
 }
-
