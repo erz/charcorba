@@ -4,3 +4,6 @@ ajouter_tag michael
 ajouter_tag mignon-mais-...
 ajouter_tag langue-de-pute
 ajouter_tag fourbe
+sleep 5
+ajouter_message chatroom-suicide Suicide demain 10h, prenez vos cordes !
+
