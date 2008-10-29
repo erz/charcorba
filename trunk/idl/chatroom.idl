@@ -4,7 +4,11 @@ interface Chatroom {
 
    typedef sequence <string,2> t_string_auteur ;
 
+   // Ajoute un message à la chatroom
    boolean ajouter_message ( in string pseudo, in string message ) ;
+   
+   // Recupère le idmessage-ième message de la chatroom
+   // Renvoie l'auteur puis le message dans deux strings
    t_string_auteur get_message ( in unsigned long idmessage ) ;
  
 };
