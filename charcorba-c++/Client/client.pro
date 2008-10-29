@@ -8,13 +8,11 @@ UI_DIR = build
 FORMS = ui/mainwindow.ui
 HEADERS = src/mainwindowimpl.h \
  ../ORB/src/orb.h \
- ../ORB/src/annuaire.h \
  src/client.h \
  src/standard_impl.h \
  ../ORB/src/standard.h \
  src/autotest_client.h \
- src/chatroom_impl.h \
- ../ORB/src/chatroom.h
+ src/chatroom_impl.h
 SOURCES = src/mainwindowimpl.cpp \
  src/main.cpp \
  ../ORB/src/orb.cpp \

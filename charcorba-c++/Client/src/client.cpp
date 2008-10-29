@@ -2,6 +2,7 @@
 #include "annuaire.h"
 #include "standard_impl.h"
 #include "orb.h"
+#include <chatroom_impl.h>
 
 #include <string>
 #include <set>
@@ -88,4 +89,11 @@ void Client::demarrer()
 {
 	cout << "[DEBUG]\tDémarrage du client" << endl;
 	m_MICO_ORB->demarrer();
+}
+
+void Client::creer_chatroom (string nom_chatroom)
+{
+	Chatroom_impl * chatroom = new Chatroom_impl(nom_chatroom);
+	m_liste_chatrooms_locales.insert( pair<string,Chatroom_impl *>(nom_chatroom,chatroom));
+	m_MICO_ORB->ajout_service(chatroom,nom_chatroom);
 }
