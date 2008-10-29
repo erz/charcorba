@@ -54,6 +54,6 @@ public:
 	void enlever_tag (std::string tag);
 	
 	void get_amis_par_tag (std::string tag);
-	void ajouter_message(string pseudo,string message);
+	void afficher_message(string pseudo,string message);
 };
 #endif

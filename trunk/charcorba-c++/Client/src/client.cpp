@@ -76,12 +76,12 @@ void Client::get_amis_par_tag (string tag)
 	}
 }
 
-void Client::ajouter_message(string pseudo,string message)
+void Client::afficher_message(string pseudo,string message)
 {
 	CORBA::Object_var service_distant = m_MICO_ORB->connecter_service(pseudo);
 
 	m_service_client = Standard::_narrow(service_distant.in()) ;
-	m_service_client->ajouter_message(m_pseudo.c_str(),message.c_str());
+	m_service_client->afficher_message(m_pseudo.c_str(),message.c_str());
 }
 
 void Client::demarrer()

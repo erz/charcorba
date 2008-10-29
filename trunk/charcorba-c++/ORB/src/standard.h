@@ -53,12 +53,8 @@ class Standard :
 
     virtual void *_narrow_helper( const char *repoid );
 
-    typedef StringSequenceTmpl<CORBA::String_var> t_liste_string;
-    typedef TSeqVar< StringSequenceTmpl<CORBA::String_var> > t_liste_string_var;
-    typedef TSeqOut< StringSequenceTmpl<CORBA::String_var> > t_liste_string_out;
-
-    virtual CORBA::Boolean ajouter_message( const char* pseudo, const char* message ) = 0;
-    virtual ::Standard::t_liste_string* get_tag( const char* pseudo ) = 0;
+    virtual CORBA::Boolean afficher_message( const char* pseudo, const char* message ) = 0;
+    virtual CORBA::Boolean inviter_client( const char* chatroom ) = 0;
 
   protected:
     Standard() {};
@@ -73,8 +69,8 @@ class Standard_stub:
 {
   public:
     virtual ~Standard_stub();
-    CORBA::Boolean ajouter_message( const char* pseudo, const char* message );
-    ::Standard::t_liste_string* get_tag( const char* pseudo );
+    CORBA::Boolean afficher_message( const char* pseudo, const char* message );
+    CORBA::Boolean inviter_client( const char* chatroom );
 
   private:
     void operator=( const Standard_stub& );
@@ -89,8 +85,8 @@ class Standard_stub_clp :
   public:
     Standard_stub_clp (PortableServer::POA_ptr, CORBA::Object_ptr);
     virtual ~Standard_stub_clp ();
-    CORBA::Boolean ajouter_message( const char* pseudo, const char* message );
-    ::Standard::t_liste_string* get_tag( const char* pseudo );
+    CORBA::Boolean afficher_message( const char* pseudo, const char* message );
+    CORBA::Boolean inviter_client( const char* chatroom );
 
   protected:
     Standard_stub_clp ();
@@ -117,8 +113,8 @@ class POA_Standard : virtual public PortableServer::StaticImplementation
     static POA_Standard * _narrow (PortableServer::Servant);
     virtual CORBA::Object_ptr _make_stub (PortableServer::POA_ptr, CORBA::Object_ptr);
 
-    virtual CORBA::Boolean ajouter_message( const char* pseudo, const char* message ) = 0;
-    virtual ::Standard::t_liste_string* get_tag( const char* pseudo ) = 0;
+    virtual CORBA::Boolean afficher_message( const char* pseudo, const char* message ) = 0;
+    virtual CORBA::Boolean inviter_client( const char* chatroom ) = 0;
 
   protected:
     POA_Standard () {};

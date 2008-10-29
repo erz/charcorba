@@ -14,7 +14,6 @@ using namespace std;
 //  Implementation of stubs
 //--------------------------------------------------------
 
-
 /*
  * Base interface for class Standard
  */
@@ -157,14 +156,14 @@ Standard_stub_clp::~Standard_stub_clp ()
 
 #endif // MICO_CONF_NO_POA
 
-CORBA::Boolean Standard_stub::ajouter_message( const char* _par_pseudo, const char* _par_message )
+CORBA::Boolean Standard_stub::afficher_message( const char* _par_pseudo, const char* _par_message )
 {
   CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
   CORBA::StaticAny _sa_message( CORBA::_stc_string, &_par_message );
   CORBA::Boolean _res;
   CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
 
-  CORBA::StaticRequest __req( this, "ajouter_message" );
+  CORBA::StaticRequest __req( this, "afficher_message" );
   __req.add_in_arg( &_sa_pseudo );
   __req.add_in_arg( &_sa_message );
   __req.set_result( &__res );
@@ -180,7 +179,7 @@ CORBA::Boolean Standard_stub::ajouter_message( const char* _par_pseudo, const ch
 #ifndef MICO_CONF_NO_POA
 
 CORBA::Boolean
-Standard_stub_clp::ajouter_message( const char* _par_pseudo, const char* _par_message )
+Standard_stub_clp::afficher_message( const char* _par_pseudo, const char* _par_message )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
@@ -191,7 +190,7 @@ Standard_stub_clp::ajouter_message( const char* _par_pseudo, const char* _par_me
       #ifdef HAVE_EXCEPTIONS
       try {
       #endif
-        __res = _myserv->ajouter_message(_par_pseudo, _par_message);
+        __res = _myserv->afficher_message(_par_pseudo, _par_message);
       #ifdef HAVE_EXCEPTIONS
       }
       catch (...) {
@@ -208,43 +207,44 @@ Standard_stub_clp::ajouter_message( const char* _par_pseudo, const char* _par_me
     _postinvoke ();
   }
 
-  return Standard_stub::ajouter_message(_par_pseudo, _par_message);
+  return Standard_stub::afficher_message(_par_pseudo, _par_message);
 }
 
 #endif // MICO_CONF_NO_POA
 
-Standard::t_liste_string* Standard_stub::get_tag( const char* _par_pseudo )
+CORBA::Boolean Standard_stub::inviter_client( const char* _par_chatroom )
 {
-  CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo );
-  CORBA::StaticAny __res( CORBA::_stcseq_string );
+  CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom );
+  CORBA::Boolean _res;
+  CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
 
-  CORBA::StaticRequest __req( this, "get_tag" );
-  __req.add_in_arg( &_sa_pseudo );
+  CORBA::StaticRequest __req( this, "inviter_client" );
+  __req.add_in_arg( &_sa_chatroom );
   __req.set_result( &__res );
 
   __req.invoke();
 
   mico_sii_throw( &__req, 
     0);
-  return (Standard::t_liste_string*) __res._retn();
+  return _res;
 }
 
 
 #ifndef MICO_CONF_NO_POA
 
-Standard::t_liste_string*
-Standard_stub_clp::get_tag( const char* _par_pseudo )
+CORBA::Boolean
+Standard_stub_clp::inviter_client( const char* _par_chatroom )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
     POA_Standard * _myserv = POA_Standard::_narrow (_serv);
     if (_myserv) {
-      Standard::t_liste_string* __res;
+      CORBA::Boolean __res;
 
       #ifdef HAVE_EXCEPTIONS
       try {
       #endif
-        __res = _myserv->get_tag(_par_pseudo);
+        __res = _myserv->inviter_client(_par_chatroom);
       #ifdef HAVE_EXCEPTIONS
       }
       catch (...) {
@@ -261,7 +261,7 @@ Standard_stub_clp::get_tag( const char* _par_pseudo )
     _postinvoke ();
   }
 
-  return Standard_stub::get_tag(_par_pseudo);
+  return Standard_stub::inviter_client(_par_chatroom);
 }
 
 #endif // MICO_CONF_NO_POA
@@ -335,7 +335,7 @@ POA_Standard::dispatch (CORBA::StaticServerRequest_ptr __req)
   #ifdef HAVE_EXCEPTIONS
   try {
   #endif
-    if( strcmp( __req->op_name(), "ajouter_message" ) == 0 ) {
+    if( strcmp( __req->op_name(), "afficher_message" ) == 0 ) {
       CORBA::String_var _par_pseudo;
       CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
       CORBA::String_var _par_message;
@@ -350,26 +350,24 @@ POA_Standard::dispatch (CORBA::StaticServerRequest_ptr __req)
       if( !__req->read_args() )
         return true;
 
-      _res = ajouter_message( _par_pseudo.inout(), _par_message.inout() );
+      _res = afficher_message( _par_pseudo.inout(), _par_message.inout() );
       __req->write_results();
       return true;
     }
-    if( strcmp( __req->op_name(), "get_tag" ) == 0 ) {
-      CORBA::String_var _par_pseudo;
-      CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
+    if( strcmp( __req->op_name(), "inviter_client" ) == 0 ) {
+      CORBA::String_var _par_chatroom;
+      CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom._for_demarshal() );
 
-      ::Standard::t_liste_string* _res;
-      CORBA::StaticAny __res( CORBA::_stcseq_string );
-      __req->add_in_arg( &_sa_pseudo );
+      CORBA::Boolean _res;
+      CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+      __req->add_in_arg( &_sa_chatroom );
       __req->set_result( &__res );
 
       if( !__req->read_args() )
         return true;
 
-      _res = get_tag( _par_pseudo.inout() );
-      __res.value( CORBA::_stcseq_string, _res );
+      _res = inviter_client( _par_chatroom.inout() );
       __req->write_results();
-      delete _res;
       return true;
     }
   #ifdef HAVE_EXCEPTIONS

@@ -1,0 +1,8 @@
+// -*- c++ -*-
+
+interface Standard {
+
+   boolean afficher_message ( in string pseudo, in string message ) ;
+   boolean inviter_client  ( in string chatroom );
+
+};
