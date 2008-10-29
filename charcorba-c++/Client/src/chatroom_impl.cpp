@@ -53,8 +53,8 @@ Chatroom_impl::get_message( CORBA::ULong idmessage )
 void Chatroom_impl::inviter_client (string pseudo)
 {
 	cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tOn invite le client '" << pseudo << "'" << endl ;
-/*	CORBA::Object_var service_distant = Client::m_client->m_MICO_ORB->connecter_service(pseudo);
+	CORBA::Object_var service_distant = Client::get_instance()->m_MICO_ORB->connecter_service(pseudo);
 
 	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
-	standard_distant->inviter_client(pseudo.c_str());*/
+	standard_distant->inviter_client(pseudo.c_str());
 }

@@ -12,7 +12,10 @@
 #include <boost/thread/thread.hpp>
 #include <boost/bind.hpp>
 
+
 using namespace std;
+ 
+Client * Client::singleton_client = NULL ;
  
 Client::Client()
 {}
@@ -21,10 +24,16 @@ Client::Client(int argc, char ** argv)
 {
 	m_MICO_ORB = new ORB (argc,argv,true) ;	
 	m_standard = new Standard_impl() ;
+	Client::singleton_client = this ;
 }
 
 Client::~Client()
 {}
+
+Client * Client::get_instance ()
+{
+	return Client::singleton_client ;
+}
 
 void Client::set_pseudo (string pseudo)
 {	

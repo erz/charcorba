@@ -3,6 +3,8 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <chatroom.h>
+#include <client.h>
 
 using namespace std ;
 // Implementation for interface Standard
@@ -33,7 +35,19 @@ Standard_impl::inviter_client( const char* chatroom )
 {
 	cout << "[DEBUG]\t[Standard]\tRéception d'une invitation à participer au chat '" << chatroom << "'" << endl ;
 	CORBA::Boolean retval = true ;
-	// PENSEZ A AJOUTER AU CLIENT UN CHAT DISTANT
+	
+	
+	CORBA::Object_var service = Client::get_instance()->m_MICO_ORB->connecter_service(chatroom);
+	
+	Chatroom_var service_chatroom ;
+	service_chatroom = Chatroom::_narrow(service.in()) ;
+
+	if (CORBA::is_nil(service_chatroom))
+	{
+		cerr << "[DEBUG]\tL'IOR n'est pas une référence sur un service." << endl;
+	}
+	
+	Client::get_instance()->m_liste_chatrooms_distantes.insert( pair<string,Chatroom_var>(string(chatroom),service_chatroom));
 	return retval;
 }
 

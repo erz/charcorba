@@ -6,4 +6,6 @@ ajouter_tag c++
 ajouter_tag pieton
 ajouter_tag anti-java
 sleep 2
+creer_chatroom chatroom-suicide
 ajouter_message florent Mais oui florent, tu es le plus fort !
+inviter_client_chatroom michael chatroom-suicide
