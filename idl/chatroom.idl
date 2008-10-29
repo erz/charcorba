@@ -1,9 +1,10 @@
-# 1 "standard.idl"
+// -*- c++ -*-
+
+interface Chatroom {
+
+   typedef sequence <string,2> t_string_auteur ;
+
+   boolean ajouter_message ( in string pseudo, in string message ) ;
+   t_string_auteur get_message ( in unsigned long idmessage ) ;
  
-
-interface Standard {
-
-   boolean afficher_message ( in string pseudo, in string message ) ;
-   boolean inviter_client  ( in string chatroom );
-
 };
