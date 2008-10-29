@@ -19,9 +19,7 @@ class Client
 {
 
 private:
-	// Singleton
-	Client * m_client;
-	
+
 	// Objet qui implémente la gestion des messages entrants
 	Standard_impl * m_standard ; 
 	
@@ -39,8 +37,7 @@ private:
 	// Liste des chatrooms distantes 
 	std::map <std::string,Chatroom_var> liste_chatrooms_distantes ;
 
-public
-:
+public:
 
 	ORB * m_MICO_ORB ;
 	
@@ -64,5 +61,6 @@ public
 	
 	// Fonctions liées aux chatrooms
 	void creer_chatroom (std::string nom_chatroom);
+	void inviter_client_chatroom (std::string pseudo,std::string nom_chatroom);
 };
 #endif
