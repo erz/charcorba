@@ -112,3 +112,20 @@ void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)
 {
 	m_liste_chatrooms_locales[nom_chatroom]->inviter_client(pseudo) ;
 }
+
+void Client::ajouter_message(string nom_chatroom,string message)
+{
+	m_liste_chatrooms_distantes[nom_chatroom]->ajouter_message (m_pseudo.c_str(),message.c_str());
+}
+
+Message Client::get_message (string nom_chatroom,unsigned long idmessage)
+{
+	::Chatroom::t_string_auteur * retval = m_liste_chatrooms_distantes[nom_chatroom]->get_message(idmessage) ;
+	CORBA::String_var auteur = (*retval)[0] ;
+	CORBA::String_var message = (*retval)[1] ;
+
+	Message msg;
+	msg.auteur = auteur;
+	msg.message = message;
+	return msg ;
+}
