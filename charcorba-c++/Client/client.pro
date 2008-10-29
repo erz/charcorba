@@ -10,7 +10,6 @@ HEADERS = src/mainwindowimpl.h \
  ../ORB/src/orb.h \
  src/client.h \
  src/standard_impl.h \
- ../ORB/src/standard.h \
  src/autotest_client.h \
  src/chatroom_impl.h
 SOURCES = src/mainwindowimpl.cpp \

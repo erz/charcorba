@@ -19,12 +19,10 @@ Chatroom_impl::ajouter_message( const char* pseudo, const char* message )
 
 {
   CORBA::Boolean retval;
-
-  // add your implementation here
-    // REMOVE  
-    mico_throw(::CORBA::NO_IMPLEMENT());
-    // REMOVE 
-
+  Message msg;
+  msg.auteur = string(pseudo) ;
+  msg.message = string(message) ;
+  m_liste_messages.push_back(msg);
   return retval; 
 }
 
@@ -35,13 +33,17 @@ Chatroom_impl::get_message( CORBA::ULong idmessage )
     ::CORBA::SystemException)
 
 {
-  ::Chatroom::t_string_auteur* retval;
+  ::Chatroom::t_string_auteur* retval = new ::Chatroom::t_string_auteur ();
+  retval->length(2);
+  
+  const char * c_auteur = m_liste_messages[idmessage].auteur.c_str() ;
+  CORBA::String_var s_auteur (c_auteur);
 
-  // add your implementation here
-    // REMOVE  
-    mico_throw(::CORBA::NO_IMPLEMENT());
-    // REMOVE 
-
+  const char * c_message = m_liste_messages[idmessage].message.c_str() ;
+  CORBA::String_var s_message (c_message);  
+  
+  (*retval)[0] = c_auteur ;
+  (*retval)[1] = c_message ;
   return retval; 
 }
 

@@ -32,7 +32,7 @@ Standard_impl::inviter_client( const char* chatroom )
 
 {
   CORBA::Boolean retval = true ;
-  mico_throw(::CORBA::NO_IMPLEMENT());
+  
   return retval;
 }
 

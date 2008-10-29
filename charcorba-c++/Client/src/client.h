@@ -15,7 +15,8 @@
 
 using namespace std;
 
-class Client{
+class Client
+{
 
 private:
 	// Singleton
@@ -36,7 +37,7 @@ private:
 	std::map <std::string,Chatroom_impl *> m_liste_chatrooms_locales ;
 
 	// Liste des chatrooms distantes 
-	//std::map <std::string,Chatroom_var> liste_chatrooms_distantes ;
+	std::map <std::string,Chatroom_var> liste_chatrooms_distantes ;
 
 public
 :
