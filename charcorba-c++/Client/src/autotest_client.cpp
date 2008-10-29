@@ -30,7 +30,7 @@ void Autotest_client::demarrer()
 		if      (cmd == "ajouter_tag" )		m_client->ajouter_tag(getstring(cin,'\n'));
 		else if (cmd == "set_pseudo" )		m_client->set_pseudo(getstring(cin,'\n'));
 		else if (cmd == "joindre_annuaire")	m_client->joindre_annuaire(),getstring(cin,'\n');
-		else if (cmd == "ajouter_message")	
+		else if (cmd == "afficher_message")	
 		{
 			string client_distant = getstring(cin,' ');
 			string message = getstring(cin,'\n');
@@ -45,6 +45,7 @@ void Autotest_client::demarrer()
 			string chatroom = getstring(cin,'\n');
 			m_client->inviter_client_chatroom(pseudo,chatroom);
 		}
+		else if (cmd == "ajouter_message")	m_client->ajouter_message(getstring(cin,' '),getstring(cin,'\n'));
 	}
 }
 

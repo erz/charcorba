@@ -19,8 +19,6 @@ xterm -e "Serveur/bin/serveur -ORBInitRef NameService=corbaloc::localhost:10809/
 sleep 5
 
 # Lancement des clients
-xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:10809/NameService < Client/tests/sylvain.test ; sleep 10"  &
-sleep 1
 xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:10809/NameService < Client/tests/florent.test ; sleep 10"  &
 sleep 1
 xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:10809/NameService < Client/tests/michael.test ; sleep 10"  &
@@ -28,4 +26,6 @@ sleep 1
 xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:10809/NameService < Client/tests/aurelien.test ; sleep 10" &
 sleep 1
 xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:10809/NameService < Client/tests/tony.test ; sleep 10" &
+sleep 1
+xterm -e "Client/bin/client -ORBInitRef NameService=corbaloc::localhost:10809/NameService < Client/tests/sylvain.test ; sleep 10"  &
 

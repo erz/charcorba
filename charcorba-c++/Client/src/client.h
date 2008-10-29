@@ -63,9 +63,11 @@ public:
 
 	// Fonctions liées aux standards	
 	void afficher_message(string pseudo,string message);
-	
+	void inviter_client_chatroom (std::string pseudo,std::string nom_chatroom);
+
 	// Fonctions liées aux chatrooms
 	void creer_chatroom (std::string nom_chatroom);
-	void inviter_client_chatroom (std::string pseudo,std::string nom_chatroom);
+	void ajouter_message(std::string nom_chatroom,std::string message);
+	Message get_message (std::string nom_chatroom,unsigned long idmessage);
 };
 #endif

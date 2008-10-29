@@ -13,12 +13,13 @@ int main(int argc, char ** argv )
 	autotest_client->demarrer();
 	
 	// Initialisation de la GUI
-	QApplication qapplication( argc, argv );
+	/*QApplication qapplication( argc, argv );
 	MainWindowImpl fenetre;
 	fenetre.ARGC=argc;
 	fenetre.ARGV=argv;
 	fenetre.show(); 
 
 	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
-	return qapplication.exec();
+	return qapplication.exec();*/
+	sleep(1000);
 }

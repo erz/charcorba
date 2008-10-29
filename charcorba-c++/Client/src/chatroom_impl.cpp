@@ -19,7 +19,7 @@ Chatroom_impl::ajouter_message( const char* pseudo, const char* message )
     ::CORBA::SystemException)
 
 {
-	cout << "[DEBUG]\t Ajout d'un message venant de '" << pseudo << "' sur le chat '" << m_nom_chatroom << endl;
+	cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tAjout d'un message venant de '" << pseudo << "' sur le chat '" << m_nom_chatroom << endl;
 	CORBA::Boolean retval;
 	Message msg;
 	msg.auteur = string(pseudo) ;
@@ -56,5 +56,5 @@ void Chatroom_impl::inviter_client (string pseudo)
 	CORBA::Object_var service_distant = Client::get_instance()->m_MICO_ORB->connecter_service(pseudo);
 
 	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
-	standard_distant->inviter_client(pseudo.c_str());
+	standard_distant->inviter_client(m_nom_chatroom.c_str());
 }
