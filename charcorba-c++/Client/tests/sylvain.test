@@ -6,6 +6,6 @@ ajouter_tag c++
 ajouter_tag pieton
 ajouter_tag anti-java
 creer_chatroom chatroom-suicide
-afficher_message florent Mais oui florent, tu es le plus fort !
+afficher_message michael Hey mais toi tu ressembles à Matt Damon !
 sleep 3
 inviter_client_chatroom michael chatroom-suicide
