@@ -20,5 +20,9 @@ int main(int argc, char ** argv )
 	fenetre.show(); 
 
 	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
-	return qapplication.exec();
+	qapplication.exec();
+	
+	delete autotest_client;
+	delete client_chat ;
+	return 0 ;
 }

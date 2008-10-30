@@ -17,44 +17,46 @@ ORB::ORB()
 }
 
 ORB::~ORB()
-{}
+{
+	arreter();
+}
 	
 ORB::ORB(int argc, char ** argv, bool activer_POA) 
 {	
-	cout << "[DEBUG]\tInitialisation ORB" << endl ;
+	cout << "[DEBUG - ORB]\tInitialisation ORB" << endl ;
 	m_ORB = CORBA::ORB_init (argc,argv);
 	ORB::static_ORB = this ;
 	if ( activer_POA ) 
 	{
-		cout << "[DEBUG]\tActivation POA" << endl ;		
+		cout << "[DEBUG - ORB]\tActivation POA" << endl ;		
 		m_POA = PortableServer::POA::_narrow (m_ORB->resolve_initial_references("RootPOA"));
 		m_POA->the_POAManager()->activate();
 	}
 
-	cout << "[DEBUG]\tConnexion au NameService" << endl ;			
+	cout << "[DEBUG - ORB]\tConnexion au NameService" << endl ;			
 	m_serveur_de_noms  = CosNaming::NamingContext::_narrow (m_ORB->resolve_initial_references("NameService"));
 	assert(!CORBA::is_nil(m_serveur_de_noms.in()));	
 }
 
 void f_thread_lancement_orb (ORB * MICO_ORB )
 {
-	cout << "[DEBUG]\tThread lancement ORB" << endl ;
+	cout << "[DEBUG - ORB]\tThread lancement ORB" << endl ;
 	try
 	{
-		cout << "[DEBUG]\tDémarrage de l'ORB" << endl;
+		cout << "[DEBUG - ORB]\tDémarrage de l'ORB" << endl;
 		MICO_ORB->m_ORB->run();
 	}
 	catch(CORBA::SystemException&)
 	{
-		cerr << "[DEBUG]\tException Système CORBA" << endl;
+		cerr << "[DEBUG - ORB]\tException Système CORBA" << endl;
 	}
 	catch(CORBA::Exception&)
 	{
-		cerr << "[DEBUG]\tException CORBA" << endl;
+		cerr << "[DEBUG - ORB]\tException CORBA" << endl;
 	}
 	catch(...)
 	{
-		cerr << "[DEBUG]\tException inconnue" << endl;
+		cerr << "[DEBUG - ORB]\tException inconnue" << endl;
 	}
 }
 
@@ -71,24 +73,27 @@ CORBA::Object_var ORB::connecter_service  (std::string nom_service)
 	}
 	catch(CosNaming::NamingContext::NotFound &exc)
 	{
-		cout << "[DEBUG]\tService '" << nom_service << "' non trouvé ..." << endl;	
+		cout << "[DEBUG - ORB]\tService '" << nom_service << "' non trouvé ..." << endl;	
 	}
 	return obj1 ;
 }
 
 void ORB::demarrer ()
 {
+	cout << "[DEBUG - ORB]\tDémarrage de l'ORB" << endl;
 	thread_lancement_orb = new boost::thread ( boost::bind( &f_thread_lancement_orb, this) );	
 }
 
 void ORB::arreter ()
 {
+	cout << "[DEBUG - ORB]\tArret de l'ORB" << endl;
 	m_POA->destroy (TRUE,TRUE);
+	m_ORB->destroy ();
 }
 
 void ORB::ajout_service(PortableServer::Servant service, std::string nom_service)
 {
-	cout << "[DEBUG]\tAjout du service : '" << nom_service << "'" << endl ;
+	cout << "[DEBUG - ORB]\tAjout du service : '" << nom_service << "'" << endl ;
 	CosNaming::Name c_nom_service;
 	c_nom_service.length (1);
 	c_nom_service[0].id = CORBA::string_dup (nom_service.c_str());	

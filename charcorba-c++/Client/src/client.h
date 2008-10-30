@@ -53,6 +53,8 @@ public:
 	boost::thread * thread_ecrire_message ;
 	
 	void demarrer();
+	void arreter();
+	
 	void set_pseudo(std::string);
 	
 	// Fonctions liées à l'annuaire

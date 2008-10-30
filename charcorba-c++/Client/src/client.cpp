@@ -20,15 +20,20 @@ Client * Client::singleton_client = NULL ;
 Client::Client()
 {}
 
+Client::~Client()
+{
+	arreter();
+	delete m_standard;
+	delete m_MICO_ORB;
+}
+
+
 Client::Client(int argc, char ** argv)  
 {
 	m_MICO_ORB = new ORB (argc,argv,true) ;	
 	m_standard = new Standard_impl() ;
 	Client::singleton_client = this ;
 }
-
-Client::~Client()
-{}
 
 Client * Client::get_instance ()
 {
@@ -98,6 +103,12 @@ void Client::demarrer()
 {
 	cout << "[DEBUG]\tDémarrage du client" << endl;
 	m_MICO_ORB->demarrer();
+}
+
+void Client::arreter()
+{
+	cout << "[DEBUG]\tArret du client" << endl ;
+	m_MICO_ORB->arreter();
 }
 
 void Client::creer_chatroom (string nom_chatroom)
