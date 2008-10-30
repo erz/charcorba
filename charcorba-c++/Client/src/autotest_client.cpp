@@ -51,6 +51,12 @@ void Autotest_client::demarrer()
 			string message = getstring(cin,'\n');
 			m_client->ajouter_message(nom_chatroom,message);
 		}
+		else if (cmd == "get_message" )
+		{
+			string nom_chatroom = getstring (cin,' ');
+			unsigned long idmessage = atoi(getstring (cin,'\n').c_str()) ;
+			Message msg = m_client->get_message(nom_chatroom,idmessage);
+		}
 	}
 }
 

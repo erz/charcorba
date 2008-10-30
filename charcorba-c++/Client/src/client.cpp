@@ -132,6 +132,7 @@ void Client::ajouter_message(string nom_chatroom,string message)
 
 Message Client::get_message (string nom_chatroom,unsigned long idmessage)
 {
+	cout << "[DEBUG]\tRéception du message " << idmessage << " de la chatroom " << nom_chatroom << endl ;
 	::Chatroom::t_string_auteur * retval = m_liste_chatrooms_distantes[nom_chatroom]->get_message(idmessage) ;
 	CORBA::String_var auteur = (*retval)[0] ;
 	CORBA::String_var message = (*retval)[1] ;
@@ -139,5 +140,7 @@ Message Client::get_message (string nom_chatroom,unsigned long idmessage)
 	Message msg;
 	msg.auteur = auteur;
 	msg.message = message;
+	cout << "[DEBUG]\tAuteur :\t" << msg.auteur << endl ;
+	cout << "[DEBUG]\tMessage :\t" << msg.message << endl ;
 	return msg ;
 }
