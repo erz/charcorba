@@ -57,14 +57,8 @@ Standard_impl::signal_chatroom( const char* chatroom )
     ::CORBA::SystemException)
 
 {
-  CORBA::Boolean retval;
-
-  // add your implementation here
-    // REMOVE
-    mico_throw(::CORBA::NO_IMPLEMENT());
-    // REMOVE
-
-  return retval;
+	CORBA::Boolean retval;
+	return retval;
 }
 
 CORBA::Boolean

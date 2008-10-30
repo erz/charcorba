@@ -21,7 +21,7 @@ class Chatroom_impl : virtual public POA_Chatroom
   
 	std::string m_nom_chatroom ;
 	std::vector <Message> m_liste_messages ;
-	std::set <Standard_var> m_liste_participants;
+	std::map <std::string,Standard_var> m_liste_participants;
 
   public:
 
