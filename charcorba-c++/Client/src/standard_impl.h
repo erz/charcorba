@@ -25,6 +25,16 @@ class Standard_impl : virtual public POA_Standard
         ::CORBA::SystemException)
     ;
 
+    CORBA::Boolean signal_chatroom( const char* chatroom )
+      throw(
+        ::CORBA::SystemException)
+    ;
+    
+    CORBA::Boolean ping()
+      throw(
+        ::CORBA::SystemException)
+    ;
+
 };
 
 

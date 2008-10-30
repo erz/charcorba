@@ -11,4 +11,7 @@ interface Standard {
    // Invite le client à participer à une chatroom
    boolean inviter_client  ( in string chatroom );
 
+   // Teste la présence du client
+   boolean ping ( );
+
 };

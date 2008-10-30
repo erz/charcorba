@@ -54,7 +54,9 @@ class Standard :
     virtual void *_narrow_helper( const char *repoid );
 
     virtual CORBA::Boolean afficher_message( const char* pseudo, const char* message ) = 0;
+    virtual CORBA::Boolean signal_chatroom( const char* chatroom ) = 0;
     virtual CORBA::Boolean inviter_client( const char* chatroom ) = 0;
+    virtual CORBA::Boolean ping() = 0;
 
   protected:
     Standard() {};
@@ -70,7 +72,9 @@ class Standard_stub:
   public:
     virtual ~Standard_stub();
     CORBA::Boolean afficher_message( const char* pseudo, const char* message );
+    CORBA::Boolean signal_chatroom( const char* chatroom );
     CORBA::Boolean inviter_client( const char* chatroom );
+    CORBA::Boolean ping();
 
   private:
     void operator=( const Standard_stub& );
@@ -86,7 +90,9 @@ class Standard_stub_clp :
     Standard_stub_clp (PortableServer::POA_ptr, CORBA::Object_ptr);
     virtual ~Standard_stub_clp ();
     CORBA::Boolean afficher_message( const char* pseudo, const char* message );
+    CORBA::Boolean signal_chatroom( const char* chatroom );
     CORBA::Boolean inviter_client( const char* chatroom );
+    CORBA::Boolean ping();
 
   protected:
     Standard_stub_clp ();
@@ -114,7 +120,9 @@ class POA_Standard : virtual public PortableServer::StaticImplementation
     virtual CORBA::Object_ptr _make_stub (PortableServer::POA_ptr, CORBA::Object_ptr);
 
     virtual CORBA::Boolean afficher_message( const char* pseudo, const char* message ) = 0;
+    virtual CORBA::Boolean signal_chatroom( const char* chatroom ) = 0;
     virtual CORBA::Boolean inviter_client( const char* chatroom ) = 0;
+    virtual CORBA::Boolean ping() = 0;
 
   protected:
     POA_Standard () {};
