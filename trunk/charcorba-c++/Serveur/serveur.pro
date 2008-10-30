@@ -14,6 +14,7 @@ SOURCES = src/main.cpp \
  ../ORB/src/orb.cpp \
  src/annuaire_impl.cpp \
  ../ORB/src/annuaire.cpp \
- src/client_annuaire.cpp
+ src/client_annuaire.cpp \
+ ../ORB/src/standard.cpp
 LIBS += -lmicocoss2.3.13 -lmico2.3.13 -lssl -lboost_thread
 INCLUDEPATH += ../ORB/src src

@@ -212,6 +212,60 @@ Standard_stub_clp::afficher_message( const char* _par_pseudo, const char* _par_m
 
 #endif // MICO_CONF_NO_POA
 
+CORBA::Boolean Standard_stub::signal_chatroom( const char* _par_chatroom )
+{
+  CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom );
+  CORBA::Boolean _res;
+  CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+
+  CORBA::StaticRequest __req( this, "signal_chatroom" );
+  __req.add_in_arg( &_sa_chatroom );
+  __req.set_result( &__res );
+
+  __req.invoke();
+
+  mico_sii_throw( &__req, 
+    0);
+  return _res;
+}
+
+
+#ifndef MICO_CONF_NO_POA
+
+CORBA::Boolean
+Standard_stub_clp::signal_chatroom( const char* _par_chatroom )
+{
+  PortableServer::Servant _serv = _preinvoke ();
+  if (_serv) {
+    POA_Standard * _myserv = POA_Standard::_narrow (_serv);
+    if (_myserv) {
+      CORBA::Boolean __res;
+
+      #ifdef HAVE_EXCEPTIONS
+      try {
+      #endif
+        __res = _myserv->signal_chatroom(_par_chatroom);
+      #ifdef HAVE_EXCEPTIONS
+      }
+      catch (...) {
+        _myserv->_remove_ref();
+        _postinvoke();
+        throw;
+      }
+      #endif
+
+      _myserv->_remove_ref();
+      _postinvoke ();
+      return __res;
+    }
+    _postinvoke ();
+  }
+
+  return Standard_stub::signal_chatroom(_par_chatroom);
+}
+
+#endif // MICO_CONF_NO_POA
+
 CORBA::Boolean Standard_stub::inviter_client( const char* _par_chatroom )
 {
   CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom );
@@ -262,6 +316,58 @@ Standard_stub_clp::inviter_client( const char* _par_chatroom )
   }
 
   return Standard_stub::inviter_client(_par_chatroom);
+}
+
+#endif // MICO_CONF_NO_POA
+
+CORBA::Boolean Standard_stub::ping()
+{
+  CORBA::Boolean _res;
+  CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+
+  CORBA::StaticRequest __req( this, "ping" );
+  __req.set_result( &__res );
+
+  __req.invoke();
+
+  mico_sii_throw( &__req, 
+    0);
+  return _res;
+}
+
+
+#ifndef MICO_CONF_NO_POA
+
+CORBA::Boolean
+Standard_stub_clp::ping()
+{
+  PortableServer::Servant _serv = _preinvoke ();
+  if (_serv) {
+    POA_Standard * _myserv = POA_Standard::_narrow (_serv);
+    if (_myserv) {
+      CORBA::Boolean __res;
+
+      #ifdef HAVE_EXCEPTIONS
+      try {
+      #endif
+        __res = _myserv->ping();
+      #ifdef HAVE_EXCEPTIONS
+      }
+      catch (...) {
+        _myserv->_remove_ref();
+        _postinvoke();
+        throw;
+      }
+      #endif
+
+      _myserv->_remove_ref();
+      _postinvoke ();
+      return __res;
+    }
+    _postinvoke ();
+  }
+
+  return Standard_stub::ping();
 }
 
 #endif // MICO_CONF_NO_POA
@@ -335,40 +441,76 @@ POA_Standard::dispatch (CORBA::StaticServerRequest_ptr __req)
   #ifdef HAVE_EXCEPTIONS
   try {
   #endif
-    if( strcmp( __req->op_name(), "afficher_message" ) == 0 ) {
-      CORBA::String_var _par_pseudo;
-      CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
-      CORBA::String_var _par_message;
-      CORBA::StaticAny _sa_message( CORBA::_stc_string, &_par_message._for_demarshal() );
+    switch (mico_string_hash (__req->op_name(), 7)) {
+    case 0:
+      if( strcmp( __req->op_name(), "inviter_client" ) == 0 ) {
+        CORBA::String_var _par_chatroom;
+        CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom._for_demarshal() );
 
-      CORBA::Boolean _res;
-      CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-      __req->add_in_arg( &_sa_pseudo );
-      __req->add_in_arg( &_sa_message );
-      __req->set_result( &__res );
+        CORBA::Boolean _res;
+        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+        __req->add_in_arg( &_sa_chatroom );
+        __req->set_result( &__res );
 
-      if( !__req->read_args() )
+        if( !__req->read_args() )
+          return true;
+
+        _res = inviter_client( _par_chatroom.inout() );
+        __req->write_results();
         return true;
+      }
+      break;
+    case 1:
+      if( strcmp( __req->op_name(), "ping" ) == 0 ) {
+        CORBA::Boolean _res;
+        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+        __req->set_result( &__res );
 
-      _res = afficher_message( _par_pseudo.inout(), _par_message.inout() );
-      __req->write_results();
-      return true;
-    }
-    if( strcmp( __req->op_name(), "inviter_client" ) == 0 ) {
-      CORBA::String_var _par_chatroom;
-      CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom._for_demarshal() );
+        if( !__req->read_args() )
+          return true;
 
-      CORBA::Boolean _res;
-      CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-      __req->add_in_arg( &_sa_chatroom );
-      __req->set_result( &__res );
-
-      if( !__req->read_args() )
+        _res = ping();
+        __req->write_results();
         return true;
+      }
+      break;
+    case 3:
+      if( strcmp( __req->op_name(), "afficher_message" ) == 0 ) {
+        CORBA::String_var _par_pseudo;
+        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
+        CORBA::String_var _par_message;
+        CORBA::StaticAny _sa_message( CORBA::_stc_string, &_par_message._for_demarshal() );
 
-      _res = inviter_client( _par_chatroom.inout() );
-      __req->write_results();
-      return true;
+        CORBA::Boolean _res;
+        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+        __req->add_in_arg( &_sa_pseudo );
+        __req->add_in_arg( &_sa_message );
+        __req->set_result( &__res );
+
+        if( !__req->read_args() )
+          return true;
+
+        _res = afficher_message( _par_pseudo.inout(), _par_message.inout() );
+        __req->write_results();
+        return true;
+      }
+      if( strcmp( __req->op_name(), "signal_chatroom" ) == 0 ) {
+        CORBA::String_var _par_chatroom;
+        CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom._for_demarshal() );
+
+        CORBA::Boolean _res;
+        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+        __req->add_in_arg( &_sa_chatroom );
+        __req->set_result( &__res );
+
+        if( !__req->read_args() )
+          return true;
+
+        _res = signal_chatroom( _par_chatroom.inout() );
+        __req->write_results();
+        return true;
+      }
+      break;
     }
   #ifdef HAVE_EXCEPTIONS
   } catch( CORBA::SystemException_catch &_ex ) {

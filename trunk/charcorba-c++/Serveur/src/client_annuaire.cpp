@@ -4,6 +4,8 @@
 #include <boost/thread/thread.hpp>
 #include <annuaire_impl.h>
 #include <orb.h>
+#include <standard.h>
+
 
 using namespace std;
 using boost::thread ;
@@ -12,15 +14,18 @@ void f_thread_ping_utilisateur (Client_annuaire & client_annuaire)
 {
 	while (1)
 	{
-		CORBA::Object_var obj1 = ::ORB::static_ORB->connecter_service (client_annuaire.m_pseudo);
-		if (CORBA::is_nil(obj1.in()))
+		try 
+		{
+			CORBA::Object_var service_distant = ::ORB::static_ORB->connecter_service (client_annuaire.m_pseudo);
+			Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
+			standard_distant->ping();	
+		}
+		catch (...)
 		{
 			cout << "[DEBUG]\tLe client '" << client_annuaire.m_pseudo << "' s'est déconnecté brutalement !" << endl ;
 			Annuaire_impl::m_static_annuaire->m_liste_clients.erase(client_annuaire.m_pseudo);
 			return ;
 		}
-		else
-			cout << "[DEBUG]\tLe client '" << client_annuaire.m_pseudo << "' est toujours présent ..." << endl ;
 		boost::xtime xt;
 		boost::xtime_get(&xt, boost::TIME_UTC);
 		xt.sec += 5 ;

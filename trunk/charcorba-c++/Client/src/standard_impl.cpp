@@ -51,4 +51,29 @@ Standard_impl::inviter_client( const char* chatroom )
 	return retval;
 }
 
+CORBA::Boolean
+Standard_impl::signal_chatroom( const char* chatroom )
+  throw(
+    ::CORBA::SystemException)
+
+{
+  CORBA::Boolean retval;
+
+  // add your implementation here
+    // REMOVE
+    mico_throw(::CORBA::NO_IMPLEMENT());
+    // REMOVE
+
+  return retval;
+}
+
+CORBA::Boolean
+Standard_impl::ping()
+  throw(
+    ::CORBA::SystemException)
+
+{
+	CORBA::Boolean retval = true ;
+	return retval;
+}
 
