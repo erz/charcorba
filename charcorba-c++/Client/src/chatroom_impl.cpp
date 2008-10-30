@@ -25,6 +25,13 @@ Chatroom_impl::ajouter_message( const char* pseudo, const char* message )
 	msg.auteur = string(pseudo) ;
 	msg.message = string(message) ;
 	m_liste_messages.push_back(msg);
+	
+	map<string,Standard_var>::iterator pos;
+	for (pos = m_liste_participants.begin(); pos != m_liste_participants.end(); ++pos)
+	{
+		cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tOn averti le client '" << pos->first << "'" << endl;
+		pos->second->signal_chatroom (m_nom_chatroom.c_str());
+	}
 	return retval; 
 }
 
@@ -57,4 +64,6 @@ void Chatroom_impl::inviter_client (string pseudo)
 
 	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
 	standard_distant->inviter_client(m_nom_chatroom.c_str());
+	
+	m_liste_participants.insert( pair<string,Standard_var>(pseudo,standard_distant));
 }
