@@ -5,13 +5,14 @@ DESTDIR = bin
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
-FORMS = ui/mainwindow.ui
+FORMS = ui/mainwindow.ui ui/dialog_connexion.ui
 HEADERS = src/mainwindowimpl.h \
  ../ORB/src/orb.h \
  src/client.h \
  src/standard_impl.h \
  src/autotest_client.h \
- src/chatroom_impl.h
+ src/chatroom_impl.h \
+ src/dialog_connexion.h
 SOURCES = src/mainwindowimpl.cpp \
  src/main.cpp \
  ../ORB/src/orb.cpp \
@@ -21,7 +22,8 @@ SOURCES = src/mainwindowimpl.cpp \
  ../ORB/src/standard.cpp \
  src/autotest_client.cpp \
  src/chatroom_impl.cpp \
- ../ORB/src/chatroom.cpp
+ ../ORB/src/chatroom.cpp \
+ src/dialog_connexion.cpp
 LIBS += -lmicocoss2.3.13 \
  -lmico2.3.13 \
  -lssl \

@@ -31,7 +31,7 @@ Client::~Client()
 Client::Client(int argc, char ** argv)  
 {
 	m_MICO_ORB = new ORB (argc,argv,true) ;	
-	m_standard = new Standard_impl() ;
+	m_standard = new Standard_impl();
 	Client::singleton_client = this ;
 }
 
