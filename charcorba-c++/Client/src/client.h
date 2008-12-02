@@ -22,7 +22,7 @@ private:
 
 	// Singleton Client
 	static Client * singleton_client ;
-
+		
 	// Objet qui implémente la gestion des messages entrants
 	Standard_impl * m_standard ; 
 	
