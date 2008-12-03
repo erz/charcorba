@@ -12,3 +12,4 @@ inviter_client_chatroom sylvain chatroom-suicide
 inviter_client_chatroom michael chatroom-suicide
 sleep 2
 get_message chatroom-suicide 0
+get_amis_par_tag informatique

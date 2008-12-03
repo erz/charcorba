@@ -5,29 +5,25 @@
 
 int main(int argc, char ** argv )
 {
-	bool GUI = true ;
-	if ( GUI == false )
-	{
-		// Initialisation du client
-		Client * client_chat = new Client(argc,argv);
-		client_chat->demarrer();
+	// Initialisation du client
+	Client * client_chat = new Client(argc,argv);
+	client_chat->demarrer();
+
+	Autotest_client * autotest_client = new Autotest_client (client_chat);
+	autotest_client->demarrer();
 		
-		Autotest_client * autotest_client = new Autotest_client (client_chat);
-		autotest_client->demarrer();
-		delete autotest_client;
-		delete client_chat ;
-	}
-	else
-	{
-		// Initialisation de la GUI
-		QApplication qapplication( argc, argv );
-		MainWindowImpl fenetre;
-		fenetre.ARGC=argc;
-		fenetre.ARGV=argv;
-		fenetre.show(); 
-	
-		qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
-		qapplication.exec();
-	}	
+	// Initialisation de la GUI
+	QApplication qapplication( argc, argv );
+	MainWindowImpl fenetre;
+	fenetre.initialiser();
+	fenetre.ARGC=argc;
+	fenetre.ARGV=argv;
+	fenetre.show(); 
+
+	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
+	qapplication.exec();
+
+	delete autotest_client;
+	delete client_chat ;
 	return 0 ;
 }

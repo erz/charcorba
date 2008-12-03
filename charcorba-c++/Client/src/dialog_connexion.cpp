@@ -23,17 +23,7 @@ void Dialog_connexion::initialiser_client ()
 		cout << "[DEBUG - GUI]\tIP =\t" << ui.qlinedit_ip->text().toStdString() << endl ;
 		cout << "[DEBUG - GUI]\tPort=\t" << ui.qlinedit_port->text().toStdString() << endl ;
 
-
 		char *argv[] = { "ABC", "-ORBInitRef",
 						"NameService=corbaloc::localhost:10809/NameService" };
 		int argc = 3;
-		
-		Client * client_chat = new Client(argc,argv);
-		client_chat->demarrer();
-		
-		Autotest_client * autotest_client = new Autotest_client (client_chat);
-		autotest_client->demarrer();
-	
-		delete autotest_client;
-		delete client_chat ;
 }
