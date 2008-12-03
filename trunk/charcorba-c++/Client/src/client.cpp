@@ -1,4 +1,5 @@
 #include "client.h"
+#include <QString>
 #include "annuaire.h"
 #include "standard_impl.h"
 #include "orb.h"
@@ -18,6 +19,7 @@ using namespace std;
 Client * Client::singleton_client = NULL ;
  
 Client::Client()
+	: QObject ()
 {}
 
 Client::~Client()
@@ -85,11 +87,22 @@ void Client::get_amis_par_tag (string tag)
 		CORBA::String_var ami = (*retval)[i] ;
 		if (string(ami) != m_pseudo) 
 		{
-			liste_amis.insert(string(ami));	
-			cout << "[DEBUG]\tNouvel ami : '" << ami << "'" << endl ;
+			ajouter_ami(string(ami));
 		}
 	}
 }
+
+void Client::ajouter_ami (string ami)
+{
+	liste_amis.insert(string(ami));	
+	cout << "[DEBUG]\tNouvel ami : '" << ami << "'" << endl ;
+	emit ami_ajoute(QString(ami.c_str()));
+}
+
+/*string Client::ami_ajoute (string ami)
+{
+	return ami;
+}*/
 
 void Client::afficher_message(string pseudo,string message)
 {

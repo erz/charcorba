@@ -89,6 +89,7 @@ void ORB::arreter ()
 	cout << "[DEBUG - ORB]\tArret de l'ORB" << endl;
 	m_POA->destroy (TRUE,TRUE);
 	m_ORB->destroy ();
+
 }
 
 void ORB::ajout_service(PortableServer::Servant service, std::string nom_service)

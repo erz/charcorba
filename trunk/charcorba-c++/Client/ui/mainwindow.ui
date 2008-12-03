@@ -24,7 +24,7 @@
     </property>
     <layout class="QVBoxLayout" >
      <item>
-      <widget class="QListView" name="listView" />
+      <widget class="QListWidget" name="qlistwidget_amis" />
      </item>
     </layout>
    </widget>
