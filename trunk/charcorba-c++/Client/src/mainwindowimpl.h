@@ -1,13 +1,16 @@
 #ifndef MAINWINDOWIMPL_H
 #define MAINWINDOWIMPL_H
-//
+
 #include <QMainWindow>
 #include <QString>
+#include <QListWidgetItem>
 #include "ui_mainwindow.h"
 #include "dialog_connexion.h"
 #include <stdio.h>
 #include <string>
-//
+
+#include <map>
+
 
 class MainWindowImpl : public QMainWindow, public Ui::MainWindow
 {
@@ -17,12 +20,13 @@ public:
 	int ARGC;
 	char ** ARGV;
 	Dialog_connexion * m_dialog_connexion ;
-	
+
 	MainWindowImpl( QWidget * parent = 0, Qt::WFlags f = 0 );
 	void initialiser () ;
 	
 public slots:
 	void afficher_dialog_connexion();
+	void ouvrir_qpopupmenu_client (QListWidgetItem * item);
 	void ajouter_ami (QString ami);
 
 private:

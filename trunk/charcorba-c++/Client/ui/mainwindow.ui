@@ -24,7 +24,11 @@
     </property>
     <layout class="QVBoxLayout" >
      <item>
-      <widget class="QListWidget" name="qlistwidget_amis" />
+      <widget class="QListWidget" name="qlistwidget_amis" >
+       <property name="contextMenuPolicy" >
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

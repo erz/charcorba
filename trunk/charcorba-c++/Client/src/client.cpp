@@ -99,11 +99,6 @@ void Client::ajouter_ami (string ami)
 	emit ami_ajoute(QString(ami.c_str()));
 }
 
-/*string Client::ami_ajoute (string ami)
-{
-	return ami;
-}*/
-
 void Client::afficher_message(string pseudo,string message)
 {
 	CORBA::Object_var service_distant = m_MICO_ORB->connecter_service(pseudo);
