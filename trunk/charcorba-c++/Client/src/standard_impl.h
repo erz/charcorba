@@ -1,7 +1,8 @@
 
 #ifndef __STANDARD_IMPL_H__
 #define __STANDARD_IMPL_H__
-
+#include <QObject>
+#include <QDialog>
 #include <standard.h>
 #include <map>
 
@@ -34,6 +35,8 @@ class Standard_impl : virtual public POA_Standard
       throw(
         ::CORBA::SystemException)
     ;
+    signals:
+    void ajout_message(QString);
 
 };
 

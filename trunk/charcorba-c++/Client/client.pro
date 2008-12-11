@@ -1,34 +1,36 @@
-TEMPLATE = app
-QT = gui core
-CONFIG += qt warn_on console debug
+CONFIG += console debug qt warn_on
 DESTDIR = bin
-OBJECTS_DIR = build
-MOC_DIR = build
-UI_DIR = build
-FORMS = ui/mainwindow.ui ui/dialog_connexion.ui
-HEADERS = src/mainwindowimpl.h \
- ../ORB/src/orb.h \
- src/client.h \
- src/standard_impl.h \
+FORMS = ui/dialog_connexion.ui ui/mainwindow.ui ui/dialog_window.ui
+HEADERS = ../ORB/src/orb.h \
  src/autotest_client.h \
  src/chatroom_impl.h \
- src/dialog_connexion.h
-SOURCES = src/mainwindowimpl.cpp \
- src/main.cpp \
+ src/client.h \
+ src/dialog_connexion.h \
+ src/mainwindowimpl.h \
+ src/standard_impl.h \
+ src/dialog_window.h
+INCLUDEPATH += ../ORB/src src
+LIBS += -lboost_thread \
+ -ldl \
+ -lm \
+ -lmico2.3.13 \
+ -lmicocoss2.3.13 \
+ -lpthread \
+ -lssl
+MOC_DIR = build
+OBJECTS_DIR = build
+QT = core gui
+SOURCES = ../ORB/src/annuaire.cpp \
+ ../ORB/src/chatroom.cpp \
  ../ORB/src/orb.cpp \
- ../ORB/src/annuaire.cpp \
- src/client.cpp \
- src/standard_impl.cpp \
  ../ORB/src/standard.cpp \
  src/autotest_client.cpp \
  src/chatroom_impl.cpp \
- ../ORB/src/chatroom.cpp \
- src/dialog_connexion.cpp
-LIBS += -lmicocoss2.3.13 \
- -lmico2.3.13 \
- -lssl \
- -lpthread \
- -lboost_thread \
- -ldl \
- -lm
-INCLUDEPATH += ../ORB/src src
+ src/client.cpp \
+ src/dialog_connexion.cpp \
+ src/main.cpp \
+ src/mainwindowimpl.cpp \
+ src/standard_impl.cpp \
+ src/dialog_window.cpp
+TEMPLATE = app
+UI_DIR = build

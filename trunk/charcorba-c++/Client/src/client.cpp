@@ -42,6 +42,11 @@ Client * Client::get_instance ()
 	return Client::singleton_client ;
 }
 
+Standard_impl * Client::get_standard(){
+	
+	return m_standard;
+}
+
 void Client::set_pseudo (string pseudo)
 {	
 	cout << "[DEBUG]\tPseudo client : " << pseudo << endl;
@@ -136,6 +141,12 @@ void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)
 void Client::ajouter_message(string nom_chatroom,string message)
 {
 	m_liste_chatrooms_distantes[nom_chatroom]->ajouter_message (m_pseudo.c_str(),message.c_str());
+	
+}
+
+void Client::message_recu(QString pseudo,QString message){
+	cout<<"[DEBUG]\t Message recu"<<endl;
+	emit signal_message_recu(QString(pseudo),QString(message));
 }
 
 Message Client::get_message (string nom_chatroom,unsigned long idmessage)
