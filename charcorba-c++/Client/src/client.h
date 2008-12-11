@@ -67,10 +67,12 @@ public:
 	void enlever_tag (std::string tag);
 	void get_amis_par_tag (std::string tag);
 	void ajouter_ami (std::string);
-
+	Standard_impl * get_standard();
+	
 	// Fonctions liées aux standards	
 	void afficher_message(string pseudo,string message);
 	void inviter_client_chatroom (std::string pseudo,std::string nom_chatroom);
+	void message_recu(QString pseudo, QString message);
 
 	// Fonctions liées aux chatrooms
 	void creer_chatroom (std::string nom_chatroom);
@@ -80,6 +82,7 @@ public:
 	signals :
 	
 	void ami_ajoute (QString);
+	void signal_message_recu(QString,QString);
 
 };
 #endif

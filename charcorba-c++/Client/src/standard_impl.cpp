@@ -24,6 +24,7 @@ Standard_impl::afficher_message(const char* pseudo,const char* message)
 	cout << "[DEBUG - Standard]\tAffichage du message '" << message << "' venant de '" << pseudo << "'" << endl ;
 	CORBA::Boolean retval ;
 	retval = true;
+    Client::get_instance()->message_recu(QString(pseudo),QString(message));
 	return retval; 
 }
 

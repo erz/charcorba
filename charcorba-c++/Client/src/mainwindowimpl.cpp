@@ -23,7 +23,19 @@ void MainWindowImpl::initialiser ()
 {
 	connect(ui.qaction_connexion,SIGNAL(triggered()),this,SLOT(afficher_dialog_connexion()));
 	connect(Client::get_instance(),SIGNAL(ami_ajoute(QString)),this,SLOT(ajouter_ami(QString)));	
-	connect(ui.qlistwidget_amis,SIGNAL(itemClicked (QListWidgetItem *)),this,SLOT(ouvrir_qpopupmenu_client(QListWidgetItem *)));
+	connect(ui.qlistwidget_amis,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(ouvrir_dialog_window(QListWidgetItem *)));
+	connect(Client::get_instance(),SIGNAL(signal_message_recu(QString,QString)),this,SLOT(afficher_message_window(QString,QString)));
+	//connect(ui.qlistwidget_amis,SIGNAL(itemClicked (QListWidgetItem *)),this,SLOT(ouvrir_qpopupmenu_client(QListWidgetItem *)));
+	
+}
+
+void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
+	cout<< "[DEBUG - GUI]\tOuverture nouvelle fenetre apres reception message"<<endl;
+	m_dialog_window = get_dialog_window(pseudo);
+	cout<<"[DEBUG - GUI]\tCreation fenetre"<<endl;
+	m_dialog_window->show();
+	cout<<"[DEBUG - GUI]\tAffichage fenetre"<<endl;
+	m_dialog_window->exec();
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
@@ -35,6 +47,17 @@ void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
 	
 	fileMenu->show();
 	fileMenu->exec(QCursor::pos());
+	
+}
+
+void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
+{
+	cout << "[DEBUG - GUI]\tOuverture fenetre de conversation" << endl ;
+	m_dialog_window = new Dialog_window(item->text());
+	m_dialog_window->show();
+	m_dialog_window->exec();
+	
+
 }
 
 void MainWindowImpl::ajouter_ami (QString ami)
@@ -49,6 +72,16 @@ Dialog_connexion * MainWindowImpl::get_dialog_connexion()
 	if ( m_dialog_connexion == NULL )
 		m_dialog_connexion = new Dialog_connexion();
 	return m_dialog_connexion;
+}
+
+Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo)
+{
+	if ( m_dialog_window == NULL )
+	{
+		m_dialog_window = new Dialog_window(pseudo);
+	}
+	
+	return m_dialog_window;
 }
 
 void MainWindowImpl::afficher_dialog_connexion()
