@@ -20,12 +20,11 @@ public class JMenuBarreMenu extends JMenuBar {
 		JMenuItem itemConnexion = new JMenuItem("Connexion");
 		itemConnexion.addActionListener(new ActionListener()
 		{
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JMenuBarreMenu.this.client.getContacts();
 			}
 		});
-		JMenuItem itemDeconnexion = new JMenuItem("Déconnexion");
+		JMenuItem itemDeconnexion = new JMenuItem("Dconnexion");
 		
 		menuConnexion.add(itemConnexion);
 		menuConnexion.add(itemDeconnexion);

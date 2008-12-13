@@ -38,7 +38,7 @@ public class JFrameClient extends JFrame {
 		fond.add(creerChatRoom = new JButton("creer une chatroom"));
 		creerChatRoom.addActionListener(new ActionListener()
 		{
-			@Override
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new JFrameChatRoom(getContactsSelected());
 			}
