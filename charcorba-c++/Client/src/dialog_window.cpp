@@ -27,6 +27,9 @@ void Dialog_window::envoyer_message(){
 		//on vide la ligne
 		ui.lineEdit->clear();
 		ui.lineEdit->setFocus();
+		
+		//ScrollBar
+		
 }
 
 void Dialog_window::ecrire_message(string pseudo,string message){
