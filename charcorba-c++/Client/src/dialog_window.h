@@ -16,7 +16,7 @@ public:
 	
 public slots :
 	void envoyer_message();
-	void ecrire_message();
+	void ecrire_message(string pseudo,string message);
 private:
 	Ui_DialogWindow ui;
 	string client_distant ;

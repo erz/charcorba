@@ -16,6 +16,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	: QMainWindow(parent, f)
 {
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
+	m_dialog_window=NULL;
 	ui.setupUi(this);
 }
 
@@ -31,11 +32,9 @@ void MainWindowImpl::initialiser ()
 
 void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
 	cout<< "[DEBUG - GUI]\tOuverture nouvelle fenetre apres reception message"<<endl;
-	m_dialog_window = get_dialog_window(pseudo);
-	cout<<"[DEBUG - GUI]\tCreation fenetre"<<endl;
-	m_dialog_window->show();
-	cout<<"[DEBUG - GUI]\tAffichage fenetre"<<endl;
+	get_dialog_window(pseudo)->show();
 	m_dialog_window->exec();
+	m_dialog_window->ecrire_message(pseudo.toStdString(),message.toStdString());
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
@@ -53,7 +52,7 @@ void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
 void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
 {
 	cout << "[DEBUG - GUI]\tOuverture fenetre de conversation" << endl ;
-	m_dialog_window = new Dialog_window(item->text());
+	get_dialog_window(item->text());
 	m_dialog_window->show();
 	m_dialog_window->exec();
 	
@@ -77,9 +76,7 @@ Dialog_connexion * MainWindowImpl::get_dialog_connexion()
 Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo)
 {
 	if ( m_dialog_window == NULL )
-	{
 		m_dialog_window = new Dialog_window(pseudo);
-	}
 	
 	return m_dialog_window;
 }

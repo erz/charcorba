@@ -22,7 +22,7 @@ public:
 	int ARGC;
 	char ** ARGV;
 	Dialog_connexion * m_dialog_connexion ;
-	Dialog_window * m_dialog_window ;
+	Dialog_window * m_dialog_window  ;
 	
 	MainWindowImpl( QWidget * parent = 0, Qt::WFlags f = 0 );
 	void initialiser () ;
