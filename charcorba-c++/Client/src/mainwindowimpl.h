@@ -38,5 +38,6 @@ private:
 	Ui_MainWindow ui;
 	Dialog_connexion * get_dialog_connexion();
 	Dialog_window * get_dialog_window(QString pseudo);
+	bool Premiere_ouverture;
 };
 #endif

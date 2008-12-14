@@ -34,6 +34,10 @@ void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
 	cout<< "[DEBUG - GUI]\tOuverture nouvelle fenetre apres reception message"<<endl;
 	get_dialog_window(pseudo)->show();
 	m_dialog_window->exec();
+	if(Premiere_ouverture==true)
+		{
+			Premiere_ouverture=false;		
+		}
 	m_dialog_window->ecrire_message(pseudo.toStdString(),message.toStdString());
 }
 
@@ -43,7 +47,6 @@ void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
 	QMenu * fileMenu = new QMenu (this);
 	fileMenu->addAction("Inviter chatroom");
 	fileMenu->addAction("Envoyer message");
-	
 	fileMenu->show();
 	fileMenu->exec(QCursor::pos());
 	
@@ -55,8 +58,6 @@ void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
 	get_dialog_window(item->text());
 	m_dialog_window->show();
 	m_dialog_window->exec();
-	
-
 }
 
 void MainWindowImpl::ajouter_ami (QString ami)
@@ -76,7 +77,11 @@ Dialog_connexion * MainWindowImpl::get_dialog_connexion()
 Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo)
 {
 	if ( m_dialog_window == NULL )
+	{
 		m_dialog_window = new Dialog_window(pseudo);
+		Premiere_ouverture=true;
+	}
+		
 	
 	return m_dialog_window;
 }
