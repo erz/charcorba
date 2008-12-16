@@ -6,7 +6,8 @@ public class personneConnectee {
 	public String tag;
 	
 	
-	public void personneConnectee(){
+	public personneConnectee()
+	{
 		
 	}
 
