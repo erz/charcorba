@@ -7,7 +7,7 @@ public class message {
 	public String message;
 	
 	
-	public void message(){
+	public message(){
 		
 	}
 
