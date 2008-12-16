@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,,,org.eclipse.ui.resourcePerspective,1229436915822
+started,bundle,org.tigris.subversion.subclipse.core,1.0.0,org.tigris.subversion.subclipse.core,1229436917668
+started,bundle,org.tigris.subversion.subclipse.ui,1.0.0,org.tigris.subversion.subclipse.ui,1229436922861
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229436924927
+opened,view,org.tigris.subversion.subclipse.ui,1.0.0,org.tigris.subversion.subclipse.ui.repository.RepositoriesView,1229436928567
+started,bundle,org.eclipse.compare,3.4.0.I20080604,org.eclipse.compare,1229436928604
+opened,view,org.tigris.subversion.subclipse.ui,1.0.0,org.tigris.subversion.subclipse.ui.history.HistoryView,1229436929503
+activated,perspective,org.tigris.subversion.subclipse.ui,1.0.0,org.tigris.subversion.subclipse.ui.svnPerspective,1229436929539
+activated,view,org.tigris.subversion.subclipse.ui,1.0.0,org.tigris.subversion.subclipse.ui.repository.RepositoriesView,1229436929551
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.perspectives.showPerspective,1229436929557
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.perspectives.showPerspective,1229436929557
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229436929601
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229436932080
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1229436935056
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.undo,1229436936452
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.selectAll,1229436936957
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1229436974459
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1229437002982
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229437007913
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229437150444
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229437165289
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229437165702
+opened,view,org.eclipse.ui.console,3.3.0.v20080529-1300,org.eclipse.ui.console.ConsoleView,1229437165777
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229437168848
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1229437173210
