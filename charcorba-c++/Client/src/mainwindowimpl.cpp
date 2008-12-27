@@ -26,6 +26,8 @@ void MainWindowImpl::initialiser ()
 	connect(Client::get_instance(),SIGNAL(ami_ajoute(QString)),this,SLOT(ajouter_ami(QString)));	
 	connect(ui.qlistwidget_amis,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(ouvrir_dialog_window(QListWidgetItem *)));
 	connect(Client::get_instance(),SIGNAL(signal_message_recu(QString,QString)),this,SLOT(afficher_message_window(QString,QString)));
+	connect(ui.actionInviter_Chatroom,SIGNAL(triggered()),this,SLOT(Inviter_chatroom()));
+	//connect((const)Client::get_instance()->get_standard(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
 	//connect(ui.qlistwidget_amis,SIGNAL(itemClicked (QListWidgetItem *)),this,SLOT(ouvrir_qpopupmenu_client(QListWidgetItem *)));
 	
 }
@@ -90,5 +92,18 @@ void MainWindowImpl::afficher_dialog_connexion()
 {
 	cout << "[DEBUG - GUI]\t Afficher_boite" << endl ;
 	//get_dialog_connexion()->show();
+}
+
+void MainWindowImpl::Inviter_chatroom()
+{
+	QListWidgetItem * temp =ui.qlistwidget_amis->currentItem();
+	cout<<"[DEBUG - GUI]\tNom item:"<<temp->data(0).toString().toStdString()<<endl;
+	Client::get_instance()->creer_chatroom("tmp");
+	Client::get_instance()->inviter_client_chatroom(temp->data(0).toString().toStdString(),"tmp");
+}
+
+void MainWindowImpl::Ouvrir_chatroom()
+{
+	
 }
 
