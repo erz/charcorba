@@ -37,6 +37,7 @@ class Standard_impl : virtual public POA_Standard
     ;
     signals:
     void ajout_message(QString);
+    void invitation_chatroom(QString);
 
 };
 

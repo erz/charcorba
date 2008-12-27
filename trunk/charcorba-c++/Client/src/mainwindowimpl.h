@@ -33,6 +33,8 @@ public slots:
 	void ouvrir_dialog_window(QListWidgetItem * item);
 	void ajouter_ami (QString ami);
 	void afficher_message_window(QString pseudo,QString message);
+	void Inviter_chatroom();
+	void Ouvrir_chatroom();
 
 private:
 	Ui_MainWindow ui;

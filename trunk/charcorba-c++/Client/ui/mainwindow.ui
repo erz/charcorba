@@ -53,6 +53,7 @@
      <string>Contacts</string>
     </property>
     <addaction name="actionTags" />
+    <addaction name="actionInviter_Chatroom" />
    </widget>
    <addaction name="menuServeur" />
    <addaction name="menuContacts" />
@@ -82,6 +83,11 @@
   <action name="actionTags" >
    <property name="text" >
     <string>Filtres</string>
+   </property>
+  </action>
+  <action name="actionInviter_Chatroom" >
+   <property name="text" >
+    <string>Inviter Chatroom</string>
    </property>
   </action>
  </widget>
