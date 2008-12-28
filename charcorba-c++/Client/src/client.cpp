@@ -149,6 +149,11 @@ void Client::message_recu(QString pseudo,QString message){
 	emit signal_message_recu(QString(pseudo),QString(message));
 }
 
+void Client::signal_invitation_chatroom(QString chatroom)
+{
+	emit invitation_chatroom(chatroom);
+}
+
 Message Client::get_message (string nom_chatroom,unsigned long idmessage)
 {
 	cout << "[DEBUG]\tRéception du message " << idmessage << " de la chatroom " << nom_chatroom << endl ;

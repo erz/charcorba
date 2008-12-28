@@ -3,6 +3,7 @@
 #define __STANDARD_IMPL_H__
 #include <QObject>
 #include <QDialog>
+#include <QString>
 #include <standard.h>
 #include <map>
 
@@ -10,11 +11,13 @@ using namespace std;
 // Implementation for interface Standard
 class Standard_impl : virtual public POA_Standard
 {
+	
   public:
   
   	static Standard_impl * m_static_standard  ;
   	
   	Standard_impl();
+ 
 	
     CORBA::Boolean afficher_message( const char* pseudo, const char* message )
       throw(
@@ -35,9 +38,7 @@ class Standard_impl : virtual public POA_Standard
       throw(
         ::CORBA::SystemException)
     ;
-    signals:
-    void ajout_message(QString);
-    void invitation_chatroom(QString);
+   
 
 };
 

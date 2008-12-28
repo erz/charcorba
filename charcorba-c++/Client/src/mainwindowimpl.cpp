@@ -17,6 +17,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 {
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
 	m_dialog_window=NULL;
+	m_dialog_chatroom_window=NULL;
 	ui.setupUi(this);
 }
 
@@ -27,8 +28,8 @@ void MainWindowImpl::initialiser ()
 	connect(ui.qlistwidget_amis,SIGNAL(itemDoubleClicked(QListWidgetItem *)),this,SLOT(ouvrir_dialog_window(QListWidgetItem *)));
 	connect(Client::get_instance(),SIGNAL(signal_message_recu(QString,QString)),this,SLOT(afficher_message_window(QString,QString)));
 	connect(ui.actionInviter_Chatroom,SIGNAL(triggered()),this,SLOT(Inviter_chatroom()));
-	//connect((const)Client::get_instance()->get_standard(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
-	//connect(ui.qlistwidget_amis,SIGNAL(itemClicked (QListWidgetItem *)),this,SLOT(ouvrir_qpopupmenu_client(QListWidgetItem *)));
+	connect(Client::get_instance(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
+	
 	
 }
 
@@ -62,6 +63,14 @@ void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
 	m_dialog_window->exec();
 }
 
+void MainWindowImpl::ouvrir_dialog_chatroom_window (QListWidgetItem * item)
+{
+	cout << "[DEBUG - GUI]\tOuverture fenetre de conversation" << endl ;
+	get_dialog_chatroom_window(item->text());
+	m_dialog_chatroom_window->show();
+	m_dialog_chatroom_window->exec();
+}
+
 void MainWindowImpl::ajouter_ami (QString ami)
 {
 	cout << "[DEBUG - GUI]\tAjout de l'ami : '" << ami.toStdString() << "'" << endl;
@@ -88,6 +97,18 @@ Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo)
 	return m_dialog_window;
 }
 
+Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)
+{
+	if ( m_dialog_chatroom_window == NULL )
+	{
+		m_dialog_chatroom_window = new Dialog_window(pseudo);
+		Premiere_ouverture=true;
+	}
+		
+	
+	return m_dialog_chatroom_window;
+}
+
 void MainWindowImpl::afficher_dialog_connexion()
 {
 	cout << "[DEBUG - GUI]\t Afficher_boite" << endl ;
@@ -100,10 +121,12 @@ void MainWindowImpl::Inviter_chatroom()
 	cout<<"[DEBUG - GUI]\tNom item:"<<temp->data(0).toString().toStdString()<<endl;
 	Client::get_instance()->creer_chatroom("tmp");
 	Client::get_instance()->inviter_client_chatroom(temp->data(0).toString().toStdString(),"tmp");
+	ouvrir_dialog_chatroom_window(temp);
 }
 
-void MainWindowImpl::Ouvrir_chatroom()
+void MainWindowImpl::Ouvrir_chatroom(QString chatroom)
 {
+	cout<<"[DEBUG - GUI]\tSignal recu!"<<endl;
 	
 }
 
