@@ -77,12 +77,13 @@ public:
 	// Fonctions liées aux chatrooms
 	void creer_chatroom (std::string nom_chatroom);
 	void ajouter_message(std::string nom_chatroom,std::string message);
+	void signal_invitation_chatroom(QString);
 	Message get_message (std::string nom_chatroom,unsigned long idmessage);
 
 	signals :
 	
 	void ami_ajoute (QString);
 	void signal_message_recu(QString,QString);
-
+	void invitation_chatroom(QString); 
 };
 #endif

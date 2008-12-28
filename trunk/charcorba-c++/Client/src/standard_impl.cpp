@@ -1,4 +1,3 @@
-
 #include <standard_impl.h>
 #include <string>
 #include <map>
@@ -14,6 +13,7 @@ Standard_impl::Standard_impl()
 {
 	Standard_impl::m_static_standard = this ;
 }
+
 
 
 CORBA::Boolean
@@ -49,7 +49,9 @@ Standard_impl::inviter_client( const char* chatroom )
 	}
 	
 	Client::get_instance()->m_liste_chatrooms_distantes.insert( pair<string,Chatroom_var>(string(chatroom),service_chatroom));
-	//emit invitation_chatroom(chatroom);
+	
+	QString tmp = QString::fromStdString(chatroom);
+	Client::get_instance()->signal_invitation_chatroom(tmp);
 	return retval;
 }
 
