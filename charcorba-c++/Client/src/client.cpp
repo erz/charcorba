@@ -107,7 +107,6 @@ void Client::ajouter_ami (string ami)
 void Client::afficher_message(string pseudo,string message)
 {
 	CORBA::Object_var service_distant = m_MICO_ORB->connecter_service(pseudo);
-
 	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
 	standard_distant->afficher_message(m_pseudo.c_str(),message.c_str());
 }
@@ -140,6 +139,7 @@ void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)
 
 void Client::ajouter_message(string nom_chatroom,string message)
 {
+	cout<<"[DEBUG]\tEnvoie message sur la chatroom"<<endl;
 	m_liste_chatrooms_distantes[nom_chatroom]->ajouter_message (m_pseudo.c_str(),message.c_str());
 	
 }

@@ -127,6 +127,7 @@ void MainWindowImpl::Inviter_chatroom()
 void MainWindowImpl::Ouvrir_chatroom(QString chatroom)
 {
 	cout<<"[DEBUG - GUI]\tSignal recu!"<<endl;
-	
+	get_dialog_chatroom_window(chatroom)->show();
+	m_dialog_chatroom_window->exec();
 }
 

@@ -42,8 +42,9 @@ void Dialog_window::envoyer_message(){
 
 void Dialog_window::chatroom_envoyer_message()
 {
+	cout<<"[DEBUG]\tEnvoie du message sur la chatroom"<<endl;
 	message=ui.lineEdit->text().toStdString();
-	Client::get_instance()->ajouter_message("sylvain",message);
+	Client::get_instance()->ajouter_message("tmp",message);
 	
 }
 
