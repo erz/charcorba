@@ -101,7 +101,7 @@ Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)
 {
 	if ( m_dialog_chatroom_window == NULL )
 	{
-		m_dialog_chatroom_window = new Dialog_window(pseudo);
+		m_dialog_chatroom_window = new Dialog_window();
 		Premiere_ouverture=true;
 	}
 		

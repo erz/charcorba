@@ -3,6 +3,15 @@
 
 using namespace std;
 // place your code here
+
+Dialog_window::Dialog_window()
+{
+	cout<<"[DEBUG]\tDialog Chatroom Window"<<endl;
+	ui.setupUi(this);
+	connect(ui.pushButton,SIGNAL(clicked()),this,SLOT(chatroom_envoyer_message()));
+}
+
+
 Dialog_window::Dialog_window(QString pseudo)
 {
 	cout<<"[DEBUG]\tDialog Window"<<endl;
@@ -28,8 +37,14 @@ void Dialog_window::envoyer_message(){
 		ui.lineEdit->clear();
 		ui.lineEdit->setFocus();
 		
-		//ScrollBar
 		
+}
+
+void Dialog_window::chatroom_envoyer_message()
+{
+	message=ui.lineEdit->text().toStdString();
+	Client::get_instance()->ajouter_message("sylvain",message);
+	
 }
 
 void Dialog_window::ecrire_message(string pseudo,string message){
