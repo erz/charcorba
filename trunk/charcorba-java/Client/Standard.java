@@ -12,4 +12,6 @@ package Client;
 // -*- c++ -*-
 public interface Standard extends StandardOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
 {
+
+	void doStandard();
 } // interface Standard
