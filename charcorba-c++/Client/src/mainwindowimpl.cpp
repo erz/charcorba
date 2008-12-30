@@ -16,7 +16,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	: QMainWindow(parent, f)
 {
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
-	m_dialog_window=NULL;
+	for(int j=0;j<5;j++) m_dialog_window[j]=NULL;
 	m_dialog_chatroom_window=NULL;
 	ui.setupUi(this);
 }
@@ -35,13 +35,19 @@ void MainWindowImpl::initialiser ()
 
 void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
 	cout<< "[DEBUG - GUI]\tOuverture nouvelle fenetre apres reception message"<<endl;
-	get_dialog_window(pseudo)->show();
-	m_dialog_window->exec();
+	int indice =0;
+	for(int i=0;i<ui.qlistwidget_amis->count();i++)
+	{
+		QListWidgetItem * tmp=ui.qlistwidget_amis->item(i);
+		if(pseudo==tmp->text()) indice=i;
+	}
+	get_dialog_window(pseudo,indice)->show();
+	m_dialog_window[indice]->exec();
 	if(Premiere_ouverture==true)
 		{
 			Premiere_ouverture=false;		
 		}
-	m_dialog_window->ecrire_message(pseudo.toStdString(),message.toStdString());
+	m_dialog_window[indice]->ecrire_message(pseudo.toStdString(),message.toStdString());
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
@@ -58,9 +64,11 @@ void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
 void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
 {
 	cout << "[DEBUG - GUI]\tOuverture fenetre de conversation" << endl ;
-	get_dialog_window(item->text());
-	m_dialog_window->show();
-	m_dialog_window->exec();
+	int indice =ui.qlistwidget_amis->row(item);
+	
+	get_dialog_window(item->text(),indice);
+	m_dialog_window[indice]->show();
+	m_dialog_window[indice]->exec();
 }
 
 void MainWindowImpl::ouvrir_dialog_chatroom_window (QListWidgetItem * item)
@@ -85,16 +93,16 @@ Dialog_connexion * MainWindowImpl::get_dialog_connexion()
 	return m_dialog_connexion;
 }
 
-Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo)
+Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo,int indice)
 {
-	if ( m_dialog_window == NULL )
+	if ( m_dialog_window[indice] == NULL )
 	{
-		m_dialog_window = new Dialog_window(pseudo);
+		m_dialog_window[indice] = new Dialog_window(pseudo);
 		Premiere_ouverture=true;
 	}
 		
 	
-	return m_dialog_window;
+	return m_dialog_window[indice];
 }
 
 Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)

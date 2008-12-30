@@ -22,7 +22,7 @@ public:
 	int ARGC;
 	char ** ARGV;
 	Dialog_connexion * m_dialog_connexion ;
-	Dialog_window * m_dialog_window  ;
+	Dialog_window *  m_dialog_window[5]  ;
 	Dialog_window * m_dialog_chatroom_window  ;
 	
 	MainWindowImpl( QWidget * parent = 0, Qt::WFlags f = 0 );
@@ -41,7 +41,7 @@ public slots:
 private:
 	Ui_MainWindow ui;
 	Dialog_connexion * get_dialog_connexion();
-	Dialog_window * get_dialog_window(QString pseudo);
+	Dialog_window * get_dialog_window(QString pseudo,int indice);
 	Dialog_window * get_dialog_chatroom_window(QString pseudo);
 	bool Premiere_ouverture;
 };
