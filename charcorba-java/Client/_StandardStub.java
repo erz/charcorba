@@ -106,4 +106,10 @@ public class _StandardStub extends org.omg.CORBA.portable.ObjectImpl implements 
      String str = org.omg.CORBA.ORB.init (args, props).object_to_string (this);
      s.writeUTF (str);
   }
+
+
+public void doStandard() {
+	// TODO Auto-generated method stub
+	
+}
 } // class _StandardStub
