@@ -1,5 +1,10 @@
 package Client;
 
+import org.omg.CORBA.BooleanHolder;
+import org.omg.CORBA.DoubleHolder;
+import org.omg.CORBA.ShortHolder;
+import org.omg.CORBA.StringHolder;
+
 
 /**
 * _StandardStub.java .
@@ -111,5 +116,12 @@ public class _StandardStub extends org.omg.CORBA.portable.ObjectImpl implements 
 public void doStandard() {
 	// TODO Auto-generated method stub
 	
+}
+
+
+public Object setValues(StringHolder stringHolder, DoubleHolder doubleHolder,
+		ShortHolder shortHolder, BooleanHolder booleanHolder) {
+	// TODO Auto-generated method stub
+	return null;
 }
 } // class _StandardStub
