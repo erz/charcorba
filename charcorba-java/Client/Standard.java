@@ -1,5 +1,10 @@
 package Client;
 
+import org.omg.CORBA.BooleanHolder;
+import org.omg.CORBA.DoubleHolder;
+import org.omg.CORBA.ShortHolder;
+import org.omg.CORBA.StringHolder;
+
 
 /**
 * Standard.java .
@@ -14,4 +19,8 @@ public interface Standard extends StandardOperations, org.omg.CORBA.Object, org.
 {
 
 	void doStandard();
+
+	Object setValues(StringHolder stringHolder, DoubleHolder doubleHolder,
+			ShortHolder shortHolder, BooleanHolder booleanHolder);
+
 } // interface Standard
