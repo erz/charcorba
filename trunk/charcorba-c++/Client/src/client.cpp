@@ -144,6 +144,13 @@ void Client::ajouter_message(string nom_chatroom,string message)
 	
 }
 
+void Client::ajouter_message_local(string nom_chatroom,string message)
+{
+	cout<<"[DEBUG]\tEnvoie message sur la chatroom"<<endl;
+	m_liste_chatrooms_locales[nom_chatroom]->ajouter_message (m_pseudo.c_str(),message.c_str());
+	
+}
+
 void Client::message_recu(QString pseudo,QString message){
 	cout<<"[DEBUG]\t Message recu"<<endl;
 	emit signal_message_recu(QString(pseudo),QString(message));
@@ -152,6 +159,11 @@ void Client::message_recu(QString pseudo,QString message){
 void Client::signal_invitation_chatroom(QString chatroom)
 {
 	emit invitation_chatroom(chatroom);
+}
+
+void Client::signal_chatroom(QString chatroom)
+{
+	emit signal_client_chatroom(chatroom);
 }
 
 Message Client::get_message (string nom_chatroom,unsigned long idmessage)

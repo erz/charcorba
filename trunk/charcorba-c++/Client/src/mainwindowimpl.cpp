@@ -29,7 +29,7 @@ void MainWindowImpl::initialiser ()
 	connect(Client::get_instance(),SIGNAL(signal_message_recu(QString,QString)),this,SLOT(afficher_message_window(QString,QString)));
 	connect(ui.actionInviter_Chatroom,SIGNAL(triggered()),this,SLOT(Inviter_chatroom()));
 	connect(Client::get_instance(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
-	
+	connect(Client::get_instance(),SIGNAL(signal_client_chatroom(QString)),this,SLOT(afficher_message_chatroom_window(QString)));
 	
 }
 
@@ -48,6 +48,12 @@ void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
 			Premiere_ouverture=false;		
 		}
 	m_dialog_window[indice]->ecrire_message(pseudo.toStdString(),message.toStdString());
+}
+
+void MainWindowImpl::afficher_message_chatroom_window(QString chatroom)
+{
+	cout<<"[DEBUG - Chatroom]\tMessage recu!"<<endl;
+
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
