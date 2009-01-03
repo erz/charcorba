@@ -37,6 +37,7 @@ public slots:
 	void afficher_message_window(QString pseudo,QString message);
 	void Inviter_chatroom();
 	void Ouvrir_chatroom(QString chatroom);
+	void afficher_message_chatroom_window(QString chatroom);
 
 private:
 	Ui_MainWindow ui;

@@ -62,6 +62,7 @@ Standard_impl::signal_chatroom( const char* chatroom )
 
 {
 	CORBA::Boolean retval;
+	Client::get_instance()->signal_chatroom(chatroom);
 	return retval;
 }
 
