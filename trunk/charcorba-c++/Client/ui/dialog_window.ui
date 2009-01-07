@@ -9,9 +9,6 @@
     <height>329</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>Dialog</string>
-  </property>
   <widget class="QWidget" name="verticalLayout" >
    <property name="geometry" >
     <rect>
@@ -24,6 +21,9 @@
    <layout class="QVBoxLayout" >
     <item>
      <widget class="QTextEdit" name="textEdit" >
+      <property name="verticalScrollBarPolicy" >
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
       <property name="readOnly" >
        <bool>true</bool>
       </property>

@@ -45,5 +45,6 @@ private:
 	Dialog_window * get_dialog_window(QString pseudo,int indice);
 	Dialog_window * get_dialog_chatroom_window(QString pseudo);
 	bool Premiere_ouverture;
+	unsigned long compteurmessage;
 };
 #endif

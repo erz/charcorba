@@ -21,6 +21,11 @@ Dialog_window::Dialog_window(QString pseudo)
 	
 }
 
+void Dialog_window::setWindowTitle(string titre)
+{
+		this->setWindowTitle(titre);
+}
+
 void Dialog_window::envoyer_message(){
 	  
 		message=ui.lineEdit->text().toStdString();
@@ -32,12 +37,11 @@ void Dialog_window::envoyer_message(){
 		if(!tmp.empty())
 			message = tmp+"\n"+message;
 		ui.textEdit->setText(message.c_str());
-		
 		//on vide la ligne
 		ui.lineEdit->clear();
 		ui.lineEdit->setFocus();
-		
-		
+		QScrollBar *sb = ui.textEdit->verticalScrollBar();
+		sb->setValue(sb->maximum());
 }
 
 void Dialog_window::chatroom_envoyer_message()
