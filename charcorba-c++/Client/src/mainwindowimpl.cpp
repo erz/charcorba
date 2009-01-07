@@ -18,6 +18,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
 	for(int j=0;j<5;j++) m_dialog_window[j]=NULL;
 	m_dialog_chatroom_window=NULL;
+	compteurmessage=0;
 	ui.setupUi(this);
 }
 
@@ -52,7 +53,15 @@ void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
 
 void MainWindowImpl::afficher_message_chatroom_window(QString chatroom)
 {
+	
 	cout<<"[DEBUG - Chatroom]\tMessage recu!"<<endl;
+	if(Premiere_ouverture==true)
+		{
+			Premiere_ouverture=false;		
+		}
+	Message tmp =Client::get_instance()->get_message(chatroom.toStdString(),compteurmessage);
+	compteurmessage++;
+	m_dialog_chatroom_window->ecrire_message(tmp.auteur,tmp.message);
 
 }
 
@@ -74,6 +83,7 @@ void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
 	
 	get_dialog_window(item->text(),indice);
 	m_dialog_window[indice]->show();
+	//m_dialog_window[indice]->setName("");
 	m_dialog_window[indice]->exec();
 }
 
@@ -104,6 +114,7 @@ Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo,int indice)
 	if ( m_dialog_window[indice] == NULL )
 	{
 		m_dialog_window[indice] = new Dialog_window(pseudo);
+		//m_dialog_window[indice]->setWindowTitle(pseudo.toStdString());
 		Premiere_ouverture=true;
 	}
 		
