@@ -21,11 +21,12 @@ public class Client {
 	
 	  // Afficher simplement un message chez le client
 	  public void afficher_message (String pseudo_client, String message) {
-	}
+		  
+	  }
 
 	  // Prévient le client que la chatroom a recu un message
 	  public void signal_chatroom(String chatroom) {
-	}
+	  }
 	  
 	  //Prévient le client qu'un ami a ouvert une chatroom
 	  public void signal_invitation_chatroom(String chatroom){
@@ -34,7 +35,7 @@ public class Client {
 
 	  // Invite le client à participer à une chatroom
 	  public void inviter_client (String chatroom) {
-	}
+	  }
 	  
 	  //Modifier son pseudonyme
 	  public void set_pseudo(String pseudo){
