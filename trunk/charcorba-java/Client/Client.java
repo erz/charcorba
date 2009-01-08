@@ -20,7 +20,7 @@ public class Client {
 	ArrayList<String> liste_tags = new ArrayList<String>();
 	
 	  // Afficher simplement un message chez le client
-	  public void afficher_message (String pseudo, String message) {
+	  public void afficher_message (String pseudo_client, String message) {
 	}
 
 	  // Prévient le client que la chatroom a recu un message
