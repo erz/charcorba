@@ -26,12 +26,58 @@ public class Client {
 	  // Prévient le client que la chatroom a recu un message
 	  public void signal_chatroom(String chatroom) {
 	}
+	  
+	  //Prévient le client qu'un ami a ouvert une chatroom
+	  public void signal_invitation_chatroom(String chatroom){
+		  
+	  }
 
 	  // Invite le client à participer à une chatroom
 	  public void inviter_client (String chatroom) {
 	}
+	  
+	  //Modifier son pseudonyme
+	  public void set_pseudo(String pseudo){
+		  
+	  }
+	  
+	  //Joindre l'annuaire
+	  public void joindre_annuaire(){
+		  
+	  }
 	
-
+	  //Ajout d'un Tag
+	  public void ajouter_tag(String tag){
+		  
+	  }
+	  
+	  //Enlever un Tag
+	  public void enlever_tag(String tag){
+		  
+	  }
+	  
+	  //Obtenir liste d'amis par tag
+	  public void get_amis_par_tag(String tag){
+		  
+	  }
+	  
+	  //Ajouter un ami
+	  public void ajouter_ami(String ami){
+		  
+	  }
+	  
+	  //Creer une Chatroom
+	  public void creer_chatroom(String nom_chatroom){
+		  
+	  }
+	  
+	  //ajouter un message
+	  public void ajouter_message(String nom_chatroom,String message){
+		  
+	  }
+	  
+	  
+	  
 	public static void main(String[] args) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName {
 		int status = 0;
 		org.omg.CORBA.ORB orb = org.omg.CORBA.ORB.init(args, null);
