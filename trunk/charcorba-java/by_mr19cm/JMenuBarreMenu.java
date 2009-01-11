@@ -3,6 +3,7 @@ package by_mr19cm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.JCheckBox;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -34,11 +35,28 @@ public class JMenuBarreMenu extends JMenuBar {
 		
 		//Affichage des contacts selon leur tags
 		JMenu menuTags = new JMenu("Tags");
+		//Parcours des clients
 		for(int i = 0; i < JMenuBarreMenu.this.client.getListeContacts().length;++i)
 		{
+			
+			//Parcours des tags
 			for (int j = 0; j < JMenuBarreMenu.this.client.getListeContacts()[i].getTags().size(); ++j)
 			{
-				menuTags.add(new JCheckBox(JMenuBarreMenu.this.client.getListeContacts()[i].getTags().get(j)));
+				//On regarde si le tag n'existe pas deja
+				boolean tagExists = false;
+				
+				for (int t = 0; t < menuTags.getMenuComponentCount();++t)
+				{
+					
+					if (((AbstractButton) menuTags.getMenuComponent(t)).getText() == JMenuBarreMenu.this.client.getListeContacts()[i].getTags().get(j))
+					{
+						System.out.println(((AbstractButton) menuTags.getMenuComponent(t)).getText());
+						tagExists = true;
+					}
+				}
+				
+				if (tagExists == false)
+					menuTags.add(new JCheckBox(JMenuBarreMenu.this.client.getListeContacts()[i].getTags().get(j)));
 			}
 		}
 		this.add(menuTags);
