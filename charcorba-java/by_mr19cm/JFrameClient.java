@@ -20,14 +20,14 @@ public class JFrameClient extends JFrame
 	//Temporaire : pour tester en local
 	ArrayList<String> tagsMika = new ArrayList<String>() {{ add("Lucille je t'aime"); add("Tiens bien l'alcool");  }};;
 	ArrayList<String> tagsTrix= new ArrayList<String>() {{ add("CORBA!!!"); add("Suicide");  }};;
-	ArrayList<String> tagsTiti= new ArrayList<String>() {{ add("Jamais la où on l'attend"); add("Recherche couple"); }};;
+	ArrayList<String> tagsTony= new ArrayList<String>() {{ add("Jamais la où on l'attend"); add("Recherche couple"); }};;
 	ArrayList<String> tagsFlo= new ArrayList<String>() {{ add("Blond"); add("Nudiste");  }};;
 	ArrayList<String> tagsAurel= new ArrayList<String>() {{ add("Jamais la où on l'attend"); add("Tiens bien l'alcool");  }};;
 	
 	private Contact[] listeContacts = {
 				new Contact(0, "mika", tagsMika),
 				new Contact(1, "trix", tagsTrix),
-				new Contact(2, "titi", tagsTiti),
+				new Contact(2, "titi", tagsTony),
 				new Contact(3, "grande folle", tagsFlo),
 				new Contact(4, "violeur d'enfants", tagsAurel)
 				};
