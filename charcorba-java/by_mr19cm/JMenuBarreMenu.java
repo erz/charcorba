@@ -50,7 +50,6 @@ public class JMenuBarreMenu extends JMenuBar {
 					
 					if (((AbstractButton) menuTags.getMenuComponent(t)).getText() == JMenuBarreMenu.this.client.getListeContacts()[i].getTags().get(j))
 					{
-						System.out.println(((AbstractButton) menuTags.getMenuComponent(t)).getText());
 						tagExists = true;
 					}
 				}
