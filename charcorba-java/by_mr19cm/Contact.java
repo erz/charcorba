@@ -1,14 +1,18 @@
 package by_mr19cm;
 
+import java.util.ArrayList;
+
 public class Contact {
 
 	private int id;
 	private String pseudo;
+	private ArrayList<String> tags;
 	
-	public Contact(int id, String pseudo)
+	public Contact(int id, String pseudo, ArrayList<String> tags)
 	{
 		this.id = id;
 		this.pseudo = pseudo;
+		this.tags = tags;
 	}
 	
 	public int getId()
@@ -19,5 +23,10 @@ public class Contact {
 	public String getPseudo()
 	{
 		return pseudo;
+	}
+	
+	public ArrayList<String> getTags()
+	{
+		return tags;
 	}
 }
