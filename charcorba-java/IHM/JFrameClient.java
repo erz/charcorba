@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class JFrameClient extends JFrame 
 {
-	Client 
 	private Container fond;
 	
 	//Temporaire : pour tester en local
