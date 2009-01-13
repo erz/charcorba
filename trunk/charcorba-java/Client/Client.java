@@ -13,7 +13,10 @@ import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 
-public class Client {
+public class Client 
+{
+	//Notre client
+	static Client singleton_client;
 
 	String m_pseudo;
 	ArrayList<String> liste_amis = new ArrayList<String>();
