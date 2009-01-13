@@ -1,4 +1,4 @@
-package by_mr19cm;
+package IHM;
 
 import java.util.ArrayList;
 
