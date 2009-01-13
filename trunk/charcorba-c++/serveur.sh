@@ -6,11 +6,7 @@ killall -9 imr
 killall -9 nsd
 killall -9 micod
 
-if [ "$*" = "local" ]; then
-	ip=`ifconfig | grep "inet addr" | grep -v 127.0.0.1 | sed -e 's/:/ /g' | awk '{ print $3 ; }' | tail -n 1`
-else
-	ip=`wget -O - -q whatismyip.org`
-fi		
+ip=`ifconfig | grep "inet addr" | grep -v 127.0.0.1 | sed -e 's/:/ /g' | awk '{ print $3 ; }' | tail -n 1`
 
 # Lancement du service linux micod
 ./ORB/start-naming-mico.sh &
