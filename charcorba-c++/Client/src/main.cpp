@@ -2,6 +2,7 @@
 #include "mainwindowimpl.h"
 #include <client.h>
 #include <autotest_client.h>
+#include <dialog_tableaublanc.h>
 
 int main(int argc, char ** argv )
 {
@@ -20,6 +21,8 @@ int main(int argc, char ** argv )
 	fenetre.ARGV=argv;
 	fenetre.show(); 
 
+	Dialog_tableaublanc dial ;
+	dial.show();
 	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
 	qapplication.exec();
 
