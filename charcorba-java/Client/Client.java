@@ -125,7 +125,7 @@ public class Client
 		System.out.println("Connexion a l'annuaire");
 		Object service = COrb.static_orb.connecter_service("Annuaire");
 	  	
-	  	m_service_annuaire = Annuaire._narrow(service.in()) ;
+	  	m_service_annuaire = Annuaire._narrow(service.in());
 	  	m_service_annuaire.joindre_annuaire(m_pseudo);
 	  }
 	  
