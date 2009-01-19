@@ -2,7 +2,8 @@ package IHM;
 
 import java.util.ArrayList;
 
-public class Contact {
+public class Contact 
+{
 
 	private int id;
 	private String pseudo;

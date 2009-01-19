@@ -13,23 +13,44 @@ import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 */
+import orb_pkge.COrb;
+
 import org.omg.CORBA.*;
+import org.omg.CORBA.Object;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 
+import annuaire.Annuaire;
+import annuaire.AnnuairePackage.t_liste_stringHelper;
+
+import IHM.JFrameClient;
+
 
 public class Client 
 {
 	//Notre client
-	static Client singleton_client;
+	public static Client singleton_client;
+	
+	//IHM 
+	JFrameClient ihm_client;
 
 	String m_pseudo;
 	ArrayList<String> liste_amis = new ArrayList<String>();
 	ArrayList<String> liste_tags = new ArrayList<String>();
 	
-	  // Afficher simplement un message chez le client
+	//Annuaire
+	Annuaire m_service_annuaire ;
+	
+	//Constructeur
+	Client()
+	{
+		ihm_client = new JFrameClient();
+	}	
+	
+	// Afficher simplement un message chez le client
+	
 	  public void afficher_message (String pseudo_client, String message) {
 		  
 	  }
@@ -48,32 +69,44 @@ public class Client
 	  }
 	  
 	  //Modifier son pseudonyme
-	  public void set_pseudo(String pseudo){
-		  
+	  public void set_pseudo(String pseudo)
+	  {
+			m_pseudo = pseudo ; 
 	  }
 	  
-	  //Joindre l'annuaire
-	  public void joindre_annuaire(){
-		  
-	  }
 	
 	  //Ajout d'un Tag
-	  public void ajouter_tag(String tag){
-		  
+	  public void ajouter_tag(String tag)
+	  {
+		m_service_annuaire.ajouter_tag(m_pseudo,tag);
+		liste_tags.add(tag);  
 	  }
 	  
 	  //Enlever un Tag
-	  public void enlever_tag(String tag){
-		  
+	  public void enlever_tag(String tag)
+	  {
+		  liste_tags.remove(tag);
 	  }
 	  
 	  //Obtenir liste d'amis par tag
-	  public void get_amis_par_tag(String tag){
+	  public void get_amis_par_tag(String tag)
+	  {
+		String[] retval = m_service_annuaire.get_amis_par_tag(tag) ;
+		
+		for (int i=0;i< retval.length;++i)
+		{
+			String ami = retval[i] ;
+			if (ami != m_pseudo) 
+			{
+				ajouter_ami(ami);
+			}
+		}
 		  
 	  }
 	  
 	  //Ajouter un ami
-	  public void ajouter_ami(String ami){
+	  public void ajouter_ami(String ami)
+	  {
 		  
 	  }
 	  
@@ -87,29 +120,26 @@ public class Client
 		  
 	  }
 	  
+	  public void joindre_annuaire()
+	  {
+		System.out.println("Connexion a l'annuaire");
+		Object service = COrb.static_orb.connecter_service("Annuaire");
+	  	
+	  	m_service_annuaire = Annuaire._narrow(service.in()) ;
+	  	m_service_annuaire.joindre_annuaire(m_pseudo);
+	  }
 	  
 	  
 	  public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName
 	  {
-		// Create an object request broker
-		    ORB orb = ORB.init(args, null);
-
-		    // Obtain object reference for name service ...
-	            org.omg.CORBA.Object object = 
-	            orb.resolve_initial_references("NameService");
-	            
-	            // ... and narrow it to a NameContext
-	            NamingContext namingContext = 
-	            NamingContextHelper.narrow(object);
-
-	            // Create a name component array
-	            NameComponent nc_array[] =
-	            { new NameComponent("address_book","") };
-
-	            // Get an address book object reference ...
-	            org.omg.CORBA.Object objectReference = 
-	            namingContext.resolve(nc_array);
-		  /*
+		  
+		  //Lancement de l'ORB
+		  new COrb(args);
+		  
+		  //Création du client 
+		  new Client();
+		  
+		    	  /*
 	    	int status = 0;
 	  
 	    	// The ORB doit être initialiser.
@@ -147,7 +177,7 @@ public class Client
 		  	System.exit(status);
 		  	*/
 		}
-		  
+		  /*
 		static int run(org.omg.CORBA.ORB orb)
 		{
 			   org.omg.CORBA.Object obj = null;
@@ -174,7 +204,7 @@ public class Client
 		   System.out.println(standardImpl.setValues(new StringHolder("a"), new DoubleHolder(1.2),new ShortHolder((short)5), new BooleanHolder(true)));
 		  
 		   return 0;
-	  } 
+	  } */
 			
 }
 

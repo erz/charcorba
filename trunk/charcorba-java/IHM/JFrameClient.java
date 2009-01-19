@@ -66,6 +66,7 @@ public class JFrameClient extends JFrame
 			nouveauContact.setPreferredSize(new Dimension(150, 30));
 			listeContactsChekBox.add(nouveauContact);
 			fond.add(nouveauContact);
+			nouveauContact.revalidate();
 		}
 	}
 	
@@ -82,10 +83,10 @@ public class JFrameClient extends JFrame
 	{
 		return listeContacts;
 	}
-	
+	/*
 	public static void main(String[] args)
 	{
 		new JFrameClient();
-	}
+	}*/
 
 }
