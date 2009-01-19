@@ -21,14 +21,19 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import annuaire.Annuaire;
+import annuaire.AnnuaireHelper;
 import annuaire.AnnuairePackage.t_liste_stringHelper;
 
 import IHM.JFrameClient;
 
 
-public class Client 
+public class Client implements Runnable
 {
 	//Notre client
 	public static Client singleton_client;
@@ -36,6 +41,8 @@ public class Client
 	//IHM 
 	JFrameClient ihm_client;
 
+	Standard_impl m_standard;
+	
 	String m_pseudo;
 	ArrayList<String> liste_amis = new ArrayList<String>();
 	ArrayList<String> liste_tags = new ArrayList<String>();
@@ -46,7 +53,11 @@ public class Client
 	//Constructeur
 	Client()
 	{
-		ihm_client = new JFrameClient();
+		
+		//ihm_client = new JFrameClient();
+		m_pseudo = "Aurelien";
+		m_standard = new Standard_impl();
+		singleton_client = this;
 	}	
 	
 	// Afficher simplement un message chez le client
@@ -69,9 +80,12 @@ public class Client
 	  }
 	  
 	  //Modifier son pseudonyme
-	  public void set_pseudo(String pseudo)
+	  
+	  
+	  public void set_pseudo(String pseudo) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	  {
 			m_pseudo = pseudo ; 
+			COrb.static_orb.ajout_service(m_standard, pseudo);
 	  }
 	  
 	
@@ -120,17 +134,17 @@ public class Client
 		  
 	  }
 	  
-	  public void joindre_annuaire()
+	  public void joindre_annuaire() throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName
 	  {
 		System.out.println("Connexion a l'annuaire");
 		Object service = COrb.static_orb.connecter_service("Annuaire");
 	  	
-	  	m_service_annuaire = Annuaire._narrow(service.in());
+		m_service_annuaire = AnnuaireHelper.narrow(service) ;
 	  	m_service_annuaire.joindre_annuaire(m_pseudo);
 	  }
 	  
 	  
-	  public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName
+	  public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName, AdapterInactive, ServantAlreadyActive, WrongPolicy, InterruptedException, ServantNotActive
 	  {
 		  
 		  //Lancement de l'ORB
@@ -138,6 +152,17 @@ public class Client
 		  
 		  //Création du client 
 		  new Client();
+		  
+		  new Thread (singleton_client).start();
+		  
+		  singleton_client.set_pseudo("Aurelien");
+		  
+		  
+		  singleton_client.joindre_annuaire();
+		  
+		  
+		  
+		  while(true);
 		  
 		    	  /*
 	    	int status = 0;
@@ -177,6 +202,13 @@ public class Client
 		  	System.exit(status);
 		  	*/
 		}
+
+	@Override
+	public void run() 
+	{
+		// TODO Auto-generated method stub
+		COrb.static_orb.orb.run();
+	}
 		  /*
 		static int run(org.omg.CORBA.ORB orb)
 		{
