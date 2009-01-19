@@ -7,12 +7,13 @@ killall -9 nsd
 killall -9 micod
 
 ip=`ifconfig | grep "inet addr" | grep -v 127.0.0.1 | sed -e 's/:/ /g' | awk '{ print $3 ; }' | tail -n 1`
+ip="127.0.0.1"
 
 # Lancement du service linux micod
 ./ORB/start-naming-mico.sh &
 
 # Lancement du NameService
-nsd -ORBIIOPAddr inet:$ip:10809 & 
+nsd -ORBIIOPVersion 1.2 -ORBIIOPAddr inet:$ip:10809 & 
 
 # Lancement du serveur
 xterm -e "Serveur/bin/serveur -ORBInitRef NameService=corbaloc::$ip:10809/NameService" &
