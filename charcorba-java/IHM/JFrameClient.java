@@ -83,10 +83,10 @@ public class JFrameClient extends JFrame
 	{
 		return listeContacts;
 	}
-	
+	/*
 	public static void main(String[] args)
 	{
 		new JFrameClient();
-	}
+	}*/
 
 }
