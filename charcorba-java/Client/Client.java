@@ -1,6 +1,7 @@
 package Client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 /*import org.jacorb.orb.ORB;
@@ -26,6 +27,8 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import chatroom.Chatroom_impl;
+
 import annuaire.Annuaire;
 import annuaire.AnnuaireHelper;
 import annuaire.AnnuairePackage.t_liste_stringHelper;
@@ -50,6 +53,8 @@ public class Client implements Runnable
 	//Annuaire
 	Annuaire m_service_annuaire ;
 	
+	HashMap<String,Chatroom_impl> m_liste_chatrooms_locales;  
+	
 	//Constructeur
 	Client()
 	{
@@ -59,7 +64,7 @@ public class Client implements Runnable
 		m_standard = new Standard_impl();
 		singleton_client = this;
 	}	
-	
+		
 	// Afficher simplement un message chez le client
 	
 	  public void afficher_message (String pseudo_client, String message) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName {
@@ -130,7 +135,9 @@ public class Client implements Runnable
 	  
 	  //Creer une Chatroom
 	  public void creer_chatroom(String nom_chatroom){
-		  
+		  Chatroom_impl chatroom = new Chatroom_impl(nom_chatroom);
+		  m_liste_chatrooms_locales.add(pair<String,Chatroom_impl> (nom_chatroom,chatroom));
+		  COrb.static_orb.ajout_service(chatroom, nom_chatroom);
 	  }
 	  
 	  //ajouter un message
