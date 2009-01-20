@@ -62,12 +62,15 @@ public class Client implements Runnable
 	
 	// Afficher simplement un message chez le client
 	
-	  public void afficher_message (String pseudo_client, String message) {
-		  
+	  public void afficher_message (String pseudo_client, String message) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName {
+		  Object service_distant = COrb.static_orb.connecter_service(pseudo_client);
+		  Standard standard_distant = StandardHelper.narrow(service_distant);
+		  standard_distant.afficher_message(m_pseudo, message);
 	  }
 
 	  // Prévient le client que la chatroom a recu un message
 	  public void signal_chatroom(String chatroom) {
+		  
 	  }
 	  
 	  //Prévient le client qu'un ami a ouvert une chatroom
@@ -122,6 +125,7 @@ public class Client implements Runnable
 	  public void ajouter_ami(String ami)
 	  {
 		  
+		 liste_amis.add(ami); 
 	  }
 	  
 	  //Creer une Chatroom
@@ -203,7 +207,6 @@ public class Client implements Runnable
 		  	*/
 		}
 
-	@Override
 	public void run() 
 	{
 		// TODO Auto-generated method stub
