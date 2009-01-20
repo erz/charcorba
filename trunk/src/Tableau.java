@@ -100,10 +100,10 @@ public class Tableau extends JPanel {
 	@Override
 	public void paint(Graphics g)
 	{
-		for (int i=0; i<pixels.size(); i++)
+		for (int i=1; i<pixels.size(); i++)
 		{
 			g.setColor(pixels.get(i).getColor());
-			g.fillOval(pixels.get(i).x, pixels.get(i).y, 3, 3);
+			g.drawLine(pixels.get(i-1).x, pixels.get(i-1).y, pixels.get(i).x, pixels.get(i).y);
 		}
 	}
 	public static void main(String[] args) {
