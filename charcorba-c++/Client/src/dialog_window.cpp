@@ -58,8 +58,6 @@ void Dialog_window::chatroom_envoyer_message()
 		{
 			Client::get_instance()->ajouter_message("tmp",message);
 		}
-	
-	
 }
 
 void Dialog_window::ecrire_message(string pseudo,string message){

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ./serveur.sh &
-sleep 5
+sleep 8
 
 ./client.sh sylvain &
 ./client.sh florent &
