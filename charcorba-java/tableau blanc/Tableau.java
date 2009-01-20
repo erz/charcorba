@@ -15,11 +15,7 @@ import javax.swing.JPanel;
 
 
 @SuppressWarnings("serial")
-public class Tableau extends JPanel {
-	private static int RED = 0;
-	private static int GREEN = 1;
-	private static int BLUE = 2;
-	
+public class Tableau extends JPanel {	
 	private Color[] colors = {Color.red, Color.green, Color.blue};
 
 	private class ColoredPoint extends Point
@@ -30,19 +26,9 @@ public class Tableau extends JPanel {
 			super(x, y);
 			color = c;
 		}
-		public Color getColor() { return color; }
-		public int getColorInt()
+		public Color getColor()
 		{
-			if (color.equals(Color.red))
-				return RED;
-			else
-				if (color.equals(Color.green))
-					return GREEN;
-				else
-					if (color.equals(Color.blue))
-						return BLUE;
-			return 0;
-			
+			return color;
 		}
 	}
 	private ArrayList<ColoredPoint> pixels = new ArrayList<ColoredPoint>();
@@ -95,15 +81,15 @@ public class Tableau extends JPanel {
 				pixels.add(newPoint = new ColoredPoint(arg0.getX(), arg0.getY(), color));
 				repaint();
 				
-				draw(newPoint.x, newPoint.y, newPoint.getColorInt());
+				draw(newPoint.x, newPoint.y, newPoint.getColor().getRed(), newPoint.getColor().getGreen(), newPoint.getColor().getBlue());
 			}
 			
 		});
 	}
 	
-	public void draw(int x, int y, int c)
+	public void draw(int x, int y, int r, int g, int b)
 	{
-		System.out.println(x + " " + y + "  " + c);
+		System.out.println(x + " " + y + "  " + r + " " + g + " " + b);
 	}
 	
 	@Override
