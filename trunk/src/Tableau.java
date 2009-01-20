@@ -81,15 +81,20 @@ public class Tableau extends JPanel {
 				pixels.add(newPoint = new ColoredPoint(arg0.getX(), arg0.getY(), color));
 				repaint();
 				
-				draw(newPoint.x, newPoint.y, newPoint.getColor().getRed(), newPoint.getColor().getGreen(), newPoint.getColor().getBlue());
+				sendPixel(newPoint.x, newPoint.y, newPoint.getColor().getRed(), newPoint.getColor().getGreen(), newPoint.getColor().getBlue());
 			}
 			
 		});
 	}
 	
-	public void draw(int x, int y, int r, int g, int b)
+	public void sendPixel(int x, int y, int r, int g, int b)
 	{
 		System.out.println(x + " " + y + "  " + r + " " + g + " " + b);
+	}
+	public void receivePixel(int x, int y, int r, int g, int b)
+	{
+		pixels.add(new ColoredPoint(x, y, new Color(r, g, b)));
+		repaint();
 	}
 	
 	@Override
