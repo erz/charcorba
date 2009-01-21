@@ -85,6 +85,7 @@ public class Client implements Runnable
 
 	  // Invite le client à participer à une chatroom
 	  public void inviter_client (String chatroom) {
+		  
 	  }
 	  
 	  //Modifier son pseudonyme
@@ -136,8 +137,8 @@ public class Client implements Runnable
 	  //Creer une Chatroom
 	  public void creer_chatroom(String nom_chatroom){
 		  Chatroom_impl chatroom = new Chatroom_impl(nom_chatroom);
-		  m_liste_chatrooms_locales.add(pair<String,Chatroom_impl> (nom_chatroom,chatroom));
-		  COrb.static_orb.ajout_service(chatroom, nom_chatroom);
+		  //m_liste_chatrooms_locales.add(pair<String,Chatroom_impl>("nom_chatroom",chatroom));
+		  //COrb.static_orb.ajout_service(chatroom, nom_chatroom);
 	  }
 	  
 	  //ajouter un message
