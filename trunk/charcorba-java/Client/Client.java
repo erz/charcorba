@@ -2,7 +2,6 @@ package Client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Properties;
 
 /*import org.jacorb.orb.ORB;
 import org.omg.CORBA.BooleanHolder;
@@ -16,10 +15,9 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 */
 import orb_pkge.COrb;
 
-import org.omg.CORBA.*;
+
 import org.omg.CORBA.Object;
 import org.omg.CORBA.ORBPackage.InvalidName;
-import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
@@ -165,7 +163,7 @@ public class Client implements Runnable
 		  
 		  singleton_client.joindre_annuaire();
 		  
-		  
+		  singleton_client.afficher_message("Aurelien", "SALUT");
 		  
 		while(true);
 		  

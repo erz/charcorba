@@ -11,7 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public class JFrameChatRoom extends JFrame {
+public class JFrameChatRoom extends JFrame 
+{
 
 	private Container contenu;
 	
@@ -20,7 +21,8 @@ public class JFrameChatRoom extends JFrame {
 	private JButton send;
 	
 	
-	public JFrameChatRoom(ArrayList<Contact> contactsSelected) {
+	public JFrameChatRoom() 
+	{
 		setSize(440, 370);
 		setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -30,8 +32,6 @@ public class JFrameChatRoom extends JFrame {
 		contenu.setLayout(new FlowLayout(0, 5, 5));
 		
 		add(new JLabel("Participants : "));
-		for (int i=0; i<contactsSelected.size(); i++)
-			contenu.add(new JLabel(contactsSelected.get(i).getPseudo()));
 		
 		out = new JTextArea();
 		out.setPreferredSize(new Dimension(400, 200));

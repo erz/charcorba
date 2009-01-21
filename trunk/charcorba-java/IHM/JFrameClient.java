@@ -11,25 +11,19 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
+
 @SuppressWarnings("serial")
 public class JFrameClient extends JFrame 
 {
 	private Container fond;
-	
-	//Temporaire : pour tester en local
-	ArrayList<String> tagsMika = new ArrayList<String>() {{ add("Lucille je t'aime"); add("Tiens bien l'alcool");  }};;
-	ArrayList<String> tagsTrix= new ArrayList<String>() {{ add("CORBA!!!"); add("Suicide");  }};;
-	ArrayList<String> tagsTony= new ArrayList<String>() {{ add("Jamais la où on l'attend"); add("Recherche couple"); }};;
-	ArrayList<String> tagsFlo= new ArrayList<String>() {{ add("Blond"); add("Nudiste");  }};;
-	ArrayList<String> tagsAurel= new ArrayList<String>() {{ add("Jamais la où on l'attend"); add("Tiens bien l'alcool");  }};;
-	
-	private Contact[] listeContacts = {
-				new Contact(0, "mika", tagsMika),
-				new Contact(1, "trix", tagsTrix),
-				new Contact(2, "titi", tagsTony),
-				new Contact(3, "grande folle", tagsFlo),
-				new Contact(4, "violeur d'enfants", tagsAurel)
-				};
+
 	private ArrayList<JCheckBox> listeContactsChekBox;
 	private JButton creerChatRoom;
 	
@@ -45,48 +39,18 @@ public class JFrameClient extends JFrame
 		fond.add(creerChatRoom = new JButton("creer une chatroom"));
 		creerChatRoom.addActionListener(new ActionListener()
 		{
-			
 			public void actionPerformed(ActionEvent arg0) {
-				new JFrameChatRoom(getContactsSelected());
+				new JFrameChatRoom();
 			}
 		});
-		
-		listeContactsChekBox = new ArrayList<JCheckBox>();
-
+	
 		setSize(200, 400);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
-	public void getContacts()
-	{
-		for (int i=0; i<listeContacts.length; i++)
-		{
-			JCheckBox nouveauContact = new JCheckBox(listeContacts[i].getPseudo());
-			nouveauContact.setPreferredSize(new Dimension(150, 30));
-			listeContactsChekBox.add(nouveauContact);
-			fond.add(nouveauContact);
-			nouveauContact.revalidate();
-		}
-	}
-	
-	public ArrayList<Contact> getContactsSelected()
-	{
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
-		for (int i=0; i<listeContactsChekBox.size(); i++)
-			if (listeContactsChekBox.get(i).isSelected())
-				contacts.add(listeContacts[i]);
-		return contacts;
-	}
-	
-	public Contact[] getListeContacts()
-	{
-		return listeContacts;
-	}
-	/*
-	public static void main(String[] args)
-	{
-		new JFrameClient();
-	}*/
-
+	 public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName, AdapterInactive, ServantAlreadyActive, WrongPolicy, InterruptedException, ServantNotActive
+	 {
+		 new JFrameClient();
+	 }
 }
