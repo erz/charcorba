@@ -56,15 +56,25 @@ Standard_impl::inviter_client( const char* chatroom )
 }
 
 CORBA::Boolean
-Standard_impl::signal_chatroom( const char* chatroom )
+Standard_impl::signal_chatroom( const char* chatroom, CORBA::ULong idpixel )
   throw(
     ::CORBA::SystemException)
-
 {
 	CORBA::Boolean retval;
 	Client::get_instance()->signal_chatroom(chatroom);
 	return retval;
 }
+
+CORBA::Boolean
+Standard_impl::signal_tableaublanc( const char* tableau, CORBA::ULong idpixel )
+  throw(
+    ::CORBA::SystemException)
+
+{
+  CORBA::Boolean retval;
+  return retval;
+}
+
 
 CORBA::Boolean
 Standard_impl::ping()
