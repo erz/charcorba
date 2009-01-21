@@ -27,6 +27,7 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import chatroom.Chatroom;
 import chatroom.Chatroom_impl;
 
 import annuaire.Annuaire;
@@ -54,6 +55,7 @@ public class Client implements Runnable
 	Annuaire m_service_annuaire ;
 	
 	HashMap<String,Chatroom_impl> m_liste_chatrooms_locales;  
+	HashMap<String,Chatroom> m_liste_chatrooms_distantes;
 	
 	//Constructeur
 	Client()
@@ -137,8 +139,8 @@ public class Client implements Runnable
 	  //Creer une Chatroom
 	  public void creer_chatroom(String nom_chatroom){
 		  Chatroom_impl chatroom = new Chatroom_impl(nom_chatroom);
-		  //m_liste_chatrooms_locales.add(pair<String,Chatroom_impl>("nom_chatroom",chatroom));
-		  //COrb.static_orb.ajout_service(chatroom, nom_chatroom);
+		  m_liste_chatrooms_locales.add(pair<String,Chatroom_impl>("nom_chatroom",chatroom));
+		  COrb.static_orb.ajout_service(chatroom, nom_chatroom);
 	  }
 	  
 	  //ajouter un message
