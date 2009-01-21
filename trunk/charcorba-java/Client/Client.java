@@ -32,8 +32,6 @@ import chatroom.Chatroom_impl;
 
 import annuaire.Annuaire;
 import annuaire.AnnuaireHelper;
-import annuaire.AnnuairePackage.t_liste_stringHelper;
-
 import IHM.JFrameClient;
 
 
@@ -69,30 +67,21 @@ public class Client implements Runnable
 		
 	// Afficher simplement un message chez le client
 	
-	  public void afficher_message (String pseudo_client, String message) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName {
+	  public void afficher_message (String pseudo_client, String message) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName 
+	  {
 		  Object service_distant = COrb.static_orb.connecter_service(pseudo_client);
 		  Standard standard_distant = StandardHelper.narrow(service_distant);
 		  standard_distant.afficher_message(m_pseudo, message);
 	  }
 
-	  // Prévient le client que la chatroom a recu un message
-	  public void signal_chatroom(String chatroom) {
-		
-	  }
-	  
-	  //Prévient le client qu'un ami a ouvert une chatroom
-	  public void signal_invitation_chatroom(String chatroom){
-		  
-	  }
-
 	  // Invite le client à participer à une chatroom
-	  public void inviter_client (String chatroom) {
-		  
+	  public void inviter_client_chatroom (String pseudo,String nom_chatroom) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName 
+	  {
+		  m_liste_chatrooms_locales.get(nom_chatroom).inviter_client(pseudo);
 	  }
 	  
 	  //Modifier son pseudonyme
-	  
-	  
+	   
 	  public void set_pseudo(String pseudo) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	  {
 			m_pseudo = pseudo ; 
@@ -134,18 +123,20 @@ public class Client implements Runnable
 	  {
 		  
 		 liste_amis.add(ami); 
+		 
 	  }
 	  
 	  //Creer une Chatroom
-	  public void creer_chatroom(String nom_chatroom){
+	  public void creer_chatroom(String nom_chatroom) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive{
 		  Chatroom_impl chatroom = new Chatroom_impl(nom_chatroom);
-		  m_liste_chatrooms_locales.add(pair<String,Chatroom_impl>("nom_chatroom",chatroom));
+		  m_liste_chatrooms_locales.put(nom_chatroom, chatroom);
 		  COrb.static_orb.ajout_service(chatroom, nom_chatroom);
 	  }
 	  
 	  //ajouter un message
-	  public void ajouter_message(String nom_chatroom,String message){
-		  
+	  public void ajouter_message(String nom_chatroom,String message)
+	  {
+		  m_liste_chatrooms_distantes.get(nom_chatroom).ajouter_message(m_pseudo, message);
 	  }
 	  
 	  public void joindre_annuaire() throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName
@@ -158,8 +149,8 @@ public class Client implements Runnable
 	  }
 	  
 	  
-	  public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName, AdapterInactive, ServantAlreadyActive, WrongPolicy, InterruptedException, ServantNotActive
-	  {
+	 public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName, AdapterInactive, ServantAlreadyActive, WrongPolicy, InterruptedException, ServantNotActive
+	 {
 		  
 		  //Lancement de l'ORB
 		  new COrb(args);
@@ -176,81 +167,15 @@ public class Client implements Runnable
 		  
 		  
 		  
-		  while(true);
+		while(true);
 		  
-		    	  /*
-	    	int status = 0;
-	  
-	    	// The ORB doit être initialiser.
-	    	org.omg.CORBA.ORB orb = null;
-	  
-		   try
-		   {
-			   Properties props = new Properties();
-			   props.put("org.omg.CORBA.ORBInitialPort", "10809");
-			   props.put("org.omg.CORBA.ORBInitialHost", "localhost");
-			   orb = ORB.init(args, props);
-			   status = run(orb);
-		   }
-		   catch(Exception ex)
-		   {
-			   ex.printStackTrace();
-			   status = 1;
-		   }
-	  
-		   // Si l'ORB est créé avec succès, il sera détruit. Cela libère les ressources utilisées par l'ORB
-		   if(orb != null)
-		   {
-			   try
-			   {
-				   orb.destroy();
-			   }
-			   catch(Exception ex)
-			   {
-				   ex.printStackTrace();
-				   status = 1;
-			   }
-		   }
-		  
-		   // Le status de sortie est retourné. Si il n'y a pas d'erreur on retourne 0 ou sinon 1.
-		  	System.exit(status);
-		  	*/
-		}
+	 }
 
 	public void run() 
 	{
 		// TODO Auto-generated method stub
 		COrb.static_orb.orb.run();
-	}
-		  /*
-		static int run(org.omg.CORBA.ORB orb)
-		{
-			   org.omg.CORBA.Object obj = null;
-		  
-		   // The stringified object reference is read and converted to an object.
-		   try
-		   {
-			   String refFile = "C:/EXEMPLEFILE.ref";
-			   java.io.BufferedReader in = new java.io.BufferedReader(new java.io.FileReader(refFile));
-			   String ref = in.readLine();
-			   obj = orb.string_to_object(ref);
-		   }
-		   catch(java.io.IOException ex)
-		   {
-			   ex.printStackTrace();
-			   return 1;
-		   }
-		  
-		   // L'objet référencé est "narrowed" vers une réference vers un objet trivial. Un simple cast java n'est 
-		   // pas autorisé ici, parce que c'est possible que le client ait besoin de demander au serveur
-		   // si oui ou non l'objet est réellement du type trivial.
-		   	Standard standardImpl = StandardHelper.narrow(obj);
-		  
-		   System.out.println(standardImpl.setValues(new StringHolder("a"), new DoubleHolder(1.2),new ShortHolder((short)5), new BooleanHolder(true)));
-		  
-		   return 0;
-	  } */
-			
+	}		
 }
 
 
