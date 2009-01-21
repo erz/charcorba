@@ -29,8 +29,8 @@ Chatroom_impl::ajouter_message( const char* pseudo, const char* message )
 	map<string,Standard_var>::iterator pos;
 	for (pos = m_liste_participants.begin(); pos != m_liste_participants.end(); ++pos)
 	{
-		cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tOn averti le client '" << pos->first << "'" << endl;
-		pos->second->signal_chatroom (m_nom_chatroom.c_str());
+		cout << "[DEBUG]\t[Chatroom - '" << m_nom_chatroom << "']\tOn averti le client '" << pos->first << " de l'insertion du message d'id" << m_liste_messages.size() <<  endl;
+		pos->second->signal_chatroom (m_nom_chatroom.c_str(),m_liste_messages.size());
 	}
 	return retval; 
 }

@@ -29,7 +29,13 @@ class Standard_impl : virtual public POA_Standard
         ::CORBA::SystemException)
     ;
 
-    CORBA::Boolean signal_chatroom( const char* chatroom )
+    CORBA::Boolean
+      signal_chatroom( const char* chatroom, CORBA::ULong idpixel )
+  throw(
+    ::CORBA::SystemException)
+    ;
+    
+    CORBA::Boolean signal_tableaublanc( const char* tableau, CORBA::ULong idpixel )
       throw(
         ::CORBA::SystemException)
     ;
