@@ -22,7 +22,6 @@ Widget_tableaublanc::Widget_tableaublanc(QWidget* parent ): QWidget(parent)
 
 void Widget_tableaublanc::mouseMoveEvent(QMouseEvent* e) 
 {
-	//qDebug("(%d,%d)",e->x(), e->y()) ;
 	m_vect_qpoints->push_back(Pixel(QPoint(e->x(),e->y()),
 	                                m_qcolor_couleur_actuelle,
 	                                true));
@@ -34,6 +33,7 @@ void Widget_tableaublanc::mousePressEvent(QMouseEvent *e)
 	m_vect_qpoints->push_back(Pixel(QPoint(e->x(),e->y()),
 	                                m_qcolor_couleur_actuelle,
 	                                false));
+	repaint();
 }
 
 void Widget_tableaublanc::mouseReleaseEvent(QMouseEvent *e)
@@ -46,12 +46,12 @@ void Widget_tableaublanc::mouseReleaseEvent(QMouseEvent *e)
 void Widget_tableaublanc::paintEvent(QPaintEvent *evnt)
 {
 	QPainter painter(this) ;
-	painter.setPen(QPen(QColor(Qt::black)));
-	int i;	
+	painter.setPen(QPen(Qt::black));
+	int i;
 	for(i=0;i<m_vect_qpoints->size();++i)
 	{
 		Pixel point = m_vect_qpoints->value(i);
-		painter.setPen(QPen(QColor(m_qcolor_couleur_actuelle)));
+		painter.setPen(QPen(m_qcolor_couleur_actuelle));
 		if (point.m_est_continu == true )
 		{
 			Pixel point_prec = m_vect_qpoints->value(i-1);
