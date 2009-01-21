@@ -7,6 +7,7 @@ killall -9 nsd
 killall -9 micod
 
 ip=`ifconfig | grep "inet addr" | grep -v 127.0.0.1 | sed -e 's/:/ /g' | awk '{ print $3 ; }' | tail -n 1`
+ip="localhost"
 
 # Lancement du service linux micod
 ./ORB/start-naming-mico.sh &

@@ -6,24 +6,32 @@
 #include <QtGui/QMouseEvent> 
 #include <QPoint>
 #include <QVector>
+#include <pixel.h> 
  
 using namespace std;
  
 class Widget_tableaublanc: public QWidget 
 {
 	Q_OBJECT 
- 	int last_x ;
- 	int last_y ;
+	int last_x ;
+	int last_y ;
+	QColor m_qcolor_couleur_actuelle ;
+
+	QVector <Pixel> * m_vect_qpoints ; 
+
+	public: 
+		Widget_tableaublanc(QWidget* parent = 0); 
 	
-	QVector <QPoint> * m_vect_qpoints ; 
- 
- public: 
-   Widget_tableaublanc(QWidget* parent = 0); 
- 
- protected: 
-   void mouseMoveEvent(QMouseEvent* e);
-   void mouseReleaseEvent(QMouseEvent *event);
-   void paintEvent(QPaintEvent *event); 
+	protected: 
+		void mouseMoveEvent(QMouseEvent* e);
+		void mouseReleaseEvent(QMouseEvent *event);
+		void mousePressEvent(QMouseEvent *event);
+		void paintEvent(QPaintEvent *event); 
+
+	public slots :
+		void set_couleur_bleu ();
+		void set_couleur_rouge ();
+		void set_couleur_vert ();
 } ; 
  
 #endif // __TABLEAUBLANC_H__
