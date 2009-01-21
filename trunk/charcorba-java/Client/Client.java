@@ -75,7 +75,7 @@ public class Client implements Runnable
 
 	  // Prévient le client que la chatroom a recu un message
 	  public void signal_chatroom(String chatroom) {
-		  
+		
 	  }
 	  
 	  //Prévient le client qu'un ami a ouvert une chatroom
