@@ -16,6 +16,6 @@ class Dialog_tableaublanc: public QDialog
 	
 	public: 
 		Dialog_tableaublanc(QWidget * parent = 0); 
-} ; 
- 
+};
+
 #endif // __DIALOG_TABLEAUBLANC_H__

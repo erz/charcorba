@@ -26,6 +26,8 @@ class TableauBlanc_impl : virtual public POA_TableauBlanc
       throw(
         ::CORBA::SystemException)
     ;
+    
+    void inviter_client (std::string pseudo);
 };
 
 

@@ -10,7 +10,8 @@
  
 using namespace std;
  
-class Widget_tableaublanc: public QWidget 
+class Widget_tableaublanc : 
+	public QWidget 
 {
 	Q_OBJECT 
 	int last_x ;
@@ -21,12 +22,16 @@ class Widget_tableaublanc: public QWidget
 
 	public: 
 		Widget_tableaublanc(QWidget* parent = 0); 
+		void ajouter_pixel (Pixel pixel);
 	
 	protected: 
 		void mouseMoveEvent(QMouseEvent* e);
 		void mouseReleaseEvent(QMouseEvent *event);
 		void mousePressEvent(QMouseEvent *event);
 		void paintEvent(QPaintEvent *event); 
+
+	//signals :
+		//void pixel_ajoute (Pixel pixel);
 
 	public slots :
 		void set_couleur_bleu ();

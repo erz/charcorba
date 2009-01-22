@@ -44,6 +44,7 @@ void f_thread_lancement_autotest ()
 		else if (cmd == "sleep")			sleep(atoi(getstring(cin,'\n').c_str()));
 		else if (cmd == "get_amis_par_tag")	Client::get_instance()->get_amis_par_tag (getstring(cin,'\n'));
 		else if (cmd == "creer_chatroom" )	Client::get_instance()->creer_chatroom(getstring(cin,'\n'));
+		else if (cmd == "creer_tableaublanc" ) Client::get_instance()->creer_tableau_blanc(getstring(cin,'\n'));
 		else if (cmd == "inviter_client_chatroom")
 		{
 			string pseudo = getstring(cin,' ');

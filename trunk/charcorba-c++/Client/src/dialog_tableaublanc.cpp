@@ -35,3 +35,5 @@ Dialog_tableaublanc::Dialog_tableaublanc(QWidget * parent):
 	layout_horizontal->addLayout(layout_palette);
 	setLayout (layout_horizontal);	
 }
+
+

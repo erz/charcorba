@@ -4,6 +4,8 @@
 #include <string>
 #include <QObject>
 #include <QString>
+#include <pixel.h>
+
 #include "orb.h"
 
 #include <set>
@@ -11,6 +13,7 @@
 #include <standard.h>
 #include <standard_impl.h>
 #include <chatroom_impl.h>
+#include <tableau_blanc_impl.h>
 
 #include <boost/thread/thread.hpp>
 #include <boost/bind.hpp>
@@ -44,6 +47,12 @@ public:
 	// Liste des chatrooms distantes 
 	std::map <std::string,Chatroom_var> m_liste_chatrooms_distantes ;
 
+	// Liste des tableaux blancs locaux
+	std::map <std::string,TableauBlanc_impl *> m_liste_tableauxblancs_locaux ;
+
+	// Liste des tableaux blancs distants
+	std::map <std::string,TableauBlanc_var> m_liste_tableauxblancs_distants ;
+	
 	ORB * m_MICO_ORB ;
 	
 	Client();
@@ -72,6 +81,7 @@ public:
 	// Fonctions liées aux standards	
 	void afficher_message(string pseudo,string message);
 	void inviter_client_chatroom (std::string pseudo,std::string nom_chatroom);
+	void inviter_client_tableaublanc (std::string pseudo, std::string nom_chatroom);	
 	void message_recu(QString pseudo, QString message);
 
 	// Fonctions liées aux chatrooms
@@ -82,10 +92,18 @@ public:
 	void signal_chatroom(QString);
 	Message get_message (std::string nom_chatroom,unsigned long idmessage);
 
+	// Fonctions liées aux tableaux 
+	void creer_tableau_blanc (std::string nom_tableau);
+	void ajouter_pixel (std::string nom_tableau,Pixel pixel);
+	void signal_invitation_tableau(QString);
+	void signal_tableau(QString);
+	Pixel get_pixel (std::string nom_tableau,unsigned long idmessage);
+
 	signals :
 	
 	void ami_ajoute (QString);
 	void signal_message_recu(QString,QString);
+	void signal_pixel_ajoute(QString,QString);
 	void signal_client_chatroom(QString);
 	void invitation_chatroom(QString); 
 };
