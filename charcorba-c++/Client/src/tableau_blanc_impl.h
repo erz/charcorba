@@ -3,6 +3,7 @@
 #define __TABLEAU_BLANC_IMPL_H__
 
 #include <tableau_blanc.h>
+#include <standard.h>
 #include <string>
 
 // Implementation for interface TableauBlanc
@@ -10,7 +11,9 @@ class TableauBlanc_impl : virtual public POA_TableauBlanc
 {
   private:
   
-  	std::string m_nom_tableau ;
+	std::string m_nom_tableau ;
+
+	std::map <std::string,Standard_var> m_liste_participants;
 
   public:
 

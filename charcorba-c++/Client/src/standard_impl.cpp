@@ -14,8 +14,6 @@ Standard_impl::Standard_impl()
 	Standard_impl::m_static_standard = this ;
 }
 
-
-
 CORBA::Boolean
 Standard_impl::afficher_message(const char* pseudo,const char* message)
   throw(
@@ -29,7 +27,7 @@ Standard_impl::afficher_message(const char* pseudo,const char* message)
 }
 
 CORBA::Boolean
-Standard_impl::inviter_client( const char* chatroom )
+Standard_impl::inviter_client_chatroom ( const char* chatroom )
   throw(
     ::CORBA::SystemException)
 
@@ -52,6 +50,16 @@ Standard_impl::inviter_client( const char* chatroom )
 	
 	QString tmp = QString::fromStdString(chatroom);
 	Client::get_instance()->signal_invitation_chatroom(tmp);
+	return retval;
+}
+
+CORBA::Boolean
+Standard_impl::inviter_client_tableaublanc ( const char* tableau )
+  throw(
+    ::CORBA::SystemException)
+{
+	cout << "[DEBUG - Standard]\tRéception d'une invitation à participer au tableau blanc '" << tableau << "'" << endl ;
+	CORBA::Boolean retval = true ;
 	return retval;
 }
 
