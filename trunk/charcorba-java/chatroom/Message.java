@@ -2,6 +2,6 @@ package chatroom;
 
 public class Message 
 {
-	String message ;
-	String auteur ;
+	public String message ;
+	public String auteur ;
 }

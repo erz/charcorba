@@ -15,12 +15,14 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import Client.Standard;
 import Client.StandardHelper;
 
-public class COrb 
+public class COrb implements Runnable 
 {
 	
 	public static COrb static_orb;
 	
 	public ORB orb;
+	
+	private Thread orb_thread;
 	
 	//Portable server
 	org.omg.PortableServer.POA m_POA ;
@@ -73,6 +75,22 @@ public class COrb
 
 		
 		namingContext.rebind (c_nom_service, href_service_Annuaire);
+	}
+	
+	public void demarrer ()
+	{
+		  new Thread (this).start();
+	}
+	
+	public void arreter ()
+	{
+		orb.destroy();
+		m_POA.destroy(true, true);
+	}
+	
+	public void run() 
+	{
+		orb.run();
 	}
 	
 }
