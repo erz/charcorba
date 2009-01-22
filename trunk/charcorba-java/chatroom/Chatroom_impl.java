@@ -34,7 +34,7 @@ public class Chatroom_impl extends ChatroomPOA
 		Iterator <Standard> it = participants.iterator();
 		while (it.hasNext())
 		{
-			it.next().signal_chatroom(m_nom_chatroom);
+			it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size());
 			
 		}
 		return retval;
