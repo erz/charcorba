@@ -24,8 +24,13 @@ class Standard_impl : virtual public POA_Standard
         ::CORBA::SystemException)
     ;
 
-    CORBA::Boolean inviter_client( const char* chatroom )
+    CORBA::Boolean inviter_client_chatroom( const char* chatroom )
       throw(
+        ::CORBA::SystemException)
+    ;
+
+    CORBA::Boolean inviter_client_tableaublanc ( const char* tableau )
+    throw(
         ::CORBA::SystemException)
     ;
 

@@ -1,5 +1,7 @@
 #include <string>
 #include <tableau_blanc_impl.h>
+#include <tableaublanc.h>
+#include <client.h>
 
 using namespace std;
 
@@ -38,7 +40,7 @@ void TableauBlanc_impl::inviter_client (string pseudo)
 	CORBA::Object_var service_distant = Client::get_instance()->m_MICO_ORB->connecter_service(pseudo);
 
 	Standard_var standard_distant = Standard::_narrow(service_distant.in()) ;
-	standard_distant->inviter_client(m_nom_chatroom.c_str());
+	standard_distant->inviter_client_tableaublanc(m_nom_tableau.c_str());
 	
 	m_liste_participants.insert( pair<string,Standard_var>(pseudo,standard_distant));
 }

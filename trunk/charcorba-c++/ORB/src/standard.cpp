@@ -324,13 +324,13 @@ Standard_stub_clp::signal_tableaublanc( const char* _par_tableau, CORBA::ULong _
 
 #endif // MICO_CONF_NO_POA
 
-CORBA::Boolean Standard_stub::inviter_client( const char* _par_chatroom )
+CORBA::Boolean Standard_stub::inviter_client_chatroom( const char* _par_chatroom )
 {
   CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom );
   CORBA::Boolean _res;
   CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
 
-  CORBA::StaticRequest __req( this, "inviter_client" );
+  CORBA::StaticRequest __req( this, "inviter_client_chatroom" );
   __req.add_in_arg( &_sa_chatroom );
   __req.set_result( &__res );
 
@@ -345,7 +345,7 @@ CORBA::Boolean Standard_stub::inviter_client( const char* _par_chatroom )
 #ifndef MICO_CONF_NO_POA
 
 CORBA::Boolean
-Standard_stub_clp::inviter_client( const char* _par_chatroom )
+Standard_stub_clp::inviter_client_chatroom( const char* _par_chatroom )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
@@ -356,7 +356,7 @@ Standard_stub_clp::inviter_client( const char* _par_chatroom )
       #ifdef HAVE_EXCEPTIONS
       try {
       #endif
-        __res = _myserv->inviter_client(_par_chatroom);
+        __res = _myserv->inviter_client_chatroom(_par_chatroom);
       #ifdef HAVE_EXCEPTIONS
       }
       catch (...) {
@@ -373,7 +373,61 @@ Standard_stub_clp::inviter_client( const char* _par_chatroom )
     _postinvoke ();
   }
 
-  return Standard_stub::inviter_client(_par_chatroom);
+  return Standard_stub::inviter_client_chatroom(_par_chatroom);
+}
+
+#endif // MICO_CONF_NO_POA
+
+CORBA::Boolean Standard_stub::inviter_client_tableaublanc( const char* _par_tableau )
+{
+  CORBA::StaticAny _sa_tableau( CORBA::_stc_string, &_par_tableau );
+  CORBA::Boolean _res;
+  CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+
+  CORBA::StaticRequest __req( this, "inviter_client_tableaublanc" );
+  __req.add_in_arg( &_sa_tableau );
+  __req.set_result( &__res );
+
+  __req.invoke();
+
+  mico_sii_throw( &__req, 
+    0);
+  return _res;
+}
+
+
+#ifndef MICO_CONF_NO_POA
+
+CORBA::Boolean
+Standard_stub_clp::inviter_client_tableaublanc( const char* _par_tableau )
+{
+  PortableServer::Servant _serv = _preinvoke ();
+  if (_serv) {
+    POA_Standard * _myserv = POA_Standard::_narrow (_serv);
+    if (_myserv) {
+      CORBA::Boolean __res;
+
+      #ifdef HAVE_EXCEPTIONS
+      try {
+      #endif
+        __res = _myserv->inviter_client_tableaublanc(_par_tableau);
+      #ifdef HAVE_EXCEPTIONS
+      }
+      catch (...) {
+        _myserv->_remove_ref();
+        _postinvoke();
+        throw;
+      }
+      #endif
+
+      _myserv->_remove_ref();
+      _postinvoke ();
+      return __res;
+    }
+    _postinvoke ();
+  }
+
+  return Standard_stub::inviter_client_tableaublanc(_par_tableau);
 }
 
 #endif // MICO_CONF_NO_POA
@@ -499,9 +553,9 @@ POA_Standard::dispatch (CORBA::StaticServerRequest_ptr __req)
   #ifdef HAVE_EXCEPTIONS
   try {
   #endif
-    switch (mico_string_hash (__req->op_name(), 7)) {
+    switch (mico_string_hash (__req->op_name(), 11)) {
     case 0:
-      if( strcmp( __req->op_name(), "inviter_client" ) == 0 ) {
+      if( strcmp( __req->op_name(), "inviter_client_chatroom" ) == 0 ) {
         CORBA::String_var _par_chatroom;
         CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom._for_demarshal() );
 
@@ -513,45 +567,51 @@ POA_Standard::dispatch (CORBA::StaticServerRequest_ptr __req)
         if( !__req->read_args() )
           return true;
 
-        _res = inviter_client( _par_chatroom.inout() );
+        _res = inviter_client_chatroom( _par_chatroom.inout() );
         __req->write_results();
         return true;
       }
       break;
-    case 1:
-      if( strcmp( __req->op_name(), "ping" ) == 0 ) {
+    case 2:
+      if( strcmp( __req->op_name(), "inviter_client_tableaublanc" ) == 0 ) {
+        CORBA::String_var _par_tableau;
+        CORBA::StaticAny _sa_tableau( CORBA::_stc_string, &_par_tableau._for_demarshal() );
+
         CORBA::Boolean _res;
         CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+        __req->add_in_arg( &_sa_tableau );
         __req->set_result( &__res );
 
         if( !__req->read_args() )
           return true;
 
-        _res = ping();
+        _res = inviter_client_tableaublanc( _par_tableau.inout() );
         __req->write_results();
         return true;
       }
       break;
     case 3:
-      if( strcmp( __req->op_name(), "afficher_message" ) == 0 ) {
-        CORBA::String_var _par_pseudo;
-        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
-        CORBA::String_var _par_message;
-        CORBA::StaticAny _sa_message( CORBA::_stc_string, &_par_message._for_demarshal() );
+      if( strcmp( __req->op_name(), "signal_tableaublanc" ) == 0 ) {
+        CORBA::String_var _par_tableau;
+        CORBA::StaticAny _sa_tableau( CORBA::_stc_string, &_par_tableau._for_demarshal() );
+        CORBA::ULong _par_idpixel;
+        CORBA::StaticAny _sa_idpixel( CORBA::_stc_ulong, &_par_idpixel );
 
         CORBA::Boolean _res;
         CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-        __req->add_in_arg( &_sa_pseudo );
-        __req->add_in_arg( &_sa_message );
+        __req->add_in_arg( &_sa_tableau );
+        __req->add_in_arg( &_sa_idpixel );
         __req->set_result( &__res );
 
         if( !__req->read_args() )
           return true;
 
-        _res = afficher_message( _par_pseudo.inout(), _par_message.inout() );
+        _res = signal_tableaublanc( _par_tableau.inout(), _par_idpixel );
         __req->write_results();
         return true;
       }
+      break;
+    case 7:
       if( strcmp( __req->op_name(), "signal_chatroom" ) == 0 ) {
         CORBA::String_var _par_chatroom;
         CORBA::StaticAny _sa_chatroom( CORBA::_stc_string, &_par_chatroom._for_demarshal() );
@@ -571,22 +631,38 @@ POA_Standard::dispatch (CORBA::StaticServerRequest_ptr __req)
         __req->write_results();
         return true;
       }
-      if( strcmp( __req->op_name(), "signal_tableaublanc" ) == 0 ) {
-        CORBA::String_var _par_tableau;
-        CORBA::StaticAny _sa_tableau( CORBA::_stc_string, &_par_tableau._for_demarshal() );
-        CORBA::ULong _par_idpixel;
-        CORBA::StaticAny _sa_idpixel( CORBA::_stc_ulong, &_par_idpixel );
-
+      break;
+    case 8:
+      if( strcmp( __req->op_name(), "ping" ) == 0 ) {
         CORBA::Boolean _res;
         CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
-        __req->add_in_arg( &_sa_tableau );
-        __req->add_in_arg( &_sa_idpixel );
         __req->set_result( &__res );
 
         if( !__req->read_args() )
           return true;
 
-        _res = signal_tableaublanc( _par_tableau.inout(), _par_idpixel );
+        _res = ping();
+        __req->write_results();
+        return true;
+      }
+      break;
+    case 10:
+      if( strcmp( __req->op_name(), "afficher_message" ) == 0 ) {
+        CORBA::String_var _par_pseudo;
+        CORBA::StaticAny _sa_pseudo( CORBA::_stc_string, &_par_pseudo._for_demarshal() );
+        CORBA::String_var _par_message;
+        CORBA::StaticAny _sa_message( CORBA::_stc_string, &_par_message._for_demarshal() );
+
+        CORBA::Boolean _res;
+        CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
+        __req->add_in_arg( &_sa_pseudo );
+        __req->add_in_arg( &_sa_message );
+        __req->set_result( &__res );
+
+        if( !__req->read_args() )
+          return true;
+
+        _res = afficher_message( _par_pseudo.inout(), _par_message.inout() );
         __req->write_results();
         return true;
       }

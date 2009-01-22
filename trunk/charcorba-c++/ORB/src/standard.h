@@ -56,7 +56,8 @@ class Standard :
     virtual CORBA::Boolean afficher_message( const char* pseudo, const char* message ) = 0;
     virtual CORBA::Boolean signal_chatroom( const char* chatroom, CORBA::ULong idpixel ) = 0;
     virtual CORBA::Boolean signal_tableaublanc( const char* tableau, CORBA::ULong idpixel ) = 0;
-    virtual CORBA::Boolean inviter_client( const char* chatroom ) = 0;
+    virtual CORBA::Boolean inviter_client_chatroom( const char* chatroom ) = 0;
+    virtual CORBA::Boolean inviter_client_tableaublanc( const char* tableau ) = 0;
     virtual CORBA::Boolean ping() = 0;
 
   protected:
@@ -75,7 +76,8 @@ class Standard_stub:
     CORBA::Boolean afficher_message( const char* pseudo, const char* message );
     CORBA::Boolean signal_chatroom( const char* chatroom, CORBA::ULong idpixel );
     CORBA::Boolean signal_tableaublanc( const char* tableau, CORBA::ULong idpixel );
-    CORBA::Boolean inviter_client( const char* chatroom );
+    CORBA::Boolean inviter_client_chatroom( const char* chatroom );
+    CORBA::Boolean inviter_client_tableaublanc( const char* tableau );
     CORBA::Boolean ping();
 
   private:
@@ -94,7 +96,8 @@ class Standard_stub_clp :
     CORBA::Boolean afficher_message( const char* pseudo, const char* message );
     CORBA::Boolean signal_chatroom( const char* chatroom, CORBA::ULong idpixel );
     CORBA::Boolean signal_tableaublanc( const char* tableau, CORBA::ULong idpixel );
-    CORBA::Boolean inviter_client( const char* chatroom );
+    CORBA::Boolean inviter_client_chatroom( const char* chatroom );
+    CORBA::Boolean inviter_client_tableaublanc( const char* tableau );
     CORBA::Boolean ping();
 
   protected:
@@ -125,7 +128,8 @@ class POA_Standard : virtual public PortableServer::StaticImplementation
     virtual CORBA::Boolean afficher_message( const char* pseudo, const char* message ) = 0;
     virtual CORBA::Boolean signal_chatroom( const char* chatroom, CORBA::ULong idpixel ) = 0;
     virtual CORBA::Boolean signal_tableaublanc( const char* tableau, CORBA::ULong idpixel ) = 0;
-    virtual CORBA::Boolean inviter_client( const char* chatroom ) = 0;
+    virtual CORBA::Boolean inviter_client_chatroom( const char* chatroom ) = 0;
+    virtual CORBA::Boolean inviter_client_tableaublanc( const char* tableau ) = 0;
     virtual CORBA::Boolean ping() = 0;
 
   protected:
