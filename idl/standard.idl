@@ -6,7 +6,10 @@ interface Standard {
    boolean afficher_message ( in string pseudo, in string message ) ;
    
    // Prévient le client que la chatroom a recu un message
-   boolean signal_chatroom ( in string chatroom );
+   boolean signal_chatroom ( in string chatroom, in unsigned long idpixel );
+
+   // Prévient le client que le tableau blanc a reçu un pixel
+   boolean signal_tableaublanc ( in string tableau, in unsigned long idpixel );
 
    // Invite le client à participer à une chatroom
    boolean inviter_client  ( in string chatroom );

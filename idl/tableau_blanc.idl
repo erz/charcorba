@@ -1,0 +1,14 @@
+// -*- c++ -*-
+
+interface TableauBlanc {
+
+   typedef sequence <short,6> t_pixel ;
+
+   // Ajoute un pixel au tableau blanc 
+   boolean ajouter_pixel ( in t_pixel pixel ) ;
+   
+   // Recupère le idmessage-ième message du tableau blanc
+   // Renvoie les données du pixe
+   t_pixel get_pixel ( in unsigned long idpixel ) ;
+ 
+};
