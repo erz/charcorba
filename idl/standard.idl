@@ -12,7 +12,10 @@ interface Standard {
    boolean signal_tableaublanc ( in string tableau, in unsigned long idpixel );
 
    // Invite le client à participer à une chatroom
-   boolean inviter_client  ( in string chatroom );
+   boolean inviter_client_chatroom  ( in string chatroom );
+
+   // Invite le client à participer à un tableau blanc
+   boolean inviter_client_tableaublanc ( in string tableau ) ;
 
    // Teste la présence du client
    boolean ping ( );

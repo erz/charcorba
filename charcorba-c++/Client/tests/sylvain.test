@@ -7,3 +7,4 @@ ajouter_tag pieton
 ajouter_tag anti-java
 sleep 5
 get_amis_par_tag informatique
+creer_tableaublanc tableau_test

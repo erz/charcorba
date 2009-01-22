@@ -4,6 +4,7 @@
 #include "standard_impl.h"
 #include "orb.h"
 #include <chatroom_impl.h>
+#include <tableau_blanc_impl.h>
 
 #include <string>
 #include <set>
@@ -132,16 +133,29 @@ void Client::creer_chatroom (string nom_chatroom)
 	m_MICO_ORB->ajout_service(chatroom,nom_chatroom);
 }
 
+void Client::creer_tableau_blanc (std::string nom_tableau)
+{
+	cout << "[DEBUG]\tCréation du tableau blanc '" << nom_tableau << "'" << endl ;
+	TableauBlanc_impl * tableau = new TableauBlanc_impl (nom_tableau);
+	m_liste_tableauxblancs_locaux.insert( pair<string,TableauBlanc_impl *>(nom_tableau,tableau));
+	m_MICO_ORB->ajout_service(tableau,nom_tableau);
+	
+}
+
 void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)
 {
 	m_liste_chatrooms_locales[nom_chatroom]->inviter_client(pseudo) ;
+}
+
+void Client::inviter_client_tableaublanc (string pseudo, string nom_tableau)
+{
+	m_liste_tableauxblancs_locaux[nom_tableau]->inviter_client(pseudo);
 }
 
 void Client::ajouter_message(string nom_chatroom,string message)
 {
 	cout<<"[DEBUG]\tEnvoie message sur la chatroom"<<endl;
 	m_liste_chatrooms_distantes[nom_chatroom]->ajouter_message (m_pseudo.c_str(),message.c_str());
-	
 }
 
 void Client::ajouter_message_local(string nom_chatroom,string message)

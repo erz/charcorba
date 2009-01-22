@@ -22,23 +22,21 @@ Widget_tableaublanc::Widget_tableaublanc(QWidget* parent ): QWidget(parent)
 
 void Widget_tableaublanc::mouseMoveEvent(QMouseEvent* e) 
 {
-	m_vect_qpoints->push_back(Pixel(QPoint(e->x(),e->y()),
+	ajouter_pixel (Pixel(QPoint(e->x(),e->y()),
 	                                m_qcolor_couleur_actuelle,
 	                                true));
-	repaint();
 }
 
 void Widget_tableaublanc::mousePressEvent(QMouseEvent *e)
 {
-	m_vect_qpoints->push_back(Pixel(QPoint(e->x(),e->y()),
+	ajouter_pixel (Pixel(QPoint(e->x(),e->y()),
 	                                m_qcolor_couleur_actuelle,
 	                                false));
-	repaint();
 }
 
 void Widget_tableaublanc::mouseReleaseEvent(QMouseEvent *e)
 {
-	m_vect_qpoints->push_back(Pixel(QPoint(e->x(),e->y()),
+	ajouter_pixel (Pixel(QPoint(e->x(),e->y()),
 	                                m_qcolor_couleur_actuelle,
 	                                false));
 }
@@ -79,3 +77,10 @@ void Widget_tableaublanc::set_couleur_vert ()
 {
 	m_qcolor_couleur_actuelle = QColor (Qt::green) ;
 }
+
+void Widget_tableaublanc::ajouter_pixel (Pixel pixel)
+{
+	m_vect_qpoints->push_back(pixel);
+	repaint();
+}
+
