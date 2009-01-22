@@ -151,7 +151,7 @@ public class Client
 	//Creer une Chatroom
 	public void creer_chatroom(String nom_chatroom) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	{
-		Chatroom_impl chatroom = new Chatroom_impl(nom_chatroom);
+		Chatroom_impl chatroom =  new Chatroom_impl(nom_chatroom);
 		m_liste_chatrooms_locales.put(nom_chatroom, chatroom);
 		COrb.static_orb.ajout_service(chatroom, nom_chatroom);
 		System.out.println("chatroom "+chatroom.m_nom_chatroom+" créée.");
@@ -246,12 +246,16 @@ public class Client
 		  singleton_client.ajouter_tag("Asiatiques");
 		  singleton_client.ajouter_tag("Fetching");
 		  
+
 		  singleton_client.creer_chatroom("Roomtest");
 		  singleton_client.ajouter_message_local("Roomtest", "Boooonjooour");
+
 	 
 		  singleton_client.afficher_message("Aurelien", "SALUT");
 		  
+
 		  Message msg = singleton_client.get_message_local("Roomtest", 0);
+
 		  
 		  System.out.println("Message de "+msg.auteur+" : "+msg.message);
 
