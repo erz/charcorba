@@ -19,6 +19,8 @@ public class Chatroom_impl extends ChatroomPOA
 
 	public Chatroom_impl(String nom_chatroom) 
 	{
+		m_liste_messages = new Vector<Message>();
+		m_liste_participants = new HashMap <String,Standard> ();
 		m_nom_chatroom = nom_chatroom;
 	}
 

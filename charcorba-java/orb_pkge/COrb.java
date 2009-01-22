@@ -12,6 +12,9 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import chatroom.Chatroom;
+import chatroom.ChatroomHelper;
+
 import Client.Standard;
 import Client.StandardHelper;
 
@@ -71,10 +74,20 @@ public class COrb implements Runnable
 		
 	      // get object reference from the servant
 	      org.omg.CORBA.Object ref_service_Annuaire = m_POA.servant_to_reference(service);
-	      Standard href_service_Annuaire = StandardHelper.narrow(ref_service_Annuaire);
-
-		
-		namingContext.rebind (c_nom_service, href_service_Annuaire);
+	      
+	      System.out.println(service.getClass().getCanonicalName());
+	      if (service.getClass().getCanonicalName().compareTo("Client.Standard_impl") == 0)
+	      {
+	    	  System.out.println(service.getClass().getCanonicalName());
+	    	  Standard href_service_Annuaire = StandardHelper.narrow(ref_service_Annuaire);
+	    	  namingContext.rebind (c_nom_service, href_service_Annuaire);
+	      }
+	      if (service.getClass().getCanonicalName().compareTo("chatroom.Chatroom_impl") == 0)
+	      {
+	    	  System.out.println(service.getClass().getCanonicalName());
+	    	  Chatroom href_service_Annuaire = ChatroomHelper.narrow(ref_service_Annuaire);
+	    	  namingContext.rebind (c_nom_service, href_service_Annuaire);
+	      }
 	}
 	
 	public void demarrer ()
