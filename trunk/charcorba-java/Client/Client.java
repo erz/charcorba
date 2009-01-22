@@ -152,9 +152,9 @@ public class Client
 	public void creer_chatroom(String nom_chatroom) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	{
 		Chatroom_impl chatroom = new Chatroom_impl(nom_chatroom);
-		System.out.println("chatroom "+chatroom.m_nom_chatroom+" créée.");
 		m_liste_chatrooms_locales.put(nom_chatroom, chatroom);
 		COrb.static_orb.ajout_service(chatroom, nom_chatroom);
+		System.out.println("chatroom "+chatroom.m_nom_chatroom+" créée.");
 	}
 	
 	// Invite le client à participer à une chatroom
@@ -212,6 +212,19 @@ public class Client
 		msg.message = message;
 		return msg ;
 	}
+	
+	//Recuperer un message sur une chatroom locale
+	Message get_message_local (String nom_chatroom, int idmessage)
+	{
+		String [] retval = m_liste_chatrooms_locales.get(nom_chatroom).get_message(idmessage) ;
+		String auteur = retval[0] ;
+		String message = retval[1] ;
+
+		Message msg = new Message();
+		msg.auteur = auteur;
+		msg.message = message;
+		return msg ;
+	}
 	  
 	////////////////
 	/////  MAIN  
@@ -233,14 +246,14 @@ public class Client
 		  singleton_client.ajouter_tag("Asiatiques");
 		  singleton_client.ajouter_tag("Fetching");
 		  
-		//  singleton_client.creer_chatroom("Roomtest");
-		//	singleton_client.ajouter_message_local("Roomtest", "Boooonjooour");
+		  singleton_client.creer_chatroom("Roomtest");
+		  singleton_client.ajouter_message_local("Roomtest", "Boooonjooour");
 	 
 		  singleton_client.afficher_message("Aurelien", "SALUT");
 		  
-		/*  Message msg = singleton_client.get_message("Roomtest", 0);
+		  Message msg = singleton_client.get_message_local("Roomtest", 0);
 		  
-		  System.out.println("Message de "+msg.auteur+" : "+msg.message);*/
+		  System.out.println("Message de "+msg.auteur+" : "+msg.message);
 
 		  Thread.sleep(1000);
 		//while(true);
