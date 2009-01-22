@@ -73,21 +73,22 @@ public class COrb implements Runnable
 		//org.omg.CORBA.Object ref_service_Annuaire = service._this_object();
 		
 	      // get object reference from the servant
+	      System.out.println(service.toString());
 	      org.omg.CORBA.Object ref_service_Annuaire = m_POA.servant_to_reference(service);
-	      
-	      System.out.println(service.getClass().getCanonicalName());
+
 	      if (service.getClass().getCanonicalName().compareTo("Client.Standard_impl") == 0)
 	      {
-	    	  System.out.println(service.getClass().getCanonicalName());
+	    	  
 	    	  Standard href_service_Annuaire = StandardHelper.narrow(ref_service_Annuaire);
 	    	  namingContext.rebind (c_nom_service, href_service_Annuaire);
 	      }
 	      if (service.getClass().getCanonicalName().compareTo("chatroom.Chatroom_impl") == 0)
 	      {
-	    	  System.out.println(service.getClass().getCanonicalName());
+	    	  
 	    	  Chatroom href_service_Annuaire = ChatroomHelper.narrow(ref_service_Annuaire);
 	    	  namingContext.rebind (c_nom_service, href_service_Annuaire);
 	      }
+
 	}
 	
 	public void demarrer ()
