@@ -63,4 +63,14 @@ public class Standard_impl extends StandardPOA
 		return retval;
 	}
 
+	public boolean signal_chatroom(String chatroom, int idpixel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean signal_tableaublanc(String tableau, int idpixel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
