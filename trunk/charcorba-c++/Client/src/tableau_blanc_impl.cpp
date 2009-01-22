@@ -7,8 +7,9 @@ TableauBlanc_impl::TableauBlanc_impl ()
 {}
 
 TableauBlanc_impl::TableauBlanc_impl (string nom_tableau)
-	: m_nom_tableau (nom_tableau)
-{}
+{
+	m_nom_tableau = nom_tableau ;	
+}
 
 // Implementation for interface TableauBlanc
 

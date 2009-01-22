@@ -15,7 +15,6 @@ class TableauBlanc_impl : virtual public POA_TableauBlanc
   public:
 
 	TableauBlanc_impl ();
-	~TableauBlanc_impl ();
 	TableauBlanc_impl (std::string nom_tableau);
 
     CORBA::Boolean ajouter_pixel( const ::TableauBlanc::t_pixel& pixel )
