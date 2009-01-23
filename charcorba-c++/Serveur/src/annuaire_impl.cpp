@@ -27,7 +27,7 @@ Annuaire_impl::joindre_annuaire( const char* pseudo )
   return retval; 
 }
 
-/*CORBA::Boolean
+CORBA::Boolean
 Annuaire_impl::quitter_annuaire( const char* pseudo )
   throw(
     ::CORBA::SystemException)
@@ -37,7 +37,7 @@ Annuaire_impl::quitter_annuaire( const char* pseudo )
   retval = true;
   m_liste_clients.erase(string(pseudo));
   return retval; 
-}*/
+}
 
 CORBA::Boolean
 Annuaire_impl::ajouter_tag( const char* pseudo, const char* tag )
@@ -52,7 +52,7 @@ Annuaire_impl::ajouter_tag( const char* pseudo, const char* tag )
   return retval; 
 }
 
-/*CORBA::Boolean
+CORBA::Boolean
 Annuaire_impl::enlever_tag( const char* pseudo, const char* tag )
   throw(
     ::CORBA::SystemException)
@@ -63,7 +63,8 @@ Annuaire_impl::enlever_tag( const char* pseudo, const char* tag )
   retval = true;
   m_liste_clients[pseudo].enlever_tag(string(tag));
   return retval; 
-}*/
+}
+
 
 ::Annuaire::t_liste_string*
 Annuaire_impl::get_amis_par_tag( const char* tag )
@@ -88,3 +89,33 @@ Annuaire_impl::get_amis_par_tag( const char* tag )
 	}
 	return retval; 
 }
+
+
+::Annuaire::t_liste_tags*
+Annuaire_impl::get_tags()
+  throw(
+    ::CORBA::SystemException)
+
+{
+	cout << "[DEBUG]\tEnvoie des tags : '"  << endl ;
+  ::Annuaire::t_liste_tags* retval=new ::Annuaire::t_liste_tags () ;
+	int n=0;
+	/*
+	for( map<string,Client_annuaire>::iterator i=m_liste_clients.begin(); i!=m_liste_clients.end(); ++i)
+	{
+		if ( (*i).second.possede_tag(tag) )
+		{
+			retval->length(n+1);
+			const char * c_tag = (*i).second.m_pseudo.c_str() ;
+			CORBA::String_var s_tag (c_tag);
+			(*retval)[n] = s_tag;
+			++n;
+		}
+	}
+ */
+    mico_throw(::CORBA::NO_IMPLEMENT());
+
+
+  return retval; 
+ }
+ 
