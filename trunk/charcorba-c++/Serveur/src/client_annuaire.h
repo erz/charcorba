@@ -8,6 +8,8 @@
 #include <map>
 #include <set>
 #include <client_annuaire.h>
+#include <string>
+#include <vector>
 
 using boost::timer;
 using boost::thread;
@@ -31,5 +33,7 @@ public:
 	void enlever_tag (std::string tag);
 	
 	bool possede_tag (std::string tag);
+	
+	std::set <std::string> get_tags(void); 
 };
 #endif

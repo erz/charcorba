@@ -100,20 +100,28 @@ Annuaire_impl::get_tags()
 	cout << "[DEBUG]\tEnvoie des tags : '"  << endl ;
   ::Annuaire::t_liste_tags* retval=new ::Annuaire::t_liste_tags () ;
 	int n=0;
-	/*
+	
+	set<string> liste_tags_globaux;	
 	for( map<string,Client_annuaire>::iterator i=m_liste_clients.begin(); i!=m_liste_clients.end(); ++i)
 	{
-		if ( (*i).second.possede_tag(tag) )
+		
+		set<string>tmp=(*i).second.get_tags();
+		for (set<string>::iterator  it=tmp.begin(); it!=tmp.end(); it++)
 		{
+			liste_tags_globaux.insert(*it);
+		}
+
+	}
+	for (set<string>::iterator ite=liste_tags_globaux.begin(); ite!=liste_tags_globaux.end(); ite++)
+	{	
 			retval->length(n+1);
-			const char * c_tag = (*i).second.m_pseudo.c_str() ;
+			const char * c_tag = (*ite).c_str() ;
 			CORBA::String_var s_tag (c_tag);
 			(*retval)[n] = s_tag;
 			++n;
-		}
 	}
- */
-    mico_throw(::CORBA::NO_IMPLEMENT());
+ 
+    //mico_throw(::CORBA::NO_IMPLEMENT());
 
 
   return retval; 
