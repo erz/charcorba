@@ -102,8 +102,15 @@ public:
 	signals :
 	
 	void ami_ajoute (QString);
+	
+	// Signaux liées aux standard
 	void signal_message_recu(QString,QString);
+	
+	// Signaux liées aux tableaux blancs
 	void signal_pixel_ajoute(QString,QString);
+	void signal_tableau_blanc_cree (QString);
+	
+	// Signaux liées aux chatrooms
 	void signal_client_chatroom(QString);
 	void invitation_chatroom(QString); 
 };

@@ -30,9 +30,6 @@ class Widget_tableaublanc :
 		void mousePressEvent(QMouseEvent *event);
 		void paintEvent(QPaintEvent *event); 
 
-	//signals :
-		//void pixel_ajoute (Pixel pixel);
-
 	public slots :
 		void set_couleur_bleu ();
 		void set_couleur_rouge ();

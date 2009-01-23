@@ -16,9 +16,8 @@ struct Message
 // Implementation for interface Chatroom
 class Chatroom_impl : virtual public POA_Chatroom
 {
-	
-  private:
-  
+	private:
+
 	std::string m_nom_chatroom ;
 	std::vector <Message> m_liste_messages ;
 	std::map <std::string,Standard_var> m_liste_participants;

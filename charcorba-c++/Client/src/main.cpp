@@ -21,8 +21,6 @@ int main(int argc, char ** argv )
 	fenetre.ARGV=argv;
 	fenetre.show(); 
 
-	Dialog_tableaublanc dial ;
-	dial.show();
 	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
 	qapplication.exec();
 

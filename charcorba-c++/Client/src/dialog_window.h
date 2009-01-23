@@ -20,14 +20,13 @@ public slots :
 	void chatroom_envoyer_message();
 	void ecrire_message(string pseudo,string message);
 	void setWindowTitle(string titre);
+
 private:
+
 	Ui_DialogWindow ui;
 	string client_distant ;
 	string message ;
 	string nom_chatroom;
-
-
-
 };
 
 #endif
