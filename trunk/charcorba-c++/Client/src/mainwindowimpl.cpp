@@ -5,6 +5,7 @@
 #include <QPoint>
 #include "mainwindowimpl.h"
 #include "dialog_connexion.h"
+#include <dialog_tableaublanc.h>
 #include <CORBA.h>
 #include <annuaire.h>
 #include <iostream>
@@ -31,7 +32,9 @@ void MainWindowImpl::initialiser ()
 	connect(ui.actionInviter_Chatroom,SIGNAL(triggered()),this,SLOT(Inviter_chatroom()));
 	connect(Client::get_instance(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
 	connect(Client::get_instance(),SIGNAL(signal_client_chatroom(QString)),this,SLOT(afficher_message_chatroom_window(QString)));
-	
+
+	// Callback liés aux tableaux blancs
+	connect(Client::get_instance(),SIGNAL(signal_tableau_blanc_cree(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
 }
 
 void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
@@ -75,6 +78,7 @@ void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
 	fileMenu->exec(QCursor::pos());
 	
 }
+
 
 void MainWindowImpl::ouvrir_dialog_window (QListWidgetItem * item)
 {
@@ -129,15 +133,13 @@ Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)
 		m_dialog_chatroom_window = new Dialog_window();
 		Premiere_ouverture=true;
 	}
-		
-	
+			
 	return m_dialog_chatroom_window;
 }
 
 void MainWindowImpl::afficher_dialog_connexion()
 {
 	cout << "[DEBUG - GUI]\t Afficher_boite" << endl ;
-	//get_dialog_connexion()->show();
 }
 
 void MainWindowImpl::Inviter_chatroom()
@@ -154,5 +156,18 @@ void MainWindowImpl::Ouvrir_chatroom(QString chatroom)
 	cout<<"[DEBUG - GUI]\tSignal recu!"<<endl;
 	get_dialog_chatroom_window(chatroom)->show();
 	m_dialog_chatroom_window->exec();
+}
+
+void MainWindowImpl::ouvrir_dialog_tableaublanc (QString nom_tableaublanc)
+{
+	cout<<"[DEBUG - GUI]\tOuverture de la fenêtre " << nom_tableaublanc.toStdString() << endl;
+	Dialog_tableaublanc * tableaublanc  = new Dialog_tableaublanc(NULL);
+	tableaublanc->show();
+	m_liste_dialog_tableauxblancs.insert( pair<string,Dialog_tableaublanc * >(nom_tableaublanc.toStdString(),tableaublanc));
+}
+
+void MainWindowImpl::ajouter_pixel (QString nom_tableaublancs,Pixel pixel)
+{
+	
 }
 
