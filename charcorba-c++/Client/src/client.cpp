@@ -154,6 +154,8 @@ void Client::ajouter_pixel (std::string nom_tableau,Pixel pixel)
 	c_pixel[4] = pixel.m_qcolor.blue();
 	c_pixel[5] = pixel.m_est_continu;
 	m_liste_tableauxblancs_locaux[nom_tableau]->ajouter_pixel(c_pixel)  ;
+	QString qstring (nom_tableau.c_str());
+	emit signal_pixel_ajoute(qstring,pixel);
 }
 
 void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)

@@ -35,6 +35,8 @@ void MainWindowImpl::initialiser ()
 
 	// Callback liés aux tableaux blancs
 	connect(Client::get_instance(),SIGNAL(signal_tableau_blanc_cree(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
+	connect(Client::get_instance(),SIGNAL(signal_pixel_ajoute(QString,Pixel)),this,SLOT(ajouter_pixel(QString,Pixel)));
+
 }
 
 void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
@@ -168,6 +170,6 @@ void MainWindowImpl::ouvrir_dialog_tableaublanc (QString nom_tableaublanc)
 
 void MainWindowImpl::ajouter_pixel (QString nom_tableaublancs,Pixel pixel)
 {
-	
+	//m_liste_dialog_tableauxblancs[nom_tableaublancs.toStdString()]
 }
 
