@@ -22,7 +22,6 @@ TableauBlanc_impl::ajouter_pixel( const ::TableauBlanc::t_pixel& pixel )
 {
   CORBA::Boolean retval;
   cout << "[DEBUG]\t[Tableau - '" << m_nom_tableau << "']\tRéception d'un pixel à la position ('" << pixel[0] << "," << pixel[1] << "'" << endl ; 
-  	emit 
   return retval; 
 }
 
@@ -32,7 +31,7 @@ TableauBlanc_impl::get_pixel( CORBA::ULong idpixel )
     ::CORBA::SystemException)
 
 {
-  ::TableauBlanc::t_pixel* retval;
+  ::TableauBlanc::t_pixel* retval = new ::TableauBlanc::t_pixel ();
   return retval; 
 }
 

@@ -191,6 +191,11 @@ void Client::signal_invitation_chatroom(QString chatroom)
 	emit invitation_chatroom(chatroom);
 }
 
+void Client::signal_invitation_tableau(QString nom_tableau)
+{
+	emit invitation_tableau(nom_tableau); 
+}
+
 void Client::signal_chatroom(QString chatroom)
 {
 	emit signal_client_chatroom(chatroom);
@@ -211,4 +216,9 @@ Message Client::get_message (string nom_chatroom,unsigned long idmessage)
 	return msg ;
 }
 
-
+Pixel Client::get_pixel (std::string nom_tableau,unsigned long idmessage)
+{
+	cout << "[DEBUG]\tRéception du pixel " << idmessage << " du tableau " << nom_tableau << endl ;
+	::TableauBlanc::t_pixel * pixel = m_liste_tableauxblancs_locaux[nom_tableau]->get_pixel(idmessage) ;	
+	return Pixel() ;
+}

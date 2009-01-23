@@ -96,7 +96,7 @@ public:
 	void creer_tableau_blanc (std::string nom_tableau);
 	void ajouter_pixel (std::string nom_tableau,Pixel pixel);
 	void signal_invitation_tableau(QString);
-	void signal_tableau(QString);
+	void signal_pixel_tableau(QString);
 	Pixel get_pixel (std::string nom_tableau,unsigned long idmessage);
 
 	signals :
@@ -109,6 +109,7 @@ public:
 	// Signaux liées aux tableaux blancs
 	void signal_pixel_ajoute(QString,Pixel);
 	void signal_tableau_blanc_cree (QString);
+	void invitation_tableau (QString);
 	
 	// Signaux liées aux chatrooms
 	void signal_client_chatroom(QString);
