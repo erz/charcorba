@@ -27,22 +27,27 @@ class Annuaire_impl : virtual public POA_Annuaire
         ::CORBA::SystemException)
     ;
 
-    /*CORBA::Boolean quitter_annuaire( const char* pseudo )
+    CORBA::Boolean quitter_annuaire( const char* pseudo )
       throw(
         ::CORBA::SystemException)
-    ;*/
+    ;
 
     CORBA::Boolean ajouter_tag( const char* pseudo, const char* tag )
       throw(
         ::CORBA::SystemException)
     ;
 
-    /*CORBA::Boolean enlever_tag( const char* pseudo, const char* tag )
+    CORBA::Boolean enlever_tag( const char* pseudo, const char* tag )
       throw(
         ::CORBA::SystemException)
-    ;*/
+    ;
 
     ::Annuaire::t_liste_string* get_amis_par_tag( const char* tag )
+      throw(
+        ::CORBA::SystemException)
+    ;
+    
+    ::Annuaire::t_liste_tags* get_tags()
       throw(
         ::CORBA::SystemException)
     ;
