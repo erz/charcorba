@@ -56,3 +56,8 @@ bool Client_annuaire::possede_tag (std::string tag)
 {
 	return liste_tags.end() != liste_tags.find(tag);
 }
+
+std::set<std::string> Client_annuaire::get_tags(void)
+{	
+	return liste_tags;
+}
