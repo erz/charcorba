@@ -9,6 +9,8 @@
 class Dialog_tableaublanc: public QDialog 
 {
 	Q_OBJECT
+
+	public:
 	Widget_tableaublanc * m_widget_tableaublanc ;
 	QPushButton * m_pushbutton_bleu ;
 	QPushButton * m_pushbutton_rouge ;

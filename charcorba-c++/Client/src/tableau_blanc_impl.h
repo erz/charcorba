@@ -11,8 +11,7 @@ class TableauBlanc_impl : virtual public POA_TableauBlanc
 {
   private:
   
-	std::string m_nom_tableau ;
-	
+	std::string m_nom_tableau ;	
 	std::map <std::string,Standard_var> m_liste_participants;
 
   public:
