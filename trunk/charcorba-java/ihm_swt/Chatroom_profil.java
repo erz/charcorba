@@ -71,8 +71,5 @@ public class Chatroom_profil {
         
     display2.dispose();
 	}
-   /* public static void  main (String[] args)
-	{
-		new Chatroom_profil();
-	}*/
+  
 }
