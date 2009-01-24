@@ -49,29 +49,23 @@ public class Chatroom_Accueil
 	    MenuItem quitter = new MenuItem(sousMenu, SWT.PUSH);
 	    quitter.setText("Quitter");
 	   
-
+/*
 	    final Button button = new Button(shell, SWT.CENTER);
 	    button.setBounds(75, 50, 150, 30);
 	    button.setText("&Connexion");
-
-	    Button creation = new Button(shell, SWT.CENTER);
+*/
+	    final Button creation = new Button(shell, SWT.CENTER);
 	    creation.setBounds(75, 50, 150, 30);
-	    creation.setText("&Créer votre profil");
-	    creation.addListener(SWT.MouseDown, new Listener() 
-	    {
-	    	public void handleEvent(Event e){
-	    		shell.dispose(); 
-	    		new Chatroom_profil(display);
-	    	}
-	    });
+	    creation.setText("&Créez votre profil");
+
 
 	    
-	    final Button creerChatroom = new Button(shell, SWT.CENTER);
+	    final Button creerChatroom = new Button(shell, SWT.BOTTOM);
 	    creerChatroom.setBounds(75, 100, 150, 30);
 	    creerChatroom.setText("&Créer une chatroom");
 	    creerChatroom.setVisible(false);
 	    
-	    
+	   /* 
 	    button.addListener(SWT.Selection, new Listener() 
 	    {
 	        public void handleEvent(Event e) 
@@ -117,6 +111,19 @@ public class Chatroom_Accueil
 				button.setVisible(false);
 				creerChatroom.setVisible(true);
 	        }
+	    });
+	    */
+	    
+	    creation.addListener(SWT.MouseDown, new Listener() 
+	    {
+	    	public void handleEvent(Event e)
+	    	{
+	    		shell.setVisible(false); 
+	    		new Chatroom_profil(display);
+	    		shell.setVisible(true); 
+	    		creation.setVisible(false);
+	    		creerChatroom.setVisible(true);
+	    	}
 	    });
 	    
 	    creerChatroom.addListener(SWT.Selection, new Listener() {
@@ -169,6 +176,8 @@ public class Chatroom_Accueil
 	    display.dispose();
 	    
   }
+	
+
 
 	public void ajouterChatroom(String nom_chatroom) throws InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive 
 	{
