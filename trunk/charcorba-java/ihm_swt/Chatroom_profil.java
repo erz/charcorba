@@ -50,7 +50,7 @@ public class Chatroom_profil {
 	    
 	    Button valider = new Button(chatroom_profil, SWT.CENTER);
 	    valider.setBounds(100, 250, 150, 30);
-	    valider.setText("Validation Profil");
+	    valider.setText("Se connecter");
 	    valider.addListener(SWT.MouseDown, new Listener() 
 	    {
 	    	public void handleEvent(Event e){
