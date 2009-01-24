@@ -29,6 +29,7 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import tableau_blanc.Pixel;
 import tableau_blanc.TableauBlanc;
 import tableau_blanc.TableauBlanc_impl;
 
@@ -245,7 +246,18 @@ public class Client
 		System.out.println("tableau blanc "+tableau.m_nom_tableau+ " créé.");
 	}
 	
-	
+	public void ajouter_pixel (String nom_tableau,Pixel pixel)
+	{
+		short[] c_pixel  ;
+		c_pixel[0] = (short) pixel.m_point.x;
+		c_pixel[1] = (short) pixel.m_point.y ;
+		c_pixel[2] = pixel.m_color.red;
+		c_pixel[3] = pixel.m_color.green;
+		c_pixel[4] = pixel.m_color.blue;
+		c_pixel[5] = pixel.m_est_continu;
+		m_liste_tableauxblancs_locaux.get(nom_tableau).ajouter_pixel(c_pixel)  ;
+		QString qstring (nom_tableau);
+	}
 	
 	////////////////
 	/////  MAIN  
