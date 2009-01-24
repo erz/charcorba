@@ -77,6 +77,7 @@ public:
 	void get_amis_par_tag (std::string tag);
 	void ajouter_ami (std::string);
 	Standard_impl * get_standard();
+	Annuaire_var  get_annuaire();
 	
 	// Fonctions liées aux standards	
 	void afficher_message(string pseudo,string message);

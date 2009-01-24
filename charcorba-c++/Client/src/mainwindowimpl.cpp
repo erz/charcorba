@@ -19,6 +19,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
 	for(int j=0;j<5;j++) m_dialog_window[j]=NULL;
 	m_dialog_chatroom_window=NULL;
+	m_dialog_tags=NULL;
 	compteurmessage=0;
 	ui.setupUi(this);
 }
@@ -32,6 +33,7 @@ void MainWindowImpl::initialiser ()
 	connect(ui.actionInviter_Chatroom,SIGNAL(triggered()),this,SLOT(Inviter_chatroom()));
 	connect(Client::get_instance(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
 	connect(Client::get_instance(),SIGNAL(signal_client_chatroom(QString)),this,SLOT(afficher_message_chatroom_window(QString)));
+	connect(ui.actionTags,SIGNAL(triggered()),this,SLOT(ouvrir_dialog_tags()));
 
 	// Callback liés aux tableaux blancs
 	connect(Client::get_instance(),SIGNAL(signal_tableau_blanc_cree(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
@@ -68,6 +70,14 @@ void MainWindowImpl::afficher_message_chatroom_window(QString chatroom)
 	compteurmessage++;
 	m_dialog_chatroom_window->ecrire_message(tmp.auteur,tmp.message);
 
+}
+
+void MainWindowImpl::ouvrir_dialog_tags()
+{
+	cout<<"[DEBUG - GUI]Appel ouverture fenetre pour gerer les tags"<<endl;
+	get_dialog_tags();
+	m_dialog_tags->show();
+	m_dialog_tags->exec();
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
@@ -137,6 +147,15 @@ Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)
 	}
 			
 	return m_dialog_chatroom_window;
+}
+
+Dialog_tags * MainWindowImpl::get_dialog_tags()
+{
+	if(m_dialog_tags == NULL)
+	{
+		m_dialog_tags = new Dialog_tags();
+	}
+	return m_dialog_tags;
 }
 
 void MainWindowImpl::afficher_dialog_connexion()

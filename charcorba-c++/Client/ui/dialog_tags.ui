@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog" >
+ <class>DialogTags</class>
+ <widget class="QDialog" name="DialogTags" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -22,7 +22,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListWidget" name="listTagsDistant" >
+  <widget class="QListWidget" name="listTagsLocal" >
    <property name="geometry" >
     <rect>
      <x>330</x>
