@@ -36,21 +36,21 @@ public class Chatroom_profil {
 	    Label tag1 = new Label(chatroom_profil, SWT.CENTER);
 	    tag1.setText("Tag n°1:");
 	    tag1.setLocation(30, 150);
-	    Text  saisie_tag1= new Text(chatroom_profil, SWT.NONE); 
+	    final Text  saisie_tag1= new Text(chatroom_profil, SWT.NONE); 
 	    saisie_tag1.setText("Tag?");
 	    saisie_tag1.setBounds(120, 140, 100, 25);
 	    
 	    Label tag2 = new Label(chatroom_profil, SWT.CENTER);
 	    tag2.setText("Tag n°2:");
 	    tag2.setLocation(30, 180);
-	    Text  saisie_tag2= new Text(chatroom_profil, SWT.NONE); 
+	    final Text  saisie_tag2= new Text(chatroom_profil, SWT.NONE); 
 	    saisie_tag2.setText("Tag?");
 	    saisie_tag2.setBounds(120, 170, 100, 25);
 	    
 	    Label tag3 = new Label(chatroom_profil, SWT.CENTER);
 	    tag3.setText("Tag n°3:");
 	    tag3.setLocation(30, 210);
-	    Text  saisie_tag3= new Text(chatroom_profil, SWT.NONE); 
+	    final Text  saisie_tag3= new Text(chatroom_profil, SWT.NONE); 
 	    saisie_tag3.setText("Tag?");
 	    saisie_tag3.setBounds(120, 200, 100, 25);
 	    
@@ -61,27 +61,31 @@ public class Chatroom_profil {
 	    {
 	    	public void handleEvent(Event e){
 	    		String pseudo = saisie_pseudo.getText();
-	    		try {
+	    		String tag_1 = saisie_tag1.getText();
+	    		String tag_2 = saisie_tag2.getText();
+	    		String tag_3 = saisie_tag3.getText();
+				try {
 					Client.Client.singleton_client.set_pseudo(pseudo);
-				} catch (InvalidName e1) {
+				} catch (InvalidName e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ServantAlreadyActive e1) {
+					e2.printStackTrace();
+				} catch (ServantAlreadyActive e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (WrongPolicy e1) {
+					e2.printStackTrace();
+				} catch (WrongPolicy e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (CannotProceed e1) {
+					e2.printStackTrace();
+				} catch (CannotProceed e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (NotFound e1) {
+					e2.printStackTrace();
+				} catch (NotFound e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ServantNotActive e1) {
+					e2.printStackTrace();
+				} catch (ServantNotActive e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e2.printStackTrace();
 				}
+
 	    		try {
 					Client.Client.singleton_client.joindre_annuaire();
 				} catch (NotFound e1) {
@@ -94,6 +98,9 @@ public class Chatroom_profil {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				Client.Client.singleton_client.ajouter_tag(tag_1);
+				Client.Client.singleton_client.ajouter_tag(tag_2);
+				Client.Client.singleton_client.ajouter_tag(tag_3);
 	    	}
 	    });
 	    
