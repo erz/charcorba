@@ -1,6 +1,8 @@
 package Client;
 
 import ihm_swt.Chatroom_Accueil;
+import ihm_swt.Chatroom_Fenetre;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -156,7 +158,6 @@ public class Client
 		Chatroom_impl chatroom =  new Chatroom_impl(nom_chatroom);
 		m_liste_chatrooms_locales.put(nom_chatroom, chatroom);
 		COrb.static_orb.ajout_service(chatroom, nom_chatroom);
-		System.out.println("chatroom "+chatroom.m_nom_chatroom+" créée.");
 	}
 	
 	// Invite le client à participer à une chatroom
@@ -168,15 +169,18 @@ public class Client
 	//ajouter un message
 	public void ajouter_message(String nom_chatroom,String message)
 	{
-		m_liste_chatrooms_distantes.get(nom_chatroom).ajouter_message(m_pseudo, message);
+		if (m_liste_chatrooms_distantes.get(nom_chatroom) != null)
+		{
+			//System.out.println("hop");
+			m_liste_chatrooms_distantes.get(nom_chatroom).ajouter_message(m_pseudo, message);
+		}
+		else
+		{
+			//System.out.println("hip");
+			m_liste_chatrooms_locales.get(nom_chatroom).ajouter_message(m_pseudo, message);
+		}
 	}
 	
-	//ajouter un message sur une chatroom locale
-	public void ajouter_message_local(String nom_chatroom,String message)
-	{
-		m_liste_chatrooms_locales.get(nom_chatroom).ajouter_message(m_pseudo, message);
-	}  
-
 	/////////////
 	// SIGNAUX
 	/////////////
@@ -195,17 +199,25 @@ public class Client
 	public void signal_invitation_chatroom(String chatroom)
 	{
 		//IHM ouvrir la chatroom
+		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.put(chatroom, new Chatroom_Fenetre(chatroom));
 	}
 
-	public void signal_chatroom(String chatroom)
+	public void signal_chatroom(String chatroom, int idmess)
 	{
 		//IHM : recuperer le message et l'afficher
+		Message mess = singleton_client.get_message(chatroom, idmess);
+		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.get(chatroom).ecrireMessage(mess.auteur, mess.message);
 	}
 	
 	//Recuperer un message
 	Message get_message (String nom_chatroom, int idmessage)
 	{
-		String [] retval = m_liste_chatrooms_distantes.get(nom_chatroom).get_message(idmessage) ;
+		String [] retval;
+		if (m_liste_chatrooms_distantes.get(nom_chatroom) != null)
+			retval = m_liste_chatrooms_distantes.get(nom_chatroom).get_message(idmessage) ;
+		else
+			retval = m_liste_chatrooms_locales.get(nom_chatroom).get_message(idmessage) ;
+		
 		String auteur = retval[0] ;
 		String message = retval[1] ;
 
@@ -215,18 +227,6 @@ public class Client
 		return msg ;
 	}
 	
-	//Recuperer un message sur une chatroom locale
-	Message get_message_local (String nom_chatroom, int idmessage)
-	{
-		String [] retval = m_liste_chatrooms_locales.get(nom_chatroom).get_message(idmessage) ;
-		String auteur = retval[0] ;
-		String message = retval[1] ;
-
-		Message msg = new Message();
-		msg.auteur = auteur;
-		msg.message = message;
-		return msg ;
-	}
 	  
 	////////////////
 	/////  MAIN  
@@ -235,8 +235,10 @@ public class Client
 	{
 
 		  //Création et demarrage du client 
-		  new Client(args).demarrer();
+		  new Client(args);//).demarrer();
 		  new Chatroom_Accueil();
+		  new Chatroom_Accueil();
+		  
 		  //////////////////////////////
 		  ///	AUTOTEST (lol)
 		  /////////////////////////////
@@ -250,20 +252,24 @@ public class Client
 		  
 
 		  singleton_client.creer_chatroom("Roomtest");
-		  singleton_client.ajouter_message_local("Roomtest", "Boooonjooour");
+		  singleton_client.ajouter_message("Roomtest", "Boooonjooour");
 
 	 
 		  singleton_client.afficher_message("Aurelien", "SALUT");
 		  
 
-		  Message msg = singleton_client.get_message_local("Roomtest", 0);
+		  Message msg = singleton_client.get_message("Roomtest", 0);
 
 		  
 		  System.out.println("Message de "+msg.auteur+" : "+msg.message);
 		
+		  //new Chatroom_Fenetre(new Chatroom_impl("HOP"));
+		   */
+		  
 		  Thread.sleep(1000);
+
 		//while(true);
-		*/  
+
 	}		
 }
 

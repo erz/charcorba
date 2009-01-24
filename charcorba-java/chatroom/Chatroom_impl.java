@@ -36,9 +36,11 @@ public class Chatroom_impl extends ChatroomPOA
 		Iterator <Standard> it = participants.iterator();
 		while (it.hasNext())
 		{
-			it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size());
+			
+			it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size()-1);
 			
 		}
+		Client.Client.singleton_client.signal_chatroom(m_nom_chatroom, m_liste_messages.size()-1);
 		return retval;
 	}
 
@@ -51,7 +53,7 @@ public class Chatroom_impl extends ChatroomPOA
 
 		  String c_message = m_liste_messages.get(idmessage).message;
 		  //CORBA::String_var s_message (c_message);  
-		  
+
 		  retval[0] = c_auteur ;
 		  retval[1] = c_message ;
 		  return retval; 

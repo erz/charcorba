@@ -5,55 +5,58 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.*;
 
+import Client.Client;
+
 import chatroom.Chatroom_impl;
 
 public class Chatroom_Fenetre 
 {
-	public Chatroom_impl chatroom;
+	public String nom_chatroom;
 	public Shell shell;
 	public List listeMessages;
 	public Text message;
 	
 	
-	public Chatroom_Fenetre(Chatroom_impl chatroom)
+	public Chatroom_Fenetre(final String nom_chatroom)
 	{
-		   this.chatroom = chatroom;
-		   Display display = new Display();
-		   shell = new Shell(display);
+		   this.nom_chatroom = nom_chatroom;
+		   shell = new Shell(Chatroom_Accueil.display);
 		   
-		   shell.setText(chatroom.m_nom_chatroom);
-		   shell.setLayout(new GridLayout());
-		   
-		   listeMessages = new List(shell, SWT.V_SCROLL);
-		   listeMessages.setSize(500, 500);
-		   listeMessages.add("mon texte");
-		   listeMessages.add("mon texte");
-		   listeMessages.add("mon texte");
-		   listeMessages.add("mon texte");
-		   listeMessages.add("mon texte");
-		  // listeMessages.setBounds(20, 20, 400,200);
+		   shell.setText(nom_chatroom);
 
-		   Group group = new Group(shell, SWT.NONE);
-		   group.setLayout (new FillLayout ());
-		   
-		   message = new Text(group, SWT.BORDER);
-		   final Button button = new Button(group, SWT.PUSH);
+		   listeMessages = new List(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		   listeMessages.setBounds(5, 5, 480, 410);
+
+		   message = new Text(shell, SWT.BORDER);
+		   message.setBounds(5, 420, 380, 30); 
+
+		   final Button button = new Button(shell, SWT.PUSH);   
+		   button.setBounds(400, 420, 80, 30); 
+
 		   button.setText("Envoyer");
+		   button.addListener(SWT.Selection, new Listener() 
+		   {
+		        public void handleEvent(Event e) 
+		        {
+		        	//System.out.println(nom_chatroom+ " " + message.getText());
+		        	Client.singleton_client.ajouter_message(nom_chatroom, message.getText());
+		        }
+		   });
+		   
 		   shell.pack();
 		   
 		   shell.setSize(500, 500);
 		   shell.open();
-		   
-		   while (!shell.isDisposed()) 
-		   {
-			          if (!display.readAndDispatch())
-			            display.sleep();
-		   }
-		   display.dispose();
 	}
 	
 	public static void main(String[] args) 
 	{
-		   new Chatroom_Fenetre(new Chatroom_impl("Hop"));
+		   new Chatroom_Fenetre("Hop");
+	}
+
+	public void ecrireMessage(String auteur, String mess) 
+	{
+		System.out.println(auteur+" "+mess);
+		listeMessages.add(auteur+" : "+ mess);
 	}
 }
