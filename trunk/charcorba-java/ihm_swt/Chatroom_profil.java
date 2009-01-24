@@ -14,9 +14,9 @@ import org.eclipse.swt.widgets.Text;
 import tableau_blanc.Tableau_swt;
 
 public class Chatroom_profil {
-	public Chatroom_profil (){
-		Display display2 = new Display();
-	    final Shell chatroom_profil = new Shell(display2);
+	public Chatroom_profil (Display display){
+		
+	    final Shell chatroom_profil = new Shell(display);
 	    
 	    //zone de saisie du pseudo
 	    Label label_pseudo = new Label(chatroom_profil, SWT.CENTER);
@@ -66,10 +66,10 @@ public class Chatroom_profil {
 	    chatroom_profil.open();
 	
 	while (!chatroom_profil.isDisposed())
-        if (!display2.readAndDispatch())
-          display2.sleep();
+        if (!display.readAndDispatch())
+          display.sleep();
         
-    display2.dispose();
+    display.dispose();
 	}
   
 }

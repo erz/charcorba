@@ -14,7 +14,7 @@ import chatroom.Chatroom_impl;
 public class Chatroom_Accueil {
 	
 	public Chatroom_Accueil(){
-		Display display = new Display();
+		final Display display = new Display();
 	    final Shell shell = new Shell(display);
 	    
 	    Menu menuBar = new Menu(shell, SWT.BAR);
@@ -34,7 +34,7 @@ public class Chatroom_Accueil {
 	    {
 	    	public void handleEvent(Event e){
 	    		shell.dispose(); 
-	    		new Chatroom_profil();
+	    		new Chatroom_profil(display);
 	    	}
 	    });
 	    
