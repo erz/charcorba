@@ -1,5 +1,7 @@
 package Client;
 
+import ihm_swt.Chatroom_Accueil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -234,11 +236,11 @@ public class Client
 
 		  //Création et demarrage du client 
 		  new Client(args).demarrer();
-	  
+		  new Chatroom_Accueil();
 		  //////////////////////////////
 		  ///	AUTOTEST (lol)
 		  /////////////////////////////
-		  
+		  /*
 		  singleton_client.set_pseudo("Aurelien");
 		  singleton_client.joindre_annuaire();
 		  
@@ -258,10 +260,10 @@ public class Client
 
 		  
 		  System.out.println("Message de "+msg.auteur+" : "+msg.message);
-
+		
 		  Thread.sleep(1000);
 		//while(true);
-		  
+		*/  
 	}		
 }
 

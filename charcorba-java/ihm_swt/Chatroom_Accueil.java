@@ -55,9 +55,9 @@ public class Chatroom_Accueil {
 	    display.dispose();
 	    
   }
-	  public static void  main (String[] args)
+	 /* public static void  main (String[] args)
 		{
 			new Chatroom_Accueil();
 			
-		}
+		}*/
 }
