@@ -247,7 +247,7 @@ public class Client
 	}
 	
 	public void ajouter_pixel (String nom_tableau,Pixel pixel)
-	{
+	{/*
 		short[] c_pixel  ;
 		c_pixel[0] = (short) pixel.m_point.x;
 		c_pixel[1] = (short) pixel.m_point.y ;
@@ -256,7 +256,7 @@ public class Client
 		c_pixel[4] = pixel.m_color.blue;
 		c_pixel[5] = pixel.m_est_continu;
 		m_liste_tableauxblancs_locaux.get(nom_tableau).ajouter_pixel(c_pixel)  ;
-		QString qstring (nom_tableau);
+		QString qstring (nom_tableau);*/
 	}
 	
 	////////////////
@@ -266,8 +266,7 @@ public class Client
 	{
 
 		  //Création et demarrage du client 
-		  new Client(args);//).demarrer();
-		  new Chatroom_Accueil();
+		  new Client(args).demarrer();
 		  new Chatroom_Accueil();
 		  
 		  //////////////////////////////

@@ -17,10 +17,11 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
-import tableau_blanc.Tableau_swt;
 
-public class Chatroom_profil {
-	public Chatroom_profil (final Display display){
+public class Chatroom_profil 
+{
+	public Chatroom_profil (final Display display)
+	{
 		
 	    final Shell chatroom_profil = new Shell(display);
 	    
@@ -101,6 +102,7 @@ public class Chatroom_profil {
 				Client.Client.singleton_client.ajouter_tag(tag_1);
 				Client.Client.singleton_client.ajouter_tag(tag_2);
 				Client.Client.singleton_client.ajouter_tag(tag_3);
+				chatroom_profil.dispose();
 	    	}
 	    });
 	    
@@ -115,7 +117,6 @@ public class Chatroom_profil {
         if (!display.readAndDispatch())
           display.sleep();
         
-    display.dispose();
 	}
   
 }
