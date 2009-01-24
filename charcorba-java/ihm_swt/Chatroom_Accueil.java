@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import chatroom.Chatroom_impl;
+
 public class Chatroom_Accueil {
 	
 	public Chatroom_Accueil(){
@@ -25,9 +27,16 @@ public class Chatroom_Accueil {
 	    MenuItem quitter = new MenuItem(sousMenu, SWT.PUSH);
 	    quitter.setText("Quitter");
 	   
-	    Button button = new Button(shell, SWT.CENTER);
-	    button.setBounds(75, 50, 150, 30);
-	    button.setText("&Connexion");
+	    Button connexion = new Button(shell, SWT.CENTER);
+	    connexion.setBounds(75, 50, 150, 30);
+	    connexion.setText("&Connexion");
+	    connexion.addListener(SWT.MouseDown, new Listener() 
+	    {
+	    	public void handleEvent(Event e){
+	    		shell.dispose(); 
+	    		
+	    	}
+	    });
 	    
 	    shell.setMenuBar(menuBar);
 	    shell.pack();
@@ -39,11 +48,16 @@ public class Chatroom_Accueil {
 	        	shell.close();
 	        }
 	      });
-	    
-	    while (!shell.isDisposed())
+	    while (!shell.isDisposed()){
 	        if (!display.readAndDispatch())
 	          display.sleep();
-	        
+	    }   
 	    display.dispose();
+	    
   }
+	  public static void  main (String[] args)
+		{
+			new Chatroom_Accueil();
+			
+		}
 }
