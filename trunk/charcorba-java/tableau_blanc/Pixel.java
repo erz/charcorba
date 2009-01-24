@@ -7,9 +7,9 @@ public class Pixel {
 		
 		public Point m_point;
 		public Color m_color;
-		public  boolean m_est_continu;
+		public  short m_est_continu;
 		
-		public Pixel(Point point, Color color, boolean est_continu)
+		public Pixel(Point point, Color color, short est_continu)
 		{
 			m_point = point;
 			m_color = color;
