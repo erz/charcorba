@@ -20,7 +20,7 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import tableau_blanc.Tableau_swt;
 
 public class Chatroom_profil {
-	public Chatroom_profil (Display display){
+	public Chatroom_profil (final Display display){
 		
 	    final Shell chatroom_profil = new Shell(display);
 	    
