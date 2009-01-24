@@ -29,6 +29,9 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import tableau_blanc.TableauBlanc;
+import tableau_blanc.TableauBlanc_impl;
+
 import chatroom.Chatroom;
 import chatroom.Chatroom_impl;
 import chatroom.Message;
@@ -63,6 +66,11 @@ public class Client
 	//Chatrooms
 	HashMap<String,Chatroom_impl> m_liste_chatrooms_locales;  
 	HashMap<String,Chatroom> m_liste_chatrooms_distantes;
+	
+	//Tableau blanc
+	// Liste des tableaux blancs locaux
+	HashMap<String,TableauBlanc_impl> m_liste_tableauxblancs_locaux ;
+	HashMap<String,TableauBlanc> m_liste_tableauxblancs_distants ;
 	
 	//Constructeur
 	Client(String[] args) throws InvalidName, AdapterInactive
@@ -228,6 +236,17 @@ public class Client
 	}
 	
 	  
+	//TABLEAU BLANC
+	public void creer_tableau_blanc (String nom_tableau) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
+	{
+		TableauBlanc_impl tableau = new TableauBlanc_impl (nom_tableau);
+		m_liste_tableauxblancs_locaux.put(nom_tableau, tableau);
+		COrb.static_orb.ajout_service(tableau, nom_tableau);
+		System.out.println("tableau blanc "+tableau.m_nom_tableau+ " créé.");
+	}
+	
+	
+	
 	////////////////
 	/////  MAIN  
 	///////////////
