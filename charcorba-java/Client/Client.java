@@ -236,7 +236,6 @@ public class Client
 		return msg ;
 	}
 	
-	  
 	//TABLEAU BLANC
 	public void creer_tableau_blanc (String nom_tableau) throws org.omg.CosNaming.NamingContextPackage.InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	{
@@ -247,17 +246,28 @@ public class Client
 	}
 	
 	public void ajouter_pixel (String nom_tableau,Pixel pixel)
-	{/*
-		short[] c_pixel  ;
+	{
+		short[] c_pixel = null  ;
 		c_pixel[0] = (short) pixel.m_point.x;
 		c_pixel[1] = (short) pixel.m_point.y ;
-		c_pixel[2] = pixel.m_color.red;
-		c_pixel[3] = pixel.m_color.green;
-		c_pixel[4] = pixel.m_color.blue;
+		c_pixel[2] = (short) pixel.m_color.getRed();
+		c_pixel[3] = (short) pixel.m_color.getGreen();
+		c_pixel[4] = (short) pixel.m_color.getBlue();
 		c_pixel[5] = pixel.m_est_continu;
 		m_liste_tableauxblancs_locaux.get(nom_tableau).ajouter_pixel(c_pixel)  ;
-		QString qstring (nom_tableau);*/
 	}
+	
+	public void inviter_client_tableaublanc (String pseudo, String nom_tableau) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName
+	{
+		m_liste_tableauxblancs_locaux.get(nom_tableau).inviter_client(pseudo);
+	}
+	
+	//A REVOIR
+	/*Pixel get_pixel (String nom_tableau,unsigned idpixel)
+	{
+		short[]  pixel = m_liste_tableauxblancs_locaux.get(nom_tableau).get_pixel(idpixel) ;	
+		return Pixel() ;
+	}*/
 	
 	////////////////
 	/////  MAIN  
