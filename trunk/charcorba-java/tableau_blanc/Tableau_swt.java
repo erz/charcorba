@@ -1,4 +1,4 @@
-package tableau;
+package tableau_blanc;
 
 import java.util.ArrayList;
 
@@ -62,7 +62,6 @@ public class Tableau_swt {
 		redButton.setText("ROUGE");
 		redButton.addListener(SWT.MouseDown, new Listener()
 		{
-			@Override
 			public void handleEvent(Event arg0) {
 				color = new Color(Display.getDefault(), new RGB(255, 0, 0));
 			}
@@ -71,7 +70,6 @@ public class Tableau_swt {
 		greenButton.setText("VERT");
 		greenButton.addListener(SWT.MouseDown, new Listener()
 		{
-			@Override
 			public void handleEvent(Event arg0) {
 				color = new Color(Display.getDefault(), new RGB(0, 255, 0));
 			}
@@ -80,7 +78,6 @@ public class Tableau_swt {
 		blueButton.setText("BLEU");
 		blueButton.addListener(SWT.MouseDown, new Listener()
 		{
-			@Override
 			public void handleEvent(Event arg0) {
 				color = new Color(Display.getDefault(), new RGB(0, 0, 255));
 			}
@@ -88,7 +85,6 @@ public class Tableau_swt {
 		
 		canvas.addPaintListener(new PaintListener()
 		{
-			@Override
 			public void paintControl(PaintEvent event) {
 				for (int i=0; i<pixels.size()-1; i++)
 				{
@@ -102,7 +98,6 @@ public class Tableau_swt {
 		});
 		canvas.addMouseMoveListener(new MouseMoveListener()
 		{
-			@Override
 			public void mouseMove(MouseEvent event) {
 				if (isMousePressed)
 					addPixel(event.x, event.y, color, true);
