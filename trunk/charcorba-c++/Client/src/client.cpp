@@ -48,6 +48,11 @@ Standard_impl * Client::get_standard(){
 	return m_standard;
 }
 
+Annuaire_var  Client::get_annuaire()
+{
+	return  m_service_annuaire;
+}
+
 void Client::set_pseudo (string pseudo)
 {	
 	cout << "[DEBUG]\tPseudo client : " << pseudo << endl;
