@@ -34,7 +34,7 @@ public class Chatroom_Accueil {
 	    {
 	    	public void handleEvent(Event e){
 	    		shell.dispose(); 
-	    		
+	    		new Chatroom_profil();
 	    	}
 	    });
 	    
