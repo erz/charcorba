@@ -30,6 +30,10 @@ public class Tableau_swt {
 	private Color color;
 	private ArrayList<Pixel> pixels;
 	
+	RGB red = new RGB(255, 0, 0);
+	RGB green = new RGB(0,255,0);
+	RGB blue = new RGB(0,0,255);
+	
 	private class Pixel
 	{
 		int x, y;
