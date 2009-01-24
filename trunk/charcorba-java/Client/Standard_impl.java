@@ -53,7 +53,7 @@ public class Standard_impl extends StandardPOA
 	public boolean signal_chatroom(String chatroom) 
 	{
 		boolean retval = true;
-		Client.singleton_client.signal_chatroom(chatroom);
+		Client.singleton_client.signal_chatroom(chatroom, 0);
 		return retval;
 	}
 	
@@ -63,9 +63,12 @@ public class Standard_impl extends StandardPOA
 		return retval;
 	}
 
-	public boolean signal_chatroom(String chatroom, int idpixel) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean signal_chatroom(String chatroom, int idpixel) 
+	{
+		boolean retval = true;
+		
+		Client.singleton_client.signal_chatroom(chatroom, idpixel);
+		return retval;
 	}
 
 	public boolean signal_tableaublanc(String tableau, int idpixel) {

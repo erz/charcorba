@@ -18,12 +18,15 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import Client.Client;
+
 @SuppressWarnings("serial")
 public class JFrameClient extends JFrame 
 {
 	private Container fond;
+	
+	private Container amis;
 
-	private ArrayList<JCheckBox> listeContactsChekBox;
 	private JButton creerChatRoom;
 	
 	public JFrameClient()
@@ -42,6 +45,7 @@ public class JFrameClient extends JFrame
 				new JFrameChatRoom();
 			}
 		});
+		
 	
 		setSize(200, 400);
 		setVisible(true);
