@@ -10,6 +10,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.InvalidName;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
+import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
+import org.omg.PortableServer.POAPackage.ServantNotActive;
+import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import tableau_blanc.Tableau_swt;
 
@@ -22,10 +28,10 @@ public class Chatroom_profil {
 	    Label label_pseudo = new Label(chatroom_profil, SWT.CENTER);
 	    label_pseudo.setText("Entrez votre pseudo:");
 	    label_pseudo.setLocation(0, 100);
-	    Text  saisie_pseudo= new Text(chatroom_profil, SWT.NONE); 
+	    final Text  saisie_pseudo= new Text(chatroom_profil, SWT.NONE); 
 	    saisie_pseudo.setText("Pseudo?");
 	    saisie_pseudo.setBounds(140, 100, 100, 25);
-		
+	    
 	  //zone de saisie des tags
 	    Label tag1 = new Label(chatroom_profil, SWT.CENTER);
 	    tag1.setText("Tag n°1:");
@@ -54,7 +60,40 @@ public class Chatroom_profil {
 	    valider.addListener(SWT.MouseDown, new Listener() 
 	    {
 	    	public void handleEvent(Event e){
-	    		
+	    		String pseudo = saisie_pseudo.getText();
+	    		try {
+					Client.Client.singleton_client.set_pseudo(pseudo);
+				} catch (InvalidName e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ServantAlreadyActive e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (WrongPolicy e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CannotProceed e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NotFound e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ServantNotActive e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    		try {
+					Client.Client.singleton_client.joindre_annuaire();
+				} catch (NotFound e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CannotProceed e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InvalidName e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	    	}
 	    });
 	    
