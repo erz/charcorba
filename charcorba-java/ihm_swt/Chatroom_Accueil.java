@@ -27,10 +27,10 @@ public class Chatroom_Accueil {
 	    MenuItem quitter = new MenuItem(sousMenu, SWT.PUSH);
 	    quitter.setText("Quitter");
 	   
-	    Button connexion = new Button(shell, SWT.CENTER);
-	    connexion.setBounds(75, 50, 150, 30);
-	    connexion.setText("&Connexion");
-	    connexion.addListener(SWT.MouseDown, new Listener() 
+	    Button creation = new Button(shell, SWT.CENTER);
+	    creation.setBounds(75, 50, 150, 30);
+	    creation.setText("&Créer votre profil");
+	    creation.addListener(SWT.MouseDown, new Listener() 
 	    {
 	    	public void handleEvent(Event e){
 	    		shell.dispose(); 
