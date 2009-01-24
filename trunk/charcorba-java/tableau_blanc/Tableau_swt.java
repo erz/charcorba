@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Tableau_swt {
 
-	private Display display;
 	private Shell shell;
 	
 	private Canvas canvas;
@@ -46,9 +45,9 @@ public class Tableau_swt {
 		}
 	}
 	
-	public Tableau_swt()
+	public Tableau_swt(Display display)
 	{
-		shell = new Shell(display = new Display());
+		shell = new Shell(display);
 		shell.setText("Tableau blanc");
 		shell.setLayout(new RowLayout(SWT.NONE));
 		
@@ -145,6 +144,6 @@ public class Tableau_swt {
 	
 	public static void main(String[] args)
 	{
-		new Tableau_swt();
+		new Tableau_swt(new Display());
 	}
 }
