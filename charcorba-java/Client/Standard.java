@@ -8,6 +8,5 @@ package Client;
 public interface Standard
 	extends StandardOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity
 {
-
-	void inviter_client_tableaublanc(String m_nom_tableau);
+	
 }
