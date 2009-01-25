@@ -19,7 +19,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
 	for(int j=0;j<5;j++) m_dialog_window[j]=NULL;
 	m_dialog_chatroom_window=NULL;
-	m_dialog_tags=NULL;
+	//m_dialog_tags=NULL;
 	compteurmessage=0;
 	ui.setupUi(this);
 }
@@ -36,9 +36,8 @@ void MainWindowImpl::initialiser ()
 	connect(ui.actionTags,SIGNAL(triggered()),this,SLOT(ouvrir_dialog_tags()));
 
 	// Callback liés aux tableaux blancs
-	connect(Client::get_instance(),SIGNAL(signal_tableau_blanc_cree(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
-	connect(Client::get_instance(),SIGNAL(signal_pixel_ajoute(QString,Pixel)),this,SLOT(ajouter_pixel(QString,Pixel)));
-
+	connect(Client::get_instance(),SIGNAL(signal_participation_tableau_blanc(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
+	connect(Client::get_instance(),SIGNAL(signal_sync_tableau_blanc(QString,unsigned long)),this,SLOT(sync_tableau_blanc(QString,unsigned long)));
 }
 
 void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
@@ -75,9 +74,9 @@ void MainWindowImpl::afficher_message_chatroom_window(QString chatroom)
 void MainWindowImpl::ouvrir_dialog_tags()
 {
 	cout<<"[DEBUG - GUI]Appel ouverture fenetre pour gerer les tags"<<endl;
-	get_dialog_tags();
-	m_dialog_tags->show();
-	m_dialog_tags->exec();
+	//get_dialog_tags();
+	//m_dialog_tags->show();
+	//m_dialog_tags->exec();
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
@@ -149,14 +148,14 @@ Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)
 	return m_dialog_chatroom_window;
 }
 
-Dialog_tags * MainWindowImpl::get_dialog_tags()
+/*Dialog_tags * MainWindowImpl::get_dialog_tags()
 {
 	if(m_dialog_tags == NULL)
 	{
 		m_dialog_tags = new Dialog_tags();
 	}
 	return m_dialog_tags;
-}
+}*/
 
 void MainWindowImpl::afficher_dialog_connexion()
 {
@@ -184,11 +183,21 @@ void MainWindowImpl::ouvrir_dialog_tableaublanc (QString nom_tableaublanc)
 	cout<<"[DEBUG - GUI]\tOuverture de la fenêtre " << nom_tableaublanc.toStdString() << endl;
 	Dialog_tableaublanc * tableaublanc  = new Dialog_tableaublanc(NULL);
 	tableaublanc->show();
+	
+	// Tester si le dialog existe déja ou pas !
 	m_liste_dialog_tableauxblancs.insert( pair<string,Dialog_tableaublanc * >(nom_tableaublanc.toStdString(),tableaublanc));
 }
 
-void MainWindowImpl::ajouter_pixel (QString nom_tableaublancs,Pixel pixel)
+void MainWindowImpl::sync_tableau_blanc (QString nom_tableau,unsigned long idpixel)
 {
-	//m_liste_dialog_tableauxblancs[nom_tableaublancs.toStdString()]
+	unsigned long taille_tableau_blanc_widget,i ;
+	taille_tableau_blanc_widget = m_liste_dialog_tableauxblancs[nom_tableau.toStdString()]->m_widget_tableaublanc->m_vect_qpoints->size();
+
+	cout << "Taille tableau blanc = " << taille_tableau_blanc_widget <<  ", pixel maj = " << idpixel << endl ;
+	for(i=taille_tableau_blanc_widget;i<idpixel;++i)
+	{
+		Pixel pixel = Client::get_instance()->get_pixel(nom_tableau.toStdString(),i);
+		m_liste_dialog_tableauxblancs[nom_tableau.toStdString()]->m_widget_tableaublanc->ajouter_pixel(pixel);
+	}
 }
 

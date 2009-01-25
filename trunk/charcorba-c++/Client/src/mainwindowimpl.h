@@ -8,7 +8,7 @@
 #include "dialog_connexion.h"
 #include "dialog_window.h"
 #include <dialog_tableaublanc.h>
-#include "dialog_tags.h"
+//#include "dialog_tags.h"
 
 #include <stdio.h>
 #include <string>
@@ -26,7 +26,7 @@ public:
 	Dialog_connexion * m_dialog_connexion ;
 	Dialog_window *  m_dialog_window[5]  ;
 	Dialog_window * m_dialog_chatroom_window  ;
-	Dialog_tags * m_dialog_tags;
+//	Dialog_tags * m_dialog_tags;
 	
 	std::map <std::string,Dialog_tableaublanc *> m_liste_dialog_tableauxblancs ;
 	
@@ -47,14 +47,14 @@ public slots:
 	
 	//Fonctions sur les tableaux blancs
 	void ouvrir_dialog_tableaublanc (QString nom_tableaublanc);
-	void ajouter_pixel (QString nom_tableaublancs,Pixel pixel);
+	void sync_tableau_blanc (QString,unsigned long);
 
 private:
 	Ui_MainWindow ui;
 	Dialog_connexion * get_dialog_connexion();
 	Dialog_window * get_dialog_window(QString pseudo,int indice);
 	Dialog_window * get_dialog_chatroom_window(QString pseudo);
-	Dialog_tags * get_dialog_tags();
+//	Dialog_tags * get_dialog_tags();
 	bool Premiere_ouverture;
 	unsigned long compteurmessage;
 };

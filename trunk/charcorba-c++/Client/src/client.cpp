@@ -138,40 +138,11 @@ void Client::creer_chatroom (string nom_chatroom)
 	m_MICO_ORB->ajout_service(chatroom,nom_chatroom);
 }
 
-void Client::creer_tableau_blanc (std::string nom_tableau)
-{
-	cout << "[DEBUG]\tCréation du tableau blanc '" << nom_tableau << "'" << endl ;
-	TableauBlanc_impl * tableau = new TableauBlanc_impl (nom_tableau);
-	m_liste_tableauxblancs_locaux.insert( pair<string,TableauBlanc_impl *>(nom_tableau,tableau));
-	m_MICO_ORB->ajout_service(tableau,nom_tableau);
-	emit signal_tableau_blanc_cree (QString(nom_tableau.c_str()));
-}
-
-void Client::ajouter_pixel (std::string nom_tableau,Pixel pixel)
-{
-	cout<<"[DEBUG]\tEnvoie message sur le tableau " << nom_tableau <<endl;
-
-	::TableauBlanc::t_pixel c_pixel  ;
-	c_pixel[0] = pixel.m_qpoint.x() ;
-	c_pixel[1] = pixel.m_qpoint.y() ;
-	c_pixel[2] = pixel.m_qcolor.red();
-	c_pixel[3] = pixel.m_qcolor.green();
-	c_pixel[4] = pixel.m_qcolor.blue();
-	c_pixel[5] = pixel.m_est_continu;
-	m_liste_tableauxblancs_locaux[nom_tableau]->ajouter_pixel(c_pixel)  ;
-	QString qstring (nom_tableau.c_str());
-	emit signal_pixel_ajoute(qstring,pixel);
-}
-
 void Client::inviter_client_chatroom (string pseudo,string nom_chatroom)
 {
 	m_liste_chatrooms_locales[nom_chatroom]->inviter_client(pseudo) ;
 }
 
-void Client::inviter_client_tableaublanc (string pseudo, string nom_tableau)
-{
-	m_liste_tableauxblancs_locaux[nom_tableau]->inviter_client(pseudo);
-}
 
 void Client::ajouter_message(string nom_chatroom,string message)
 {
@@ -196,11 +167,6 @@ void Client::signal_invitation_chatroom(QString chatroom)
 	emit invitation_chatroom(chatroom);
 }
 
-void Client::signal_invitation_tableau(QString nom_tableau)
-{
-	emit invitation_tableau(nom_tableau); 
-}
-
 void Client::signal_chatroom(QString chatroom)
 {
 	emit signal_client_chatroom(chatroom);
@@ -221,9 +187,53 @@ Message Client::get_message (string nom_chatroom,unsigned long idmessage)
 	return msg ;
 }
 
+/* Fonctions liées aux tableaux */
+
+void Client::creer_tableau_blanc (std::string nom_tableau)
+{
+	cout << "[DEBUG]\tCréation du tableau blanc '" << nom_tableau << "'" << endl ;
+	TableauBlanc_impl * tableau = new TableauBlanc_impl (nom_tableau);
+	m_liste_tableauxblancs_locaux.insert( pair<string,TableauBlanc_impl *>(nom_tableau,tableau));
+	m_MICO_ORB->ajout_service(tableau,nom_tableau);
+	cout << "[DEBUG]\t Envoie du signal " << endl ;
+}
+
+void Client::inviter_client_tableaublanc (string pseudo, string nom_tableau)
+{
+	m_liste_tableauxblancs_locaux[nom_tableau]->inviter_client(pseudo);
+}
+
+void Client::ajouter_pixel (std::string nom_tableau,Pixel pixel)
+{
+	cout<<"[DEBUG]\tEnvoie message sur le tableau " << nom_tableau <<endl;
+
+	s_pixel mon_pixel ;
+	
+	mon_pixel.x = pixel.m_qpoint.x() ;
+	mon_pixel.y = pixel.m_qpoint.y() ;
+	mon_pixel.rouge = pixel.m_qcolor.red();
+	mon_pixel.vert = pixel.m_qcolor.green();
+	mon_pixel.bleu = pixel.m_qcolor.blue();
+	mon_pixel.est_continu = pixel.m_est_continu;
+	m_liste_tableauxblancs_distants[nom_tableau]->ajouter_pixel(mon_pixel)  ;
+	QString qstring (nom_tableau.c_str());
+}
+
 Pixel Client::get_pixel (std::string nom_tableau,unsigned long idmessage)
 {
 	cout << "[DEBUG]\tRéception du pixel " << idmessage << " du tableau " << nom_tableau << endl ;
-	::TableauBlanc::t_pixel * pixel = m_liste_tableauxblancs_locaux[nom_tableau]->get_pixel(idmessage) ;	
-	return Pixel() ;
+	s_pixel pixel = m_liste_tableauxblancs_distants[nom_tableau]->get_pixel(idmessage) ;
+	cout << "[DEBUG]\tValeur (" << pixel.x << "," << pixel.y << ")" << endl ;
+	return Pixel(QPoint(pixel.x,pixel.y),QColor(pixel.rouge,pixel.vert,pixel.bleu),pixel.est_continu) ;
+}
+
+void Client::participer_tableau_blanc (QString nom_tableau)
+{
+	emit signal_participation_tableau_blanc (nom_tableau);
+}
+
+void Client::sync_tableau_blanc (QString nom_tableau,unsigned long idpixel)
+{
+	cout << "On synchronise le tableau blanc !" << endl ;
+	emit signal_sync_tableau_blanc (nom_tableau,idpixel);
 }

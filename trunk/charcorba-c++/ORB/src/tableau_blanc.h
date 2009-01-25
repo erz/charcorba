@@ -22,6 +22,30 @@ typedef ObjOut< TableauBlanc > TableauBlanc_out;
 
 
 
+struct s_pixel;
+typedef TFixVar< s_pixel > s_pixel_var;
+typedef s_pixel& s_pixel_out;
+
+
+struct s_pixel {
+  #ifdef HAVE_TYPEDEF_OVERLOAD
+  typedef s_pixel_var _var_type;
+  #endif
+  #ifdef HAVE_EXPLICIT_STRUCT_OPS
+  s_pixel();
+  ~s_pixel();
+  s_pixel( const s_pixel& s );
+  s_pixel& operator=( const s_pixel& s );
+  #endif //HAVE_EXPLICIT_STRUCT_OPS
+
+  CORBA::Short x;
+  CORBA::Short y;
+  CORBA::Short rouge;
+  CORBA::Short vert;
+  CORBA::Short bleu;
+  CORBA::Boolean est_continu;
+};
+
 
 /*
  * Base class and common definitions for interface TableauBlanc
@@ -57,8 +81,8 @@ class TableauBlanc :
     typedef TSeqVar< BoundedSequenceTmpl< CORBA::Short,MICO_TID_DEF,6> > t_pixel_var;
     typedef TSeqOut< BoundedSequenceTmpl< CORBA::Short,MICO_TID_DEF,6> > t_pixel_out;
 
-    virtual CORBA::Boolean ajouter_pixel( const ::TableauBlanc::t_pixel& pixel ) = 0;
-    virtual ::TableauBlanc::t_pixel* get_pixel( CORBA::ULong idpixel ) = 0;
+    virtual CORBA::Boolean ajouter_pixel( const ::s_pixel& pixel ) = 0;
+    virtual ::s_pixel get_pixel( CORBA::ULong idpixel ) = 0;
 
   protected:
     TableauBlanc() {};
@@ -73,8 +97,8 @@ class TableauBlanc_stub:
 {
   public:
     virtual ~TableauBlanc_stub();
-    CORBA::Boolean ajouter_pixel( const ::TableauBlanc::t_pixel& pixel );
-    ::TableauBlanc::t_pixel* get_pixel( CORBA::ULong idpixel );
+    CORBA::Boolean ajouter_pixel( const ::s_pixel& pixel );
+    ::s_pixel get_pixel( CORBA::ULong idpixel );
 
   private:
     void operator=( const TableauBlanc_stub& );
@@ -89,8 +113,8 @@ class TableauBlanc_stub_clp :
   public:
     TableauBlanc_stub_clp (PortableServer::POA_ptr, CORBA::Object_ptr);
     virtual ~TableauBlanc_stub_clp ();
-    CORBA::Boolean ajouter_pixel( const ::TableauBlanc::t_pixel& pixel );
-    ::TableauBlanc::t_pixel* get_pixel( CORBA::ULong idpixel );
+    CORBA::Boolean ajouter_pixel( const ::s_pixel& pixel );
+    ::s_pixel get_pixel( CORBA::ULong idpixel );
 
   protected:
     TableauBlanc_stub_clp ();
@@ -117,8 +141,8 @@ class POA_TableauBlanc : virtual public PortableServer::StaticImplementation
     static POA_TableauBlanc * _narrow (PortableServer::Servant);
     virtual CORBA::Object_ptr _make_stub (PortableServer::POA_ptr, CORBA::Object_ptr);
 
-    virtual CORBA::Boolean ajouter_pixel( const ::TableauBlanc::t_pixel& pixel ) = 0;
-    virtual ::TableauBlanc::t_pixel* get_pixel( CORBA::ULong idpixel ) = 0;
+    virtual CORBA::Boolean ajouter_pixel( const ::s_pixel& pixel ) = 0;
+    virtual ::s_pixel get_pixel( CORBA::ULong idpixel ) = 0;
 
   protected:
     POA_TableauBlanc () {};
@@ -129,6 +153,8 @@ class POA_TableauBlanc : virtual public PortableServer::StaticImplementation
 };
 
 #endif // MICO_CONF_NO_POA
+
+extern CORBA::StaticTypeInfo *_marshaller_s_pixel;
 
 extern CORBA::StaticTypeInfo *_marshaller_TableauBlanc;
 
