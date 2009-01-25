@@ -20,7 +20,7 @@ public class Chatroom_Fenetre
 	public Chatroom_Fenetre(final String nom_chatroom)
 	{
 		   this.nom_chatroom = nom_chatroom;
-		   shell = new Shell(Chatroom_Accueil.display);
+		   shell = new Shell(Display.getCurrent());
 		   
 		   shell.setText(nom_chatroom);
 

@@ -34,7 +34,7 @@ public class Chatroom_Accueil
 
 	public Label pseudo;
 
-	static public Display display;
+	Display display;
 	
 	public Chatroom_Accueil()
 	{
@@ -168,8 +168,8 @@ public class Chatroom_Accueil
 	    quitter.addListener(SWT.Selection, new Listener() {
 	        public void handleEvent(Event e) 
 	        {
-	        	
-	        	shell.close();
+	        	Client.singleton_client.signal_invitation_chatroom("Chatroom1");
+	        	//shell.close();
 	        }
 	      });
 
