@@ -39,6 +39,8 @@ public class Chatroom_Accueil
 
 	Display display;
 	
+	Shell shell;
+	
 	public Chatroom_Accueil()
 	{
 		singleton_ihm = this;
@@ -47,7 +49,7 @@ public class Chatroom_Accueil
 		
 		display = new Display();
 
-	    final Shell shell = new Shell(display);
+	    shell = new Shell(display);
 	    shell.setText("CHARCORBA");
 	    
 	    Menu menuBar = new Menu(shell, SWT.BAR);
@@ -108,7 +110,7 @@ public class Chatroom_Accueil
 	    	public void handleEvent(Event e)
 	    	{
 	    		shell.setVisible(false); 
-	    		new Chatroom_profil(display);
+	    		new Chatroom_profil();
 	    		shell.setVisible(true); 
 	    		creation.setVisible(false);
 	    		groupAmis.setVisible(true);
@@ -141,7 +143,7 @@ public class Chatroom_Accueil
 					e1.printStackTrace();
 				}
 				
-				//A COMMENTER SI EXCEPTION A FERMETURE TABLEAU ET FENETRE
+				/*/A COMMENTER SI EXCEPTION A FERMETURE TABLEAU ET FENETRE
 				try {
 					singleton_ihm.ajouterTableau(nomChatroom.getText());
 				} catch (InvalidName e2) {
@@ -162,7 +164,7 @@ public class Chatroom_Accueil
 				} catch (ServantNotActive e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
-				}
+				}*/
 				
 				//On invite a la chatroom les amis selectionnés
 				for(int i = 0; i < listeAmis.getSelection().length; ++i)
@@ -182,7 +184,7 @@ public class Chatroom_Accueil
 				}
 				
 				//On invite au tableau blanc les amis sélectionnés
-				for(int j = 0; j< listeAmis.getSelection().length; ++j)
+				/*for(int j = 0; j< listeAmis.getSelection().length; ++j)
 				{
 					try {
 						Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], nomChatroom.getText());
@@ -196,7 +198,7 @@ public class Chatroom_Accueil
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
+				}*/
 				
 	        }
 	      });
@@ -211,7 +213,7 @@ public class Chatroom_Accueil
 	    quitter.addListener(SWT.Selection, new Listener() {
 	        public void handleEvent(Event e) 
 	        {
-	        	Client.singleton_client.signal_invitation_chatroom("Chatroom1");
+	        	//Client.singleton_client.signal_invitation_chatroom("Chatroom1");
 	        	//shell.close();
 	        }
 	      });
@@ -251,5 +253,18 @@ public class Chatroom_Accueil
 	{
 		   new Chatroom_Accueil();
 	}*/
+
+
+	public void ajouterChatroom_Distante(final String chatroom) 
+	{
+		display.syncExec(new Runnable() 
+		{
+			   public void run() 
+			   {
+				   liste_chatrooms_fenetres.put(chatroom, new Chatroom_Fenetre(chatroom));
+			   }
+			});
+		
+	}
 
 }

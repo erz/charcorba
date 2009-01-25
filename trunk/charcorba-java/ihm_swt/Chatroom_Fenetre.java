@@ -20,8 +20,7 @@ public class Chatroom_Fenetre
 	public Chatroom_Fenetre(final String nom_chatroom)
 	{
 		   this.nom_chatroom = nom_chatroom;
-		   shell = new Shell(Display.getCurrent());
-		   
+		   shell = new Shell(Chatroom_Accueil.singleton_ihm.shell);
 		   shell.setText(nom_chatroom);
 
 		   listeMessages = new List(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
@@ -32,7 +31,7 @@ public class Chatroom_Fenetre
 
 		   final Button button = new Button(shell, SWT.PUSH);   
 		   button.setBounds(400, 420, 80, 30); 
-
+		   System.out.println("la ?");
 		   button.setText("Envoyer");
 		   button.addListener(SWT.Selection, new Listener() 
 		   {
@@ -44,9 +43,13 @@ public class Chatroom_Fenetre
 		   });
 		   
 		   shell.pack();
-		   
 		   shell.setSize(500, 500);
 		   shell.open();
+		   
+		   System.out.println("Chatroom "+nom_chatroom+"créée.");
+			/*while (!shell.isDisposed())
+		        if (!Chatroom_Accueil.singleton_ihm.display.readAndDispatch())
+		        	Chatroom_Accueil.singleton_ihm.display.sleep();*/
 	}
 	
 	public static void main(String[] args) 
@@ -54,9 +57,16 @@ public class Chatroom_Fenetre
 		   new Chatroom_Fenetre("Hop");
 	}
 
-	public void ecrireMessage(String auteur, String mess) 
+	public void ecrireMessage(final String auteur, final String mess) 
 	{
-		System.out.println(auteur+" "+mess);
-		listeMessages.add(auteur+" : "+ mess);
+		Chatroom_Accueil.singleton_ihm.display.syncExec(new Runnable() 
+		{
+			   public void run() 
+			   {
+				   System.out.println("Ca y est, on affiche "+mess+" de "+auteur);
+				   listeMessages.add(auteur+" : "+ mess);
+			   }
+			});
+		
 	}
 }
