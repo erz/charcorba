@@ -1,14 +1,23 @@
 // -*- c++ -*-
 
+struct s_pixel {
+	short x ;
+	short y ;
+	short rouge ;
+	short vert ;
+	short bleu ;
+	boolean est_continu ;
+};
+
 interface TableauBlanc {
 
    typedef sequence <short,6> t_pixel ;
 
    // Ajoute un pixel au tableau blanc 
-   boolean ajouter_pixel ( in t_pixel pixel ) ;
+   boolean ajouter_pixel ( in s_pixel pixel ) ;
    
    // Recupère le idmessage-ième message du tableau blanc
    // Renvoie les données du pixe
-   t_pixel get_pixel ( in unsigned long idpixel ) ;
+   s_pixel get_pixel ( in unsigned long idpixel ) ;
  
 };

@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <iostream>
 #include <pixel.h>
+#include <client.h>
 
 using namespace std;
 
@@ -22,23 +23,26 @@ Widget_tableaublanc::Widget_tableaublanc(QWidget* parent ): QWidget(parent)
 
 void Widget_tableaublanc::mouseMoveEvent(QMouseEvent* e) 
 {
-	ajouter_pixel (Pixel(QPoint(e->x(),e->y()),
-	                                m_qcolor_couleur_actuelle,
-	                                true));
+	Client::get_instance()->ajouter_pixel (string("tableau_test"),
+                                          Pixel(QPoint(e->x(),e->y()),
+	                                      m_qcolor_couleur_actuelle,
+	                                      true));
 }
 
 void Widget_tableaublanc::mousePressEvent(QMouseEvent *e)
 {
-	ajouter_pixel (Pixel(QPoint(e->x(),e->y()),
-	                                m_qcolor_couleur_actuelle,
-	                                false));
+	Client::get_instance()->ajouter_pixel (string("tableau_test"),
+                                          Pixel(QPoint(e->x(),e->y()),
+	                                      m_qcolor_couleur_actuelle,
+	                                      false));
 }
 
 void Widget_tableaublanc::mouseReleaseEvent(QMouseEvent *e)
 {
-	ajouter_pixel (Pixel(QPoint(e->x(),e->y()),
-	                                m_qcolor_couleur_actuelle,
-	                                false));
+	Client::get_instance()->ajouter_pixel (string("tableau_test"),
+                                          Pixel(QPoint(e->x(),e->y()),
+	                                      m_qcolor_couleur_actuelle,
+	                                      false));
 }
 
 void Widget_tableaublanc::paintEvent(QPaintEvent *evnt)
@@ -50,6 +54,7 @@ void Widget_tableaublanc::paintEvent(QPaintEvent *evnt)
 	for(i=0;i<m_vect_qpoints->size();++i)
 	{
 		Pixel point = m_vect_qpoints->value(i);
+		//cout << point.m_qpoint.x() << ":" <<  point.m_qpoint.y() << endl ;
 		painter.setPen(QPen(point.m_qcolor));
 		if (point.m_est_continu == true )
 		{
@@ -80,6 +85,7 @@ void Widget_tableaublanc::set_couleur_vert ()
 
 void Widget_tableaublanc::ajouter_pixel (Pixel pixel)
 {
+	//cout << "On dessine le pixel " << pixel.m_qpoint.x() << "," << pixel.m_qpoint.y() << endl ;
 	m_vect_qpoints->push_back(pixel);
 	repaint();
 }

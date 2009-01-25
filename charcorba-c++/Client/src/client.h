@@ -82,7 +82,7 @@ public:
 	// Fonctions liées aux standards	
 	void afficher_message(string pseudo,string message);
 	void inviter_client_chatroom (std::string pseudo,std::string nom_chatroom);
-	void inviter_client_tableaublanc (std::string pseudo, std::string nom_chatroom);	
+	void inviter_client_tableaublanc (std::string pseudo, std::string nom_tableau);	
 	void message_recu(QString pseudo, QString message);
 
 	// Fonctions liées aux chatrooms
@@ -96,9 +96,9 @@ public:
 	// Fonctions liées aux tableaux 
 	void creer_tableau_blanc (std::string nom_tableau);
 	void ajouter_pixel (std::string nom_tableau,Pixel pixel);
-	void signal_invitation_tableau(QString);
-	void signal_pixel_tableau(QString);
 	Pixel get_pixel (std::string nom_tableau,unsigned long idmessage);
+	void participer_tableau_blanc (QString);
+	void sync_tableau_blanc (QString,unsigned long);
 
 	signals :
 	
@@ -108,9 +108,8 @@ public:
 	void signal_message_recu(QString,QString);
 	
 	// Signaux liées aux tableaux blancs
-	void signal_pixel_ajoute(QString,Pixel);
-	void signal_tableau_blanc_cree (QString);
-	void invitation_tableau (QString);
+	void signal_participation_tableau_blanc (QString);
+	void signal_sync_tableau_blanc (QString,unsigned long);
 	
 	// Signaux liées aux chatrooms
 	void signal_client_chatroom(QString);

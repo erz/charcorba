@@ -4,6 +4,7 @@
 #include <iostream>
 #include <chatroom.h>
 #include <client.h>
+#include <tableau_blanc.h>
 
 using namespace std ;
 // Implementation for interface Standard
@@ -35,7 +36,6 @@ Standard_impl::inviter_client_chatroom ( const char* chatroom )
 	cout << "[DEBUG - Standard]\tRéception d'une invitation à participer au chat '" << chatroom << "'" << endl ;
 	CORBA::Boolean retval = true ;
 	
-	
 	CORBA::Object_var service = Client::get_instance()->m_MICO_ORB->connecter_service(chatroom);
 	
 	Chatroom_var service_chatroom ;
@@ -59,7 +59,24 @@ Standard_impl::inviter_client_tableaublanc ( const char* tableau )
     ::CORBA::SystemException)
 {
 	cout << "[DEBUG - Standard]\tRéception d'une invitation à participer au tableau blanc '" << tableau << "'" << endl ;
+	
 	CORBA::Boolean retval = true ;
+	
+	CORBA::Object_var service = Client::get_instance()->m_MICO_ORB->connecter_service(tableau);
+	
+	TableauBlanc_var service_tableaublanc ;
+	service_tableaublanc = TableauBlanc::_narrow(service.in()) ;
+
+	if (CORBA::is_nil(service_tableaublanc))
+	{
+		cerr << "[DEBUG]\tL'IOR n'est pas une référence sur un service." << endl;
+	}
+	
+	Client::get_instance()->m_liste_tableauxblancs_distants.insert( pair<string,TableauBlanc_var>(string(tableau),service_tableaublanc));
+	
+	QString tmp = QString::fromStdString(tableau);
+	Client::get_instance()->participer_tableau_blanc(tmp);
+	
 	return retval;
 }
 
@@ -80,6 +97,7 @@ Standard_impl::signal_tableaublanc( const char* tableau, CORBA::ULong idpixel )
 
 {
   CORBA::Boolean retval;
+  Client::get_instance()->sync_tableau_blanc (QString (tableau),idpixel);
   return retval;
 }
 

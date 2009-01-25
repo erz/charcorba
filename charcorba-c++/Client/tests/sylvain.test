@@ -5,6 +5,10 @@ ajouter_tag geek
 ajouter_tag c++
 ajouter_tag pieton
 ajouter_tag anti-java
-sleep 5
 get_amis_par_tag informatique
 creer_tableaublanc tableau_test
+inviter_client_tableaublanc sylvain tableau_test
+sleep 5
+inviter_client_tableaublanc florent tableau_test
+sleep 5
+inviter_client_tableaublanc michael tableau_test

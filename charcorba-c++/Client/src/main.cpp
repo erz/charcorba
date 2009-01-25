@@ -6,13 +6,11 @@
 
 int main(int argc, char ** argv )
 {
+	
 	// Initialisation du client
 	Client * client_chat = new Client(argc,argv);
 	client_chat->demarrer();
-
-	Autotest_client * autotest_client = new Autotest_client (client_chat);
-	autotest_client->demarrer();
-		
+	
 	// Initialisation de la GUI
 	QApplication qapplication( argc, argv );
 	MainWindowImpl fenetre;
@@ -20,6 +18,9 @@ int main(int argc, char ** argv )
 	fenetre.ARGC=argc;
 	fenetre.ARGV=argv;
 	fenetre.show(); 
+
+	Autotest_client * autotest_client = new Autotest_client (client_chat);
+	autotest_client->demarrer();
 
 	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
 	qapplication.exec();

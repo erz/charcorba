@@ -18,9 +18,9 @@ class Widget_tableaublanc :
 	int last_y ;
 	QColor m_qcolor_couleur_actuelle ;
 
+	public: 
 	QVector <Pixel> * m_vect_qpoints ; 
 
-	public: 
 		Widget_tableaublanc(QWidget* parent = 0); 
 		void ajouter_pixel (Pixel pixel);
 	

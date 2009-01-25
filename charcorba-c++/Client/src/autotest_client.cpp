@@ -51,6 +51,12 @@ void f_thread_lancement_autotest ()
 			string chatroom = getstring(cin,'\n');
 			Client::get_instance()->inviter_client_chatroom(pseudo,chatroom);
 		}
+		else if (cmd == "inviter_client_tableaublanc")
+		{
+			string pseudo = getstring(cin,' ');
+			string tableau = getstring(cin,'\n');
+			Client::get_instance()->inviter_client_tableaublanc(pseudo,tableau);
+		}
 		else if (cmd == "ajouter_message")
 		{
 			string nom_chatroom = getstring(cin,' ');

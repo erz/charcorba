@@ -13,6 +13,96 @@ using namespace std;
 //--------------------------------------------------------
 //  Implementation of stubs
 //--------------------------------------------------------
+#ifdef HAVE_EXPLICIT_STRUCT_OPS
+s_pixel::s_pixel()
+{
+}
+
+s_pixel::s_pixel( const s_pixel& _s )
+{
+  x = ((s_pixel&)_s).x;
+  y = ((s_pixel&)_s).y;
+  rouge = ((s_pixel&)_s).rouge;
+  vert = ((s_pixel&)_s).vert;
+  bleu = ((s_pixel&)_s).bleu;
+  est_continu = ((s_pixel&)_s).est_continu;
+}
+
+s_pixel::~s_pixel()
+{
+}
+
+s_pixel&
+s_pixel::operator=( const s_pixel& _s )
+{
+  x = ((s_pixel&)_s).x;
+  y = ((s_pixel&)_s).y;
+  rouge = ((s_pixel&)_s).rouge;
+  vert = ((s_pixel&)_s).vert;
+  bleu = ((s_pixel&)_s).bleu;
+  est_continu = ((s_pixel&)_s).est_continu;
+  return *this;
+}
+#endif
+
+class _Marshaller_s_pixel : public ::CORBA::StaticTypeInfo {
+    typedef s_pixel _MICO_T;
+  public:
+    ~_Marshaller_s_pixel();
+    StaticValueType create () const;
+    void assign (StaticValueType dst, const StaticValueType src) const;
+    void free (StaticValueType) const;
+    ::CORBA::Boolean demarshal (::CORBA::DataDecoder&, StaticValueType) const;
+    void marshal (::CORBA::DataEncoder &, StaticValueType) const;
+};
+
+
+_Marshaller_s_pixel::~_Marshaller_s_pixel()
+{
+}
+
+::CORBA::StaticValueType _Marshaller_s_pixel::create() const
+{
+  return (StaticValueType) new _MICO_T;
+}
+
+void _Marshaller_s_pixel::assign( StaticValueType d, const StaticValueType s ) const
+{
+  *(_MICO_T*) d = *(_MICO_T*) s;
+}
+
+void _Marshaller_s_pixel::free( StaticValueType v ) const
+{
+  delete (_MICO_T*) v;
+}
+
+::CORBA::Boolean _Marshaller_s_pixel::demarshal( ::CORBA::DataDecoder &dc, StaticValueType v ) const
+{
+  return
+    dc.struct_begin() &&
+    CORBA::_stc_short->demarshal( dc, &((_MICO_T*)v)->x ) &&
+    CORBA::_stc_short->demarshal( dc, &((_MICO_T*)v)->y ) &&
+    CORBA::_stc_short->demarshal( dc, &((_MICO_T*)v)->rouge ) &&
+    CORBA::_stc_short->demarshal( dc, &((_MICO_T*)v)->vert ) &&
+    CORBA::_stc_short->demarshal( dc, &((_MICO_T*)v)->bleu ) &&
+    CORBA::_stc_boolean->demarshal( dc, &((_MICO_T*)v)->est_continu ) &&
+    dc.struct_end();
+}
+
+void _Marshaller_s_pixel::marshal( ::CORBA::DataEncoder &ec, StaticValueType v ) const
+{
+  ec.struct_begin();
+  CORBA::_stc_short->marshal( ec, &((_MICO_T*)v)->x );
+  CORBA::_stc_short->marshal( ec, &((_MICO_T*)v)->y );
+  CORBA::_stc_short->marshal( ec, &((_MICO_T*)v)->rouge );
+  CORBA::_stc_short->marshal( ec, &((_MICO_T*)v)->vert );
+  CORBA::_stc_short->marshal( ec, &((_MICO_T*)v)->bleu );
+  CORBA::_stc_boolean->marshal( ec, &((_MICO_T*)v)->est_continu );
+  ec.struct_end();
+}
+
+::CORBA::StaticTypeInfo *_marshaller_s_pixel;
+
 
 
 /*
@@ -157,9 +247,9 @@ TableauBlanc_stub_clp::~TableauBlanc_stub_clp ()
 
 #endif // MICO_CONF_NO_POA
 
-CORBA::Boolean TableauBlanc_stub::ajouter_pixel( const TableauBlanc::t_pixel& _par_pixel )
+CORBA::Boolean TableauBlanc_stub::ajouter_pixel( const s_pixel& _par_pixel )
 {
-  CORBA::StaticAny _sa_pixel( _marshaller__seq_6b_short, &_par_pixel );
+  CORBA::StaticAny _sa_pixel( _marshaller_s_pixel, &_par_pixel );
   CORBA::Boolean _res;
   CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
 
@@ -178,7 +268,7 @@ CORBA::Boolean TableauBlanc_stub::ajouter_pixel( const TableauBlanc::t_pixel& _p
 #ifndef MICO_CONF_NO_POA
 
 CORBA::Boolean
-TableauBlanc_stub_clp::ajouter_pixel( const TableauBlanc::t_pixel& _par_pixel )
+TableauBlanc_stub_clp::ajouter_pixel( const s_pixel& _par_pixel )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
@@ -211,10 +301,11 @@ TableauBlanc_stub_clp::ajouter_pixel( const TableauBlanc::t_pixel& _par_pixel )
 
 #endif // MICO_CONF_NO_POA
 
-TableauBlanc::t_pixel* TableauBlanc_stub::get_pixel( CORBA::ULong _par_idpixel )
+s_pixel TableauBlanc_stub::get_pixel( CORBA::ULong _par_idpixel )
 {
   CORBA::StaticAny _sa_idpixel( CORBA::_stc_ulong, &_par_idpixel );
-  CORBA::StaticAny __res( _marshaller__seq_6b_short );
+  s_pixel _res;
+  CORBA::StaticAny __res( _marshaller_s_pixel, &_res );
 
   CORBA::StaticRequest __req( this, "get_pixel" );
   __req.add_in_arg( &_sa_idpixel );
@@ -224,20 +315,20 @@ TableauBlanc::t_pixel* TableauBlanc_stub::get_pixel( CORBA::ULong _par_idpixel )
 
   mico_sii_throw( &__req, 
     0);
-  return (TableauBlanc::t_pixel*) __res._retn();
+  return _res;
 }
 
 
 #ifndef MICO_CONF_NO_POA
 
-TableauBlanc::t_pixel*
+s_pixel
 TableauBlanc_stub_clp::get_pixel( CORBA::ULong _par_idpixel )
 {
   PortableServer::Servant _serv = _preinvoke ();
   if (_serv) {
     POA_TableauBlanc * _myserv = POA_TableauBlanc::_narrow (_serv);
     if (_myserv) {
-      TableauBlanc::t_pixel* __res;
+      s_pixel __res;
 
       #ifdef HAVE_EXCEPTIONS
       try {
@@ -323,12 +414,14 @@ void _Marshaller__seq_6b_short::marshal( ::CORBA::DataEncoder &ec, StaticValueTy
 struct __tc_init_TABLEAU_BLANC {
   __tc_init_TABLEAU_BLANC()
   {
+    _marshaller_s_pixel = new _Marshaller_s_pixel;
     _marshaller_TableauBlanc = new _Marshaller_TableauBlanc;
     _marshaller__seq_6b_short = new _Marshaller__seq_6b_short;
   }
 
   ~__tc_init_TABLEAU_BLANC()
   {
+    delete static_cast<_Marshaller_s_pixel*>(_marshaller_s_pixel);
     delete static_cast<_Marshaller_TableauBlanc*>(_marshaller_TableauBlanc);
     delete static_cast<_Marshaller__seq_6b_short*>(_marshaller__seq_6b_short);
   }
@@ -392,8 +485,8 @@ POA_TableauBlanc::dispatch (CORBA::StaticServerRequest_ptr __req)
   try {
   #endif
     if( strcmp( __req->op_name(), "ajouter_pixel" ) == 0 ) {
-      ::TableauBlanc::t_pixel _par_pixel;
-      CORBA::StaticAny _sa_pixel( _marshaller__seq_6b_short, &_par_pixel );
+      ::s_pixel _par_pixel;
+      CORBA::StaticAny _sa_pixel( _marshaller_s_pixel, &_par_pixel );
 
       CORBA::Boolean _res;
       CORBA::StaticAny __res( CORBA::_stc_boolean, &_res );
@@ -411,8 +504,8 @@ POA_TableauBlanc::dispatch (CORBA::StaticServerRequest_ptr __req)
       CORBA::ULong _par_idpixel;
       CORBA::StaticAny _sa_idpixel( CORBA::_stc_ulong, &_par_idpixel );
 
-      ::TableauBlanc::t_pixel* _res;
-      CORBA::StaticAny __res( _marshaller__seq_6b_short );
+      ::s_pixel _res;
+      CORBA::StaticAny __res( _marshaller_s_pixel, &_res );
       __req->add_in_arg( &_sa_idpixel );
       __req->set_result( &__res );
 
@@ -420,9 +513,7 @@ POA_TableauBlanc::dispatch (CORBA::StaticServerRequest_ptr __req)
         return true;
 
       _res = get_pixel( _par_idpixel );
-      __res.value( _marshaller__seq_6b_short, _res );
       __req->write_results();
-      delete _res;
       return true;
     }
   #ifdef HAVE_EXCEPTIONS
