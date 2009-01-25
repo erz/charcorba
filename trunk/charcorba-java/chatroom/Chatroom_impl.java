@@ -71,7 +71,7 @@ public class Chatroom_impl extends ChatroomPOA
 		Client.Standard standard_distant = Client.StandardHelper.narrow(service_distant) ;
 		
 		System.out.println("HOOOOOOOO");
-		standard_distant.inviter_client(m_nom_chatroom);
+		standard_distant.inviter_client_chatroom(m_nom_chatroom);
 		
 		m_liste_participants.put(pseudo, standard_distant);
 	}

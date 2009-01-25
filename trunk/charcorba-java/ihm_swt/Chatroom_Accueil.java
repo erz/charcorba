@@ -144,7 +144,7 @@ public class Chatroom_Accueil
 				}
 				
 				//Creation du tableau blanc
-				/*
+				
 				try {
 					singleton_ihm.ajouterTableau(nomChatroom.getText()+" - Tableau blanc");
 				} catch (InvalidName e2) {
@@ -165,7 +165,7 @@ public class Chatroom_Accueil
 				} catch (ServantNotActive e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
-				}*/
+				}
 				
 				//On invite a la chatroom les amis selectionnés
 				for(int i = 0; i < listeAmis.getSelection().length; ++i)
@@ -185,7 +185,6 @@ public class Chatroom_Accueil
 				}
 				
 				//On invite au tableau blanc les amis sélectionnés
-				/*
 				for(int j = 0; j< listeAmis.getSelection().length; ++j)
 				{
 					try {
@@ -200,7 +199,7 @@ public class Chatroom_Accueil
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}*/
+				}
 				
 	        }
 	      });
@@ -247,7 +246,7 @@ public class Chatroom_Accueil
 	
 	public void ajouterTableau(String nom_tableau) throws InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	{
-		liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt());
+		liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt(nom_tableau));
 		Client.singleton_client.creer_tableau_blanc(nom_tableau);
 	}
 
@@ -269,7 +268,7 @@ public class Chatroom_Accueil
 		{
 			   public void run() 
 			   {
-				   liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt());
+				   liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt(nom_tableau));
 				   }
 			});
 			}
