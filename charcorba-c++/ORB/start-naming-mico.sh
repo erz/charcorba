@@ -7,7 +7,7 @@ RC="-ORBImplRepoAddr $ADDR -ORBNamingAddr $ADDR"
 rm -f NameService-root.inf
 # run POA daemon
 echo "starting POA daemon ..."
-micod -ORBIIOPAddr $ADDR --forward &
+micod -ORBNoResolve -ORBIIOPAddr $ADDR --forward &
 micod_pid=$!
 
 trap "kill $micod_pid" 0
