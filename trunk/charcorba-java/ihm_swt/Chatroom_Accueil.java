@@ -7,10 +7,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
@@ -25,6 +29,8 @@ public class Chatroom_Accueil
 	static public Chatroom_Accueil singleton_ihm;
 	
 	public HashMap<String,Chatroom_Fenetre> liste_chatrooms_fenetres;
+	
+	public List listeAmis;
 
 
 	static public Display display;
@@ -49,70 +55,44 @@ public class Chatroom_Accueil
 	    MenuItem quitter = new MenuItem(sousMenu, SWT.PUSH);
 	    quitter.setText("Quitter");
 	   
-/*
-	    final Button button = new Button(shell, SWT.CENTER);
-	    button.setBounds(75, 50, 150, 30);
-	    button.setText("&Connexion");
-*/
+
 	    final Button creation = new Button(shell, SWT.CENTER);
 	    creation.setBounds(75, 50, 150, 30);
 	    creation.setText("&Créez votre profil");
 
+	    // Interface une fois connecté :
+	    final Group groupChatRoom = new Group(shell, SWT.NONE);
+	    
+		final Text nomChatroom = new Text(groupChatRoom, SWT.BORDER);
+		nomChatroom.setBounds(10, 20, 160, 30); 
+		nomChatroom.setText("Chatroom1");
+		   
+	    final Button creerChatroom = new Button(groupChatRoom, SWT.NONE);
+	    creerChatroom.setBounds(200, 20, 70, 30);
+	    creerChatroom.setText("&Créer");
 
+	    groupChatRoom.setText("Créer une chatroom");
+	    groupChatRoom.setBounds(5, 18, 280, 70);
 	    
-	    final Button creerChatroom = new Button(shell, SWT.BOTTOM);
-	    creerChatroom.setBounds(75, 100, 150, 30);
-	    creerChatroom.setText("&Créer une chatroom");
-	    creerChatroom.setVisible(false);
+	    groupChatRoom.setVisible(false);
 	    
-	   /* 
-	    button.addListener(SWT.Selection, new Listener() 
-	    {
-	        public void handleEvent(Event e) 
-	        {
-	        	Client.singleton_client.demarrer();
-	        	
-	        	try {
-					Client.singleton_client.set_pseudo("Aurelien");
-				} catch (InvalidName e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (ServantAlreadyActive e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (WrongPolicy e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (CannotProceed e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (NotFound e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (ServantNotActive e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				}
-	        	try {
-					Client.singleton_client.joindre_annuaire();
-				} catch (NotFound e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (CannotProceed e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				} catch (InvalidName e1) {
-					// TODO Bloc catch auto-généré
-					e1.printStackTrace();
-				}
-				
-				
-				//Cacher le bouton connexion
-				button.setVisible(false);
-				creerChatroom.setVisible(true);
-	        }
-	    });
-	    */
+	    final Group groupAmis = new Group(shell, SWT.NONE);
+	    
+	    Text tagRecherche = new Text(groupAmis, SWT.BORDER);
+	    tagRecherche.setBounds(10, 20, 130, 30); 
+	    tagRecherche.setText("tag");
+	    
+	    Button rechercherTag = new Button(groupAmis, SWT.NONE);
+	    rechercherTag.setBounds(145, 20, 130, 30);
+	    rechercherTag.setText("&Rechercher par tag");
+	    
+	    listeAmis = new List(groupAmis, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+	    listeAmis.setBounds(10, 60, 260, 180);
+		
+	    groupAmis.setText("Amis");
+	    groupAmis.setBounds(5, 90, 280, 250);
+	    
+	    groupAmis.setVisible(false);
 	    
 	    creation.addListener(SWT.MouseDown, new Listener() 
 	    {
@@ -122,7 +102,8 @@ public class Chatroom_Accueil
 	    		new Chatroom_profil(display);
 	    		shell.setVisible(true); 
 	    		creation.setVisible(false);
-	    		creerChatroom.setVisible(true);
+	    		groupAmis.setVisible(true);
+	    		groupChatRoom.setVisible(true);
 	    	}
 	    });
 	    
@@ -153,10 +134,17 @@ public class Chatroom_Accueil
 	        }
 	      });
 	    
+	    rechercherTag.addListener(SWT.Selection, new Listener() {
+	        public void handleEvent(Event e) 
+	        {
+	        	//Client.sin
+	        }
+	      });
+	    
 	    quitter.addListener(SWT.Selection, new Listener() {
 	        public void handleEvent(Event e) 
 	        {
-	        	Client.singleton_client.arreter();
+	        	
 	        	shell.close();
 	        }
 	      });
@@ -173,16 +161,23 @@ public class Chatroom_Accueil
 	        if (!display.readAndDispatch())
 	          display.sleep();
 	    }   
+	    if (Client.singleton_client != null)
+	    	Client.singleton_client.arreter();
 	    display.dispose();
 	    
   }
 	
 
-
 	public void ajouterChatroom(String nom_chatroom) throws InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive 
 	{
 		liste_chatrooms_fenetres.put(nom_chatroom, new Chatroom_Fenetre(nom_chatroom));
 		Client.singleton_client.creer_chatroom(nom_chatroom);
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+		   new Chatroom_Accueil();
 	}
 
 }
