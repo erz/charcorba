@@ -20,10 +20,10 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 public class Chatroom_profil 
 {
-	public Chatroom_profil (final Display display)
+	public Chatroom_profil ()
 	{
 		
-	    final Shell chatroom_profil = new Shell(display);
+	    final Shell chatroom_profil = new Shell(Chatroom_Accueil.singleton_ihm.shell);
 	    
 	    //zone de saisie du pseudo
 	    Label label_pseudo = new Label(chatroom_profil, SWT.CENTER);
@@ -117,9 +117,9 @@ public class Chatroom_profil
 	    chatroom_profil.setSize(300, 400);
 	    chatroom_profil.open();
 	
-	while (!chatroom_profil.isDisposed())
-        if (!display.readAndDispatch())
-          display.sleep();
+		while (!chatroom_profil.isDisposed())
+	        if (!Chatroom_Accueil.singleton_ihm.display.readAndDispatch())
+	        	Chatroom_Accueil.singleton_ihm.display.sleep();
         
 	}
   

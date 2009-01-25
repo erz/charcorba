@@ -42,7 +42,7 @@ import annuaire.AnnuaireHelper;
 import IHM.JFrameClient;
 
 
-public class Client
+public class Client 
 {
 	///////////////////////////
 	//	ATTRIBUTS
@@ -196,12 +196,14 @@ public class Client
 	{
 		if (m_liste_chatrooms_distantes.get(nom_chatroom) != null)
 		{
-			//System.out.println("hop");
+			System.out.println("On envoie "+message+" Sur une chatroom distante");
 			m_liste_chatrooms_distantes.get(nom_chatroom).ajouter_message(m_pseudo, message);
+			Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.get(nom_chatroom).ecrireMessage(m_pseudo, message);
+			
 		}
 		else
 		{
-			//System.out.println("hip");
+			System.out.println("On envoie "+message+" Sur une chatroom locale");
 			m_liste_chatrooms_locales.get(nom_chatroom).ajouter_message(m_pseudo, message);
 		}
 	}
@@ -225,14 +227,17 @@ public class Client
 	public void signal_invitation_chatroom(String chatroom)
 	{
 		//IHM ouvrir la chatroom
-		System.out.println();
-		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.put(chatroom, new Chatroom_Fenetre(chatroom));
+		System.out.println("GERORORO");
+		Chatroom_Accueil.singleton_ihm.ajouterChatroom_Distante(chatroom);
 	}
 
 	public void signal_chatroom(String chatroom, int idmess)
 	{
 		//IHM : recuperer le message et l'afficher
+		
 		Message mess = singleton_client.get_message(chatroom, idmess);
+		
+		System.out.println("Affichage iminnent de "+mess.auteur+" : "+mess.message);
 		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.get(chatroom).ecrireMessage(mess.auteur, mess.message);
 	}
 	
@@ -307,6 +312,7 @@ public class Client
 		  //Création et demarrage du client 
 		  new Client(args).demarrer();
 		  new Chatroom_Accueil();
+		  singleton_client.arreter();
 		  
 		  //////////////////////////////
 		  ///	AUTOTEST (lol)
@@ -335,15 +341,11 @@ public class Client
 		  //new Chatroom_Fenetre(new Chatroom_impl("HOP"));
 		   */
 		  
-		  Thread.sleep(1000);
+		  //Thread.sleep(1000);
 
 		//while(true);
 
-	}
-
-
-
-		
+	}	
 }
 
 

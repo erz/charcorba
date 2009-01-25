@@ -26,21 +26,26 @@ public class Chatroom_impl extends ChatroomPOA
 
 	public boolean ajouter_message(String pseudo_client, String message) 
 	{
+		System.out.println("On va afficher le message "+message+" de "+pseudo_client);
 		boolean retval = true ;
 		Message msg = new Message();
 		msg.auteur =  pseudo_client;
 		msg.message = message;
 		m_liste_messages.add(msg);
 		
-		Collection<Standard> participants = m_liste_participants.values();
-		Iterator <Standard> it = participants.iterator();
-		while (it.hasNext())
+		if (pseudo_client.compareTo(Client.Client.singleton_client.m_pseudo) == 0)
 		{
-			
-			it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size()-1);
-			
+			Collection<Standard> participants = m_liste_participants.values();
+			Iterator <Standard> it = participants.iterator();
+			while (it.hasNext())
+			{
+				
+				it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size()-1);
+				
+			}
 		}
 		Client.Client.singleton_client.signal_chatroom(m_nom_chatroom, m_liste_messages.size()-1);
+		
 		return retval;
 	}
 
