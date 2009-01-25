@@ -14,7 +14,7 @@ public class TableauBlanc_impl extends TableauBlancPOA{
 	HashMap<String,Standard> m_liste_participants;
 	
 	public TableauBlanc_impl(String nom_tableau) {
-		// TODO Auto-generated constructor stub
+		m_nom_tableau = nom_tableau;
 	}
 
 	public boolean ajouter_pixel(short[] pixel) {
@@ -30,7 +30,7 @@ public class TableauBlanc_impl extends TableauBlancPOA{
 	public void inviter_client(String pseudo) throws NotFound, CannotProceed, InvalidName {
 		org.omg.CORBA.Object service_distant = orb_pkge.COrb.static_orb.connecter_service(pseudo);;
 		Client.Standard standard_distant = Client.StandardHelper.narrow(service_distant) ;
-		standard_distant.inviter_client_tableaublanc(m_nom_tableau);
+		standard_distant.inviter_client(m_nom_tableau);
 		m_liste_participants.put(pseudo,standard_distant);
 	}
 
