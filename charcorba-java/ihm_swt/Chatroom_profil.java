@@ -28,7 +28,7 @@ public class Chatroom_profil
 	    //zone de saisie du pseudo
 	    Label label_pseudo = new Label(chatroom_profil, SWT.CENTER);
 	    label_pseudo.setText("Entrez votre pseudo:");
-	    label_pseudo.setLocation(0, 100);
+	    label_pseudo.setLocation(5, 100);
 	    final Text  saisie_pseudo= new Text(chatroom_profil, SWT.NONE); 
 	    saisie_pseudo.setText("Pseudo?");
 	    saisie_pseudo.setBounds(140, 100, 100, 25);
