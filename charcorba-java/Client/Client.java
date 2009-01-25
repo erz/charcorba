@@ -230,7 +230,6 @@ public class Client
 	public void signal_invitation_chatroom(String chatroom)
 	{
 		//IHM ouvrir la chatroom
-		System.out.println("GERORORO");
 		Chatroom_Accueil.singleton_ihm.ajouterChatroom_Distante(chatroom);
 	}
 
@@ -295,8 +294,30 @@ public class Client
 		return Pixel() ;
 	}*/
 	
-	public void participer_tableau_blanc(String tableau) {
+	public void participer_tableau_blanc(String tableau) 
+	{
 		// TODO Auto-generated method stub
+		try {
+			Chatroom_Accueil.singleton_ihm.ajouterTableau_Distant(tableau);
+		} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (ServantAlreadyActive e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (WrongPolicy e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (CannotProceed e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (NotFound e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (ServantNotActive e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
 		
 	}	
 

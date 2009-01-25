@@ -32,6 +32,7 @@ public class Tableau_swt {
 	private Color color;
 	private ArrayList<Pixel> pixels;
 	
+	private String nom_tableau;
 	
 	private class Pixel
 	{
@@ -48,10 +49,11 @@ public class Tableau_swt {
 		}
 	}
 	
-	public Tableau_swt()
+	public Tableau_swt(String nom_tableau)
 	{
+		this.nom_tableau = nom_tableau;
 		shell = new Shell(Chatroom_Accueil.singleton_ihm.shell);
-		shell.setText("Tableau blanc");
+		shell.setText(nom_tableau);
 		shell.setLayout(new RowLayout(SWT.NONE));
 		
 		pixels = new ArrayList<Pixel>();

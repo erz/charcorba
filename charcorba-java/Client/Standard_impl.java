@@ -79,16 +79,54 @@ public class Standard_impl extends StandardPOA
 		  return retval;
 	}
 	
-	public boolean inviter_client_tableaublanc ( String tableau ) throws NotFound, CannotProceed, InvalidName
+	public boolean inviter_client_tableaublanc ( String tableau )
 	{	
 		boolean retval = true ;
-		org.omg.CORBA.Object service = COrb.static_orb.connecter_service(tableau);
+		org.omg.CORBA.Object service = null;
+		try {
+			service = COrb.static_orb.connecter_service(tableau);
+		} catch (NotFound e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (CannotProceed e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (InvalidName e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
 		
 		TableauBlanc service_tableaublanc ;
 		service_tableaublanc = TableauBlancHelper.narrow(service) ;
 
 		Client.singleton_client.m_liste_tableauxblancs_distants.put(tableau,service_tableaublanc);
 		Client.singleton_client.participer_tableau_blanc(tableau);
+		return retval;
+	}
+
+	public boolean inviter_client_chatroom(String chatroom) 
+	{
+		boolean retval = true ;
+		
+		org.omg.CORBA.Object service = null;
+		try {
+			service = COrb.static_orb.connecter_service(chatroom);
+		} catch (NotFound e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (CannotProceed e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (InvalidName e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+		
+		Chatroom service_chatroom = ChatroomHelper.narrow(service) ;
+
+		Client.singleton_client.m_liste_chatrooms_distantes.put(chatroom,service_chatroom);
+		
+		Client.singleton_client.signal_invitation_chatroom(chatroom);
 		return retval;
 	}
 

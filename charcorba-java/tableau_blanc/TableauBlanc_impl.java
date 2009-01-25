@@ -46,11 +46,17 @@ public class TableauBlanc_impl extends TableauBlancPOA
 	{
 		org.omg.CORBA.Object service_distant = orb_pkge.COrb.static_orb.connecter_service(pseudo);;
 		Client.Standard standard_distant = Client.StandardHelper.narrow(service_distant) ;
-		standard_distant.inviter_client(m_nom_tableau);
+		standard_distant.inviter_client_tableaublanc(m_nom_tableau);
 		m_liste_participants.put(pseudo,standard_distant);
 	}
 
-	public short[] get_pixel(int idpixel) {
+
+	public boolean ajouter_pixel(s_pixel pixel) 
+	{
+		return false;
+	}
+
+	public s_pixel get_pixel(int idpixel) {
 		// TODO Raccord de méthode auto-généré
 		return null;
 	}
