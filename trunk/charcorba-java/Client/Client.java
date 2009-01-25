@@ -58,7 +58,7 @@ public class Client
 	Annuaire m_service_annuaire ;
 	
 	//Pseudo
-	String m_pseudo;
+	public String m_pseudo;
 	
 	//Listes
 	ArrayList<String> liste_amis = new ArrayList<String>();
@@ -126,7 +126,7 @@ public class Client
 		for (int i=0;i< retval.length;++i)
 		{
 			String ami = retval[i] ;
-			if (ami != m_pseudo) 
+			if (ami.compareTo(m_pseudo) != 0) 
 			{
 				ajouter_ami(ami);
 			}
@@ -136,8 +136,22 @@ public class Client
 	//Ajouter un ami
 	public void ajouter_ami(String ami)
 	{
-		liste_amis.add(ami); 
-		signal_ajout_ami(ami);
+		boolean estDeja = false;
+		for (int i = 0; i < liste_amis.size(); ++i)
+		{
+			if (liste_amis.get(i).compareTo(ami) == 0)
+			{
+				estDeja = true;
+				break;
+			}
+				
+		}
+		
+		if (estDeja == false)
+		{
+			liste_amis.add(ami); 
+			signal_ajout_ami(ami);
+		}
 	}
 	  
 	// Afficher simplement un message chez le client
@@ -158,6 +172,8 @@ public class Client
 	//Arreter tout
 	public void arreter ()
 	{
+		if (m_service_annuaire != null)
+			m_service_annuaire.quitter_annuaire(m_pseudo);
 		COrb.static_orb.arreter();
 	}
 	
@@ -197,6 +213,7 @@ public class Client
 	public void signal_ajout_ami(String ami)
 	{
 		//IHM : Ajouter ami
+		Chatroom_Accueil.singleton_ihm.listeAmis.add(ami);
 	}
 	
 	public void message_recu(String pseudo, String message)
