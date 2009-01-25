@@ -12,7 +12,8 @@ HEADERS = ../ORB/src/orb.h \
  src/dialog_tableaublanc.h \
  src/tableaublanc.h \
  src/pixel.h \
- src/tableau_blanc_impl.h
+ src/tableau_blanc_impl.h \
+ src/dialog_tags.h
 INCLUDEPATH += ../ORB/src src
 LIBS += -lboost_thread \
  -ldl \
@@ -40,6 +41,7 @@ SOURCES = ../ORB/src/annuaire.cpp \
  src/tableaublanc.cpp \
  src/pixel.cpp \
  src/tableau_blanc_impl.cpp \
- ../ORB/src/tableau_blanc.cpp
+ ../ORB/src/tableau_blanc.cpp \
+ src/dialog_tags.cpp
 TEMPLATE = app
 UI_DIR = build
