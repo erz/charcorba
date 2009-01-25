@@ -136,7 +136,7 @@ public class Chatroom_Accueil
 					// TODO Bloc catch auto-généré
 					e1.printStackTrace();
 				}
-				
+			
 				
 				//On invite a la chatroom les amis selectionnés
 				for(int i = 0; i < listeAmis.getSelection().length; ++i)
@@ -151,6 +151,23 @@ public class Chatroom_Accueil
 						e1.printStackTrace();
 					} catch (InvalidName e1) {
 						// TODO Bloc catch auto-généré
+						e1.printStackTrace();
+					}
+				}
+				
+				//On invite au tableau blanc les amis sélectionnés
+				for(int j = 0; j< listeAmis.getSelection().length; ++j)
+				{
+					try {
+						Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], nomChatroom.getText());
+					} catch (NotFound e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (CannotProceed e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (InvalidName e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -197,7 +214,6 @@ public class Chatroom_Accueil
 		liste_chatrooms_fenetres.put(nom_chatroom, new Chatroom_Fenetre(nom_chatroom));
 		Client.singleton_client.creer_chatroom(nom_chatroom);
 	}
-	
 	
 	public static void main(String[] args) 
 	{
