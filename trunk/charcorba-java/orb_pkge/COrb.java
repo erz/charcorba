@@ -25,7 +25,6 @@ public class COrb implements Runnable
 	
 	public ORB orb;
 	
-	private Thread orb_thread;
 	
 	//Portable server
 	org.omg.PortableServer.POA m_POA ;
@@ -73,7 +72,6 @@ public class COrb implements Runnable
 		//org.omg.CORBA.Object ref_service_Annuaire = service._this_object();
 		
 	      // get object reference from the servant
-	      System.out.println(service.toString());
 	      org.omg.CORBA.Object ref_service_Annuaire = m_POA.servant_to_reference(service);
 
 	      if (service.getClass().getCanonicalName().compareTo("Client.Standard_impl") == 0)
