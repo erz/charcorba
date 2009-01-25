@@ -295,6 +295,8 @@ public class Client
 
 		  //Création et demarrage du client 
 		  new Client(args).demarrer();
+		  new Client(args).demarrer();
+		  new Chatroom_Accueil();
 		  new Chatroom_Accueil();
 		  
 		  //////////////////////////////
