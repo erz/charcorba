@@ -39,7 +39,7 @@ public class Chatroom_Accueil
 
 	Display display;
 	
-	Shell shell;
+	public Shell shell;
 	
 	public Chatroom_Accueil()
 	{
@@ -143,9 +143,10 @@ public class Chatroom_Accueil
 					e1.printStackTrace();
 				}
 				
-				/*/A COMMENTER SI EXCEPTION A FERMETURE TABLEAU ET FENETRE
+				//Creation du tableau blanc
+				/*
 				try {
-					singleton_ihm.ajouterTableau(nomChatroom.getText());
+					singleton_ihm.ajouterTableau(nomChatroom.getText()+" - Tableau blanc");
 				} catch (InvalidName e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -184,10 +185,11 @@ public class Chatroom_Accueil
 				}
 				
 				//On invite au tableau blanc les amis sélectionnés
-				/*for(int j = 0; j< listeAmis.getSelection().length; ++j)
+				/*
+				for(int j = 0; j< listeAmis.getSelection().length; ++j)
 				{
 					try {
-						Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], nomChatroom.getText());
+						Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], nomChatroom.getText()+" - Tableau blanc");
 					} catch (NotFound e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -245,15 +247,9 @@ public class Chatroom_Accueil
 	
 	public void ajouterTableau(String nom_tableau) throws InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
 	{
-		liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt(display));
+		liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt());
 		Client.singleton_client.creer_tableau_blanc(nom_tableau);
 	}
-	/*
-	public static void main(String[] args) 
-	{
-		   new Chatroom_Accueil();
-	}*/
-
 
 	public void ajouterChatroom_Distante(final String chatroom) 
 	{
@@ -266,5 +262,16 @@ public class Chatroom_Accueil
 			});
 		
 	}
+	
+	public void ajouterTableau_Distant(final String nom_tableau) throws InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
+	{
+		display.syncExec(new Runnable() 
+		{
+			   public void run() 
+			   {
+				   liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt());
+				   }
+			});
+			}
 
 }

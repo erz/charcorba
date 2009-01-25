@@ -85,6 +85,9 @@ public class Client
 		m_liste_chatrooms_locales = new HashMap<String,Chatroom_impl> ();  
 		m_liste_chatrooms_distantes = new HashMap<String,Chatroom> ();
 		
+		m_liste_tableauxblancs_locaux = new HashMap<String,TableauBlanc_impl> ();
+		m_liste_tableauxblancs_distants = new HashMap<String,TableauBlanc> ();
+		
 		singleton_client = this;
 	}
 	

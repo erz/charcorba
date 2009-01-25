@@ -9,7 +9,8 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import Client.Standard;
 
-public class TableauBlanc_impl extends TableauBlancPOA{
+public class TableauBlanc_impl extends TableauBlancPOA
+{
 
 	public String m_nom_tableau;
 	public HashMap<String,Standard> m_liste_participants;
@@ -41,7 +42,8 @@ public class TableauBlanc_impl extends TableauBlancPOA{
 		return true;
 	}
 
-	public void inviter_client(String pseudo) throws NotFound, CannotProceed, InvalidName {
+	public void inviter_client(String pseudo) throws NotFound, CannotProceed, InvalidName 
+	{
 		org.omg.CORBA.Object service_distant = orb_pkge.COrb.static_orb.connecter_service(pseudo);;
 		Client.Standard standard_distant = Client.StandardHelper.narrow(service_distant) ;
 		standard_distant.inviter_client(m_nom_tableau);
