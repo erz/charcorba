@@ -22,6 +22,8 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import tableau_blanc.Tableau_swt;
+
 import Client.Client;
 
 public class Chatroom_Accueil 
@@ -29,6 +31,7 @@ public class Chatroom_Accueil
 	static public Chatroom_Accueil singleton_ihm;
 	
 	public HashMap<String,Chatroom_Fenetre> liste_chatrooms_fenetres;
+	public HashMap<String,Tableau_swt> liste_tableaublanc_fenetres;
 	
 	public List listeAmis;
 
@@ -40,6 +43,7 @@ public class Chatroom_Accueil
 	{
 		singleton_ihm = this;
 		liste_chatrooms_fenetres = new HashMap<String,Chatroom_Fenetre>();
+		liste_tableaublanc_fenetres = new HashMap<String, Tableau_swt>();
 		
 		display = new Display();
 
@@ -136,7 +140,29 @@ public class Chatroom_Accueil
 					// TODO Bloc catch auto-généré
 					e1.printStackTrace();
 				}
-			
+				
+				//A COMMENTER SI EXCEPTION A FERMETURE TABLEAU ET FENETRE
+				try {
+					singleton_ihm.ajouterTableau(nomChatroom.getText());
+				} catch (InvalidName e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (ServantAlreadyActive e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (WrongPolicy e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (CannotProceed e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (NotFound e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (ServantNotActive e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				
 				//On invite a la chatroom les amis selectionnés
 				for(int i = 0; i < listeAmis.getSelection().length; ++i)
@@ -215,9 +241,15 @@ public class Chatroom_Accueil
 		Client.singleton_client.creer_chatroom(nom_chatroom);
 	}
 	
+	public void ajouterTableau(String nom_tableau) throws InvalidName, ServantAlreadyActive, WrongPolicy, CannotProceed, NotFound, ServantNotActive
+	{
+		liste_tableaublanc_fenetres.put(nom_tableau, new Tableau_swt(display));
+		Client.singleton_client.creer_tableau_blanc(nom_tableau);
+	}
+	/*
 	public static void main(String[] args) 
 	{
 		   new Chatroom_Accueil();
-	}
+	}*/
 
 }
