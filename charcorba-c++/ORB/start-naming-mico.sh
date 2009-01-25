@@ -1,9 +1,9 @@
 #!/bin/sh
 
 NSD=/usr/local/bin/nsd
-ADDR=inet:`uname -n`:12456
+ADDR=inet:192.168.0.4:12456
 # ADDR=inet:protea:12456
-RC="-ORBImplRepoAddr $ADDR -ORBNamingAddr $ADDR"
+RC=" -ORBNoResolve -ORBImplRepoAddr $ADDR -ORBNamingAddr $ADDR"
 rm -f NameService-root.inf
 # run POA daemon
 echo "starting POA daemon ..."
