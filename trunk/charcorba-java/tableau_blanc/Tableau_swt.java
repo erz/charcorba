@@ -1,5 +1,7 @@
 package tableau_blanc;
 
+import ihm_swt.Chatroom_Accueil;
+
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
@@ -46,9 +48,9 @@ public class Tableau_swt {
 		}
 	}
 	
-	public Tableau_swt(Display display)
+	public Tableau_swt()
 	{
-		shell = new Shell(display);
+		shell = new Shell(Chatroom_Accueil.singleton_ihm.shell);
 		shell.setText("Tableau blanc");
 		shell.setLayout(new RowLayout(SWT.NONE));
 		
@@ -120,10 +122,10 @@ public class Tableau_swt {
 		shell.pack();
 		shell.open();
 		
-		while (! shell.isDisposed())
+		/*while (! shell.isDisposed())
 			if (! display.readAndDispatch())
 				display.sleep();
-		display.dispose();
+		display.dispose();*/
 	}
 	
 	public void addPixel(int x, int y, Color c, boolean isContinu)
@@ -141,10 +143,5 @@ public class Tableau_swt {
 	{
 		pixels.add(new Pixel(x, y, new Color(Display.getDefault(), new RGB(r, g, b)), isContinu));
 		canvas.redraw();
-	}
-	
-	public static void main(String[] args)
-	{
-		new Tableau_swt(new Display());
 	}
 }

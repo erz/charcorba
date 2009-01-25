@@ -12,6 +12,9 @@ import org.omg.PortableServer.POAPackage.ServantAlreadyActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import tableau_blanc.TableauBlanc;
+import tableau_blanc.TableauBlancHelper;
+
 import chatroom.Chatroom;
 import chatroom.ChatroomHelper;
 
@@ -84,6 +87,11 @@ public class COrb implements Runnable
 	      {
 	    	  
 	    	  Chatroom href_service_Annuaire = ChatroomHelper.narrow(ref_service_Annuaire);
+	    	  namingContext.rebind (c_nom_service, href_service_Annuaire);
+	      }
+	      if (service.getClass().getCanonicalName().compareTo("tableau_blanc.TableauBlanc_impl") == 0)
+	      {
+	    	  TableauBlanc href_service_Annuaire = TableauBlancHelper.narrow(ref_service_Annuaire);
 	    	  namingContext.rebind (c_nom_service, href_service_Annuaire);
 	      }
 
