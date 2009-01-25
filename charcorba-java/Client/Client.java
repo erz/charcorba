@@ -172,8 +172,8 @@ public class Client
 	//Arreter tout
 	public void arreter ()
 	{
-		if (m_service_annuaire != null)
-			m_service_annuaire.quitter_annuaire(m_pseudo);
+		//if (m_service_annuaire != null)
+		//	m_service_annuaire.quitter_annuaire(m_pseudo);
 		COrb.static_orb.arreter();
 	}
 	
@@ -225,6 +225,7 @@ public class Client
 	public void signal_invitation_chatroom(String chatroom)
 	{
 		//IHM ouvrir la chatroom
+		System.out.println();
 		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.put(chatroom, new Chatroom_Fenetre(chatroom));
 	}
 
