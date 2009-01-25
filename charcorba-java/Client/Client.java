@@ -303,7 +303,7 @@ public class Client
 	///////////////
 	public static void main(String args[]) throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName, AdapterInactive, ServantAlreadyActive, WrongPolicy, InterruptedException, ServantNotActive
 	{
-
+		
 		  //Création et demarrage du client 
 		  new Client(args).demarrer();
 		  new Chatroom_Accueil();
