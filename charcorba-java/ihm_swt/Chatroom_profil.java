@@ -102,6 +102,10 @@ public class Chatroom_profil
 				Client.Client.singleton_client.ajouter_tag(tag_1);
 				Client.Client.singleton_client.ajouter_tag(tag_2);
 				Client.Client.singleton_client.ajouter_tag(tag_3);
+				
+				Chatroom_Accueil.singleton_ihm.pseudo.setText(pseudo);
+				Chatroom_Accueil.singleton_ihm.pseudo.setVisible(true);
+				
 				chatroom_profil.dispose();
 	    	}
 	    });

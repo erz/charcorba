@@ -64,6 +64,8 @@ public class Chatroom_impl extends ChatroomPOA
 		org.omg.CORBA.Object service_distant = orb_pkge.COrb.static_orb.connecter_service(pseudo);
 
 		Client.Standard standard_distant = Client.StandardHelper.narrow(service_distant) ;
+		
+		System.out.println("HOOOOOOOO");
 		standard_distant.inviter_client(m_nom_chatroom);
 		
 		m_liste_participants.put(pseudo, standard_distant);

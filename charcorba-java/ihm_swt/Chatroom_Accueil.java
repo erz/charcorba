@@ -32,6 +32,7 @@ public class Chatroom_Accueil
 	
 	public List listeAmis;
 
+	public Label pseudo;
 
 	static public Display display;
 	
@@ -55,13 +56,17 @@ public class Chatroom_Accueil
 	    MenuItem quitter = new MenuItem(sousMenu, SWT.PUSH);
 	    quitter.setText("Quitter");
 	   
-
+	    
 	    final Button creation = new Button(shell, SWT.CENTER);
 	    creation.setBounds(75, 50, 150, 30);
 	    creation.setText("&Créez votre profil");
 
 	    // Interface une fois connecté :
 	    final Group groupChatRoom = new Group(shell, SWT.NONE);
+	    
+	    pseudo = new Label(shell, SWT.CENTER);
+	    pseudo.setBounds(130, 5, 140, 50);
+	    pseudo.setVisible(false);
 	    
 		final Text nomChatroom = new Text(groupChatRoom, SWT.BORDER);
 		nomChatroom.setBounds(10, 20, 160, 30); 
@@ -78,7 +83,7 @@ public class Chatroom_Accueil
 	    
 	    final Group groupAmis = new Group(shell, SWT.NONE);
 	    
-	    Text tagRecherche = new Text(groupAmis, SWT.BORDER);
+	    final Text tagRecherche = new Text(groupAmis, SWT.BORDER);
 	    tagRecherche.setBounds(10, 20, 130, 30); 
 	    tagRecherche.setText("tag");
 	    
@@ -86,7 +91,7 @@ public class Chatroom_Accueil
 	    rechercherTag.setBounds(145, 20, 130, 30);
 	    rechercherTag.setText("&Rechercher par tag");
 	    
-	    listeAmis = new List(groupAmis, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+	    listeAmis = new List(groupAmis, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
 	    listeAmis.setBounds(10, 60, 260, 180);
 		
 	    groupAmis.setText("Amis");
@@ -111,7 +116,7 @@ public class Chatroom_Accueil
 	        public void handleEvent(Event e) 
 	        {
 				try {
-					singleton_ihm.ajouterChatroom("Roomtest");
+					singleton_ihm.ajouterChatroom(nomChatroom.getText());
 				} catch (InvalidName e1) {
 					// TODO Bloc catch auto-généré
 					e1.printStackTrace();
@@ -131,13 +136,32 @@ public class Chatroom_Accueil
 					// TODO Bloc catch auto-généré
 					e1.printStackTrace();
 				}
+				
+				
+				//On invite a la chatroom les amis selectionnés
+				for(int i = 0; i < listeAmis.getSelection().length; ++i)
+				{
+					try {
+						Client.singleton_client.inviter_client_chatroom((listeAmis.getSelection())[i], nomChatroom.getText());
+					} catch (NotFound e1) {
+						// TODO Bloc catch auto-généré
+						e1.printStackTrace();
+					} catch (CannotProceed e1) {
+						// TODO Bloc catch auto-généré
+						e1.printStackTrace();
+					} catch (InvalidName e1) {
+						// TODO Bloc catch auto-généré
+						e1.printStackTrace();
+					}
+				}
+				
 	        }
 	      });
 	    
 	    rechercherTag.addListener(SWT.Selection, new Listener() {
 	        public void handleEvent(Event e) 
 	        {
-	        	//Client.sin
+	        	Client.singleton_client.get_amis_par_tag(tagRecherche.getText());
 	        }
 	      });
 	    
