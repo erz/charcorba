@@ -287,6 +287,17 @@ public class Client
 		return Pixel() ;
 	}*/
 	
+	public void participer_tableau_blanc(String tableau) {
+		// TODO Auto-generated method stub
+		
+	}	
+
+	//A REVOIR
+	public void sync_tableau_blanc(String tableau, int idpixel) {
+		Message mess = singleton_client.get_message(tableau, idpixel);
+		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.get(tableau).ecrireMessage(mess.auteur, mess.message);
+	}
+	
 	////////////////
 	/////  MAIN  
 	///////////////
@@ -328,7 +339,11 @@ public class Client
 
 		//while(true);
 
-	}		
+	}
+
+
+
+		
 }
 
 

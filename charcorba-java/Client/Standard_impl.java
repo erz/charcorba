@@ -7,6 +7,8 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 import chatroom.Chatroom;
 import chatroom.ChatroomHelper;
 import orb_pkge.COrb;
+import tableau_blanc.TableauBlanc;
+import tableau_blanc.TableauBlancHelper;
 
 public class Standard_impl extends StandardPOA
 {
@@ -72,8 +74,22 @@ public class Standard_impl extends StandardPOA
 	}
 
 	public boolean signal_tableaublanc(String tableau, int idpixel) {
-		// TODO Auto-generated method stub
-		return false;
+		  boolean retval = true;
+		  Client.singleton_client.sync_tableau_blanc (tableau,idpixel);
+		  return retval;
+	}
+	
+	public boolean inviter_client_tableaublanc ( String tableau ) throws NotFound, CannotProceed, InvalidName
+	{	
+		boolean retval = true ;
+		org.omg.CORBA.Object service = COrb.static_orb.connecter_service(tableau);
+		
+		TableauBlanc service_tableaublanc ;
+		service_tableaublanc = TableauBlancHelper.narrow(service) ;
+
+		Client.singleton_client.m_liste_tableauxblancs_distants.put(tableau,service_tableaublanc);
+		Client.singleton_client.participer_tableau_blanc(tableau);
+		return retval;
 	}
 
 }
