@@ -19,7 +19,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	cout<<"[DEBUG]\tCréation fenetre"<<endl;
 	for(int j=0;j<5;j++) m_dialog_window[j]=NULL;
 	m_dialog_chatroom_window=NULL;
-	//m_dialog_tags=NULL;
+	m_dialog_tags=NULL;
 	compteurmessage=0;
 	ui.setupUi(this);
 }
@@ -74,9 +74,9 @@ void MainWindowImpl::afficher_message_chatroom_window(QString chatroom)
 void MainWindowImpl::ouvrir_dialog_tags()
 {
 	cout<<"[DEBUG - GUI]Appel ouverture fenetre pour gerer les tags"<<endl;
-	//get_dialog_tags();
-	//m_dialog_tags->show();
-	//m_dialog_tags->exec();
+	get_dialog_tags();
+	m_dialog_tags->show();
+	m_dialog_tags->exec();
 }
 
 void MainWindowImpl::ouvrir_qpopupmenu_client (QListWidgetItem * item)
@@ -129,7 +129,7 @@ Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo,int indice)
 	if ( m_dialog_window[indice] == NULL )
 	{
 		m_dialog_window[indice] = new Dialog_window(pseudo);
-		//m_dialog_window[indice]->setWindowTitle(pseudo.toStdString());
+		m_dialog_window[indice]->setWindowTitle(pseudo.toStdString());
 		Premiere_ouverture=true;
 	}
 		
@@ -148,14 +148,14 @@ Dialog_window * MainWindowImpl::get_dialog_chatroom_window(QString pseudo)
 	return m_dialog_chatroom_window;
 }
 
-/*Dialog_tags * MainWindowImpl::get_dialog_tags()
+Dialog_tags * MainWindowImpl::get_dialog_tags()
 {
 	if(m_dialog_tags == NULL)
 	{
 		m_dialog_tags = new Dialog_tags();
 	}
 	return m_dialog_tags;
-}*/
+}
 
 void MainWindowImpl::afficher_dialog_connexion()
 {
