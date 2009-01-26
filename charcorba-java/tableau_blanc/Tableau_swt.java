@@ -60,7 +60,7 @@ public class Tableau_swt {
 		color = new Color(Display.getDefault(), new RGB(255, 0, 0));
 		canvas = new Canvas(shell, SWT.NONE);
 		canvas.setBackground(new Color(Display.getDefault(), new RGB(255, 255, 255)));
-		canvas.setLayoutData(new RowData(400, 400));
+		canvas.setLayoutData(new RowData(400, 300));
 		
 		Button redButton = new Button(shell, SWT.NONE);
 		redButton.setText("ROUGE");
