@@ -32,6 +32,7 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import tableau_blanc.Pixel;
 import tableau_blanc.TableauBlanc;
 import tableau_blanc.TableauBlanc_impl;
+import tableau_blanc.s_pixel;
 
 import chatroom.Chatroom;
 import chatroom.Chatroom_impl;
@@ -237,7 +238,7 @@ public class Client
 	{
 		//IHM : recuperer le message et l'afficher
 		
-		Message mess = singleton_client.get_message(chatroom, idmess);
+		Message mess = singleton_client.get_message(chatroom, idmess-1);
 		
 		System.out.println("Affichage iminnent de "+mess.auteur+" : "+mess.message);
 		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.get(chatroom).ecrireMessage(mess.auteur, mess.message);
@@ -270,16 +271,19 @@ public class Client
 		System.out.println("tableau blanc "+tableau.m_nom_tableau+ " créé.");
 	}
 	
-	public void ajouter_pixel (String nom_tableau,Pixel pixel)
+	public void ajouter_pixel (String nom_tableau, tableau_blanc.s_pixel pix)
 	{
-		short[] c_pixel = null  ;
-		c_pixel[0] = (short) pixel.m_point.x;
-		c_pixel[1] = (short) pixel.m_point.y ;
-		c_pixel[2] = (short) pixel.m_color.getRed();
-		c_pixel[3] = (short) pixel.m_color.getGreen();
-		c_pixel[4] = (short) pixel.m_color.getBlue();
-		c_pixel[5] = pixel.m_est_continu;
-		m_liste_tableauxblancs_locaux.get(nom_tableau).ajouter_pixel(c_pixel)  ;
+		if (m_liste_tableauxblancs_distants.get(nom_tableau) != null)
+		{
+			System.out.println("On envoie un pixel "+pix.x+" "+pix.y+" sur un tableau distant");
+			m_liste_tableauxblancs_distants.get(nom_tableau).ajouter_pixel(pix);
+				
+		}/*
+		else
+		{
+			System.out.println("On envoie un pixel "+pix.x+" "+pix.y+" sur un tableau local");
+			m_liste_tableauxblancs_locaux.get(nom_tableau).ajouter_pixel(pix);
+		}*/
 	}
 	
 	public void inviter_client_tableaublanc (String pseudo, String nom_tableau) throws NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName
@@ -322,9 +326,20 @@ public class Client
 	}	
 
 	//A REVOIR
-	public void sync_tableau_blanc(String tableau, int idpixel) {
-		Message mess = singleton_client.get_message(tableau, idpixel);
-		Chatroom_Accueil.singleton_ihm.liste_chatrooms_fenetres.get(tableau).ecrireMessage(mess.auteur, mess.message);
+	public void sync_tableau_blanc(String tableau, int idpixel) 
+	{
+		s_pixel pix = null;
+		if (m_liste_tableauxblancs_distants.get(tableau) != null)
+		{
+			pix = m_liste_tableauxblancs_distants.get(tableau).get_pixel(idpixel-1);		
+		}/*
+		else
+		{
+			pix = m_liste_tableauxblancs_locaux.get(tableau).get_pixel(idpixel-1);
+		}*/
+
+		System.out.println("Pour synchroniser, on ajoute le pixel "+pix.x+" "+pix.y);
+		Chatroom_Accueil.singleton_ihm.liste_tableaublanc_fenetres.get(tableau).ajouterPixelDistant(pix);
 	}
 	
 	////////////////

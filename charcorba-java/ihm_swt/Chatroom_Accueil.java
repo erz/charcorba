@@ -37,7 +37,7 @@ public class Chatroom_Accueil
 
 	public Label pseudo;
 
-	Display display;
+	public Display display;
 	
 	public Shell shell;
 	
@@ -146,7 +146,9 @@ public class Chatroom_Accueil
 				//Creation du tableau blanc
 				
 				try {
-					singleton_ihm.ajouterTableau(nomChatroom.getText()+" - Tableau blanc");
+					//Client.singleton_client.creer_tableau_blanc(nomChatroom.getText()+" - Tableau blanc");
+					Client.singleton_client.creer_tableau_blanc("tableau_test");
+					//singleton_ihm.ajouterTableau(nomChatroom.getText()+" - Tableau blanc");
 				} catch (InvalidName e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -185,10 +187,26 @@ public class Chatroom_Accueil
 				}
 				
 				//On invite au tableau blanc les amis sélectionnés
+				try {
+					//Client.singleton_client.inviter_client_tableaublanc(Client.singleton_client.m_pseudo, nomChatroom.getText()+" - Tableau blanc");
+					Client.singleton_client.inviter_client_tableaublanc(Client.singleton_client.m_pseudo, "tableau_test");
+					
+				} catch (NotFound e2) {
+					// TODO Bloc catch auto-généré
+					e2.printStackTrace();
+				} catch (CannotProceed e2) {
+					// TODO Bloc catch auto-généré
+					e2.printStackTrace();
+				} catch (InvalidName e2) {
+					// TODO Bloc catch auto-généré
+					e2.printStackTrace();
+				}
 				for(int j = 0; j< listeAmis.getSelection().length; ++j)
 				{
 					try {
-						Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], nomChatroom.getText()+" - Tableau blanc");
+						//Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], nomChatroom.getText()+" - Tableau blanc");
+						Client.singleton_client.inviter_client_tableaublanc((listeAmis.getSelection())[j], "tableau_test");
+						
 					} catch (NotFound e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -73,7 +73,8 @@ public class Standard_impl extends StandardPOA
 		return retval;
 	}
 
-	public boolean signal_tableaublanc(String tableau, int idpixel) {
+	public boolean signal_tableaublanc(String tableau, int idpixel) 
+	{
 		  boolean retval = true;
 		  Client.singleton_client.sync_tableau_blanc (tableau,idpixel);
 		  return retval;
