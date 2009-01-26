@@ -84,7 +84,7 @@ void Client::ajouter_tag (string tag)
 void Client::enlever_tag (string tag)
 {
 	cout << "[DEBUG]\tEnlever tag : " << tag << endl ;
-	//m_service_annuaire->ajouter_tag(m_pseudo.c_str(),tag.c_str());
+	m_service_annuaire->enlever_tag(m_pseudo.c_str(),tag.c_str());
 	liste_tags.erase(tag);
 }
 

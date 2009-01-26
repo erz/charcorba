@@ -9,6 +9,7 @@ Dialog_tags::Dialog_tags()
 	Actualisation_tags();
 	connect(ui.ButtonAjoutTag,SIGNAL(clicked()),this,SLOT(Ajouter_tags()));
 	connect(ui.Buttoncopiertag,SIGNAL(clicked()),this,SLOT(Copier_tags_distant()));
+	connect(ui.Buttonsupprimertag,SIGNAL(clicked()),this,SLOT(Supprimer_tag_local()));
 }
 
 void Dialog_tags::Ajouter_tags()
@@ -49,4 +50,10 @@ void Dialog_tags::Copier_tags_distant()
 	Client::get_instance()->ajouter_tag(ui.listTagsServeur->currentItem()->text().toStdString());
 	Actualisation_tags();
 	
+}
+
+void Dialog_tags::Supprimer_tag_local()
+{
+	Client::get_instance()->enlever_tag(ui.listTagsLocal->currentItem()->text().toStdString());
+	Actualisation_tags();
 }
