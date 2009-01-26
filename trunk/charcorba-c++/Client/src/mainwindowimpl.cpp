@@ -20,6 +20,8 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	for(int j=0;j<5;j++) m_dialog_window[j]=NULL;
 	m_dialog_chatroom_window=NULL;
 	m_dialog_tags=NULL;
+	
+	InvitationChatroom=false;
 	compteurmessage=0;
 	ui.setupUi(this);
 }
@@ -168,6 +170,11 @@ void MainWindowImpl::Inviter_chatroom()
 	cout<<"[DEBUG - GUI]\tNom item:"<<temp->data(0).toString().toStdString()<<endl;
 	Client::get_instance()->creer_chatroom("tmp");
 	Client::get_instance()->inviter_client_chatroom(temp->data(0).toString().toStdString(),"tmp");
+	if(!InvitationChatroom)
+		{
+			Client::get_instance()->inviter_client_chatroom(Client::get_instance()->m_pseudo,"tmp");
+			InvitationChatroom=true;
+		} 
 	ouvrir_dialog_chatroom_window(temp);
 }
 

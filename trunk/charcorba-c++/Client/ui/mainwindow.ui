@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>251</width>
-    <height>603</height>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -31,6 +31,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="ButtonRefresh" >
+    <property name="geometry" >
+     <rect>
+      <x>160</x>
+      <y>540</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Actualiser</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar" >
