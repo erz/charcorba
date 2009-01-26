@@ -40,11 +40,11 @@ public class Chatroom_impl extends ChatroomPOA
 			while (it.hasNext())
 			{
 				
-				it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size()-1);
+				it.next().signal_chatroom(m_nom_chatroom,m_liste_messages.size());
 				
 			}
 		}
-		Client.Client.singleton_client.signal_chatroom(m_nom_chatroom, m_liste_messages.size()-1);
+		Client.Client.singleton_client.signal_chatroom(m_nom_chatroom, m_liste_messages.size());
 		
 		return retval;
 	}

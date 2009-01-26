@@ -132,15 +132,39 @@ public class Tableau_swt {
 	
 	public void addPixel(int x, int y, Color c, boolean isContinu)
 	{
-		pixels.add(new Pixel(x, y, color, isContinu));
-		sendPixel(x, y, c.getRed(), c.getGreen(), c.getBlue(), isContinu);
-		canvas.redraw();
+		//pixels.add(new Pixel(x, y, color, isContinu));
+		s_pixel pix = new s_pixel();
+		pix.x = (short) x;
+		pix.y = (short) y;
+		pix.rouge = (short) color.getRed();
+		pix.vert = (short) color.getGreen();
+		pix.bleu = (short) color.getBlue();
+		pix.est_continu = isContinu;
+		
+		sendPixel(pix);
+		//canvas.redraw();
 	}
 	
-	public void sendPixel(int x, int y, int r, int g, int b, boolean isContinu)
+	public void ajouterPixelDistant(final s_pixel pix)
 	{
-		
+		System.out.println("On ajoute les pixels distants "+pix.x+" "+pix.y);
+		Chatroom_Accueil.singleton_ihm.display.asyncExec(new Runnable() 
+		{
+			   public void run() 
+			   {
+					final Color col = new Color(Display.getDefault(), new RGB(pix.rouge, pix.vert, pix.bleu));
+					pixels.add(new Pixel(pix.x, pix.y, col, pix.est_continu));
+					canvas.redraw();
+			   }
+		});
+
 	}
+	
+	public void sendPixel(s_pixel pix)
+	{
+		Client.Client.singleton_client.ajouter_pixel(nom_tableau, pix);
+	}
+	
 	public void receivePixel(int x, int y, int r, int g, int b, boolean isContinu)
 	{
 		pixels.add(new Pixel(x, y, new Color(Display.getDefault(), new RGB(r, g, b)), isContinu));
