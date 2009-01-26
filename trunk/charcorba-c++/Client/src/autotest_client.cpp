@@ -33,7 +33,10 @@ void f_thread_lancement_autotest ()
 	{
 		cout << "[DEBUG]\tAppel '" << cmd  << "'" << endl; 
 		if      (cmd == "ajouter_tag" )		Client::get_instance()->ajouter_tag(getstring(cin,'\n'));
-		else if (cmd == "set_pseudo" )		Client::get_instance()->set_pseudo(getstring(cin,'\n'));
+		else if (cmd == "set_pseudo" )		
+			{
+				Client::get_instance()->set_pseudo(getstring(cin,'\n'));
+			}
 		else if (cmd == "joindre_annuaire")	Client::get_instance()->joindre_annuaire(),getstring(cin,'\n');
 		else if (cmd == "afficher_message")	
 		{
