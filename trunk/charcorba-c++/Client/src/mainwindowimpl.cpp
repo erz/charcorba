@@ -174,12 +174,9 @@ void MainWindowImpl::Inviter_chatroom()
 	cout<<"[DEBUG - GUI]\tNom item:"<<temp->data(0).toString().toStdString()<<endl;
 	Client::get_instance()->creer_chatroom("tmp");
 	Client::get_instance()->inviter_client_chatroom(temp->data(0).toString().toStdString(),"tmp");
-	if(!InvitationChatroom)
-		{
-			Client::get_instance()->inviter_client_chatroom(Client::get_instance()->m_pseudo,"tmp");
-			InvitationChatroom=true;
-		} 
-	ouvrir_dialog_chatroom_window(temp);
+	Client::get_instance()->inviter_client_chatroom(Client::get_instance()->m_pseudo,"tmp");
+	 
+	
 }
 
 void MainWindowImpl::Ouvrir_chatroom(QString chatroom)

@@ -37,6 +37,7 @@ void Dialog_tags::Actualisation_tags()
 	}
 	
 	set <std::string> liste_locale=Client::get_instance()->liste_tags;
+	
 	for (set<string>::iterator it=liste_locale.begin(); it!=liste_locale.end(); it++)
 	{	
 		QListWidgetItem * qitem_tag = new QListWidgetItem (string(*it).c_str());

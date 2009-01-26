@@ -48,16 +48,22 @@ void Dialog_window::chatroom_envoyer_message()
 {
 	cout<<"[DEBUG]\tEnvoie du message sur la chatroom"<<endl;
 	message=ui.lineEdit->text().toStdString();
-	std::map<string,Chatroom_var>::const_iterator it = Client::get_instance()->m_liste_chatrooms_distantes.find("tmp");
-	if( it == Client::get_instance()->m_liste_chatrooms_distantes.end() ) 
+	//std::map<string,Chatroom_var>::const_iterator it = Client::get_instance()->m_liste_chatrooms_distantes.find("tmp");
+	/*for (std::map<string,Chatroom_var>::const_iterator it=Client::get_instance()->m_liste_chatrooms_distantes.begin(); it!=Client::get_instance()->m_liste_chatrooms_distantes.end(); it++)
+	{
+		if( it->first != "tmp" ) 
 		{
 			//cout << "Pas trouvé dans chatroom distantes!" <<endl;
 			Client::get_instance()->ajouter_message_local("tmp",message);
 		}
-	else
+		else
 		{
 			Client::get_instance()->ajouter_message("tmp",message);
-		}
+		}	
+	}
+	*/
+	Client::get_instance()->ajouter_message("tmp",message);
+	
 }
 
 void Dialog_window::ecrire_message(string pseudo,string message){
