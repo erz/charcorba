@@ -45,6 +45,7 @@ public slots:
 	void Ouvrir_chatroom(QString chatroom);
 	void afficher_message_chatroom_window(QString chatroom);
 	void ouvrir_dialog_tags();
+	void actualisation_amis();
 	
 	//Fonctions sur les tableaux blancs
 	void ouvrir_dialog_tableaublanc (QString nom_tableaublanc);

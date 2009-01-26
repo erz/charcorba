@@ -33,7 +33,7 @@ void Dialog_window::envoyer_message(){
 		
 		//On affiche le message dans la fenetre
 		string tmp = ui.textEdit->toPlainText().toStdString();
-		message="[Moi]\n"+message;
+		message="["+Client::get_instance()->m_pseudo+"]\n"+message;
 		if(!tmp.empty())
 			message = tmp+"\n"+message;
 		ui.textEdit->setText(message.c_str());
