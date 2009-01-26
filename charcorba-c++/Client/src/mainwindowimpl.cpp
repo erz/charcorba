@@ -36,7 +36,8 @@ void MainWindowImpl::initialiser ()
 	connect(Client::get_instance(),SIGNAL(invitation_chatroom(QString)),this,SLOT(Ouvrir_chatroom(QString)));
 	connect(Client::get_instance(),SIGNAL(signal_client_chatroom(QString)),this,SLOT(afficher_message_chatroom_window(QString)));
 	connect(ui.actionTags,SIGNAL(triggered()),this,SLOT(ouvrir_dialog_tags()));
-
+	connect(ui.ButtonRefresh,SIGNAL(clicked()),this,SLOT(actualisation_amis()));
+	
 	// Callback liés aux tableaux blancs
 	connect(Client::get_instance(),SIGNAL(signal_participation_tableau_blanc(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
 	connect(Client::get_instance(),SIGNAL(signal_sync_tableau_blanc(QString,unsigned long)),this,SLOT(sync_tableau_blanc(QString,unsigned long)));
@@ -55,8 +56,10 @@ void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
 	m_dialog_window[indice]->exec();
 	if(Premiere_ouverture==true)
 		{
-			Premiere_ouverture=false;		
+			Premiere_ouverture=false;
+			sleep(1);		
 		}
+	
 	m_dialog_window[indice]->ecrire_message(pseudo.toStdString(),message.toStdString());
 }
 
@@ -207,6 +210,22 @@ void MainWindowImpl::sync_tableau_blanc (QString nom_tableau,unsigned long idpix
 		Pixel pixel = Client::get_instance()->get_pixel(nom_tableau.toStdString(),i);
 		m_liste_dialog_tableauxblancs[nom_tableau.toStdString()]->m_widget_tableaublanc->ajouter_pixel(pixel);
 	}
+}
+
+void MainWindowImpl::actualisation_amis()
+{
+	
+	for (set<string>::iterator it=Client::get_instance()->liste_tags.begin(); it!=Client::get_instance()->liste_tags.end(); it++)
+	{	
+		Client::get_instance()->get_amis_par_tag(*it);
+	}
+	
+	ui.qlistwidget_amis->clear();
+	for (set<string>::iterator it=Client::get_instance()->liste_amis.begin(); it!=Client::get_instance()->liste_amis.end(); it++)
+	{
+		ajouter_ami(string(*it).c_str());
+	}
+	
 }
 
 Ui_MainWindow MainWindowImpl::get_ui()
