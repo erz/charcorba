@@ -32,6 +32,7 @@ public:
 	
 	MainWindowImpl( QWidget * parent = 0, Qt::WFlags f = 0 );
 	void initialiser () ;
+	Ui_MainWindow get_ui();
 	
 public slots:
 	void afficher_dialog_connexion();

@@ -40,6 +40,7 @@ void MainWindowImpl::initialiser ()
 	// Callback liés aux tableaux blancs
 	connect(Client::get_instance(),SIGNAL(signal_participation_tableau_blanc(QString)),this,SLOT(ouvrir_dialog_tableaublanc(QString)));
 	connect(Client::get_instance(),SIGNAL(signal_sync_tableau_blanc(QString,unsigned long)),this,SLOT(sync_tableau_blanc(QString,unsigned long)));
+
 }
 
 void MainWindowImpl::afficher_message_window(QString pseudo,QString message){
@@ -131,7 +132,7 @@ Dialog_window * MainWindowImpl::get_dialog_window(QString pseudo,int indice)
 	if ( m_dialog_window[indice] == NULL )
 	{
 		m_dialog_window[indice] = new Dialog_window(pseudo);
-		m_dialog_window[indice]->setWindowTitle(pseudo.toStdString());
+		//m_dialog_window[indice]->setWindowTitle(pseudo.toStdString());
 		Premiere_ouverture=true;
 	}
 		
@@ -208,3 +209,7 @@ void MainWindowImpl::sync_tableau_blanc (QString nom_tableau,unsigned long idpix
 	}
 }
 
+Ui_MainWindow MainWindowImpl::get_ui()
+{
+	return ui;
+}

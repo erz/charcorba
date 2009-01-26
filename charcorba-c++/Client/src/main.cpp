@@ -21,10 +21,12 @@ int main(int argc, char ** argv )
 
 	Autotest_client * autotest_client = new Autotest_client (client_chat);
 	autotest_client->demarrer();
-
+	
 	qapplication.connect( &qapplication, SIGNAL( lastWindowClosed() ), &qapplication, SLOT( quit() ) );
 	qapplication.exec();
-
+	//Pseudo
+	fenetre.get_ui().labelPseudo->setText("");
+	fenetre.get_ui().labelPseudo->setText(Client::get_instance()->m_pseudo.c_str());
 	delete autotest_client;
 	delete client_chat ;
 	return 0 ;
