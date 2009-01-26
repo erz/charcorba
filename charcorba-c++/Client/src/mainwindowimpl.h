@@ -56,6 +56,7 @@ private:
 	Dialog_window * get_dialog_chatroom_window(QString pseudo);
 	Dialog_tags * get_dialog_tags();
 	bool Premiere_ouverture;
+	bool InvitationChatroom;
 	unsigned long compteurmessage;
 };
 #endif
