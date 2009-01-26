@@ -20,6 +20,7 @@ class  Dialog_tags:public QDialog, private Ui::DialogTags
 	
 	public slots:
 	void Ajouter_tags();
+	void Copier_tags_distant();
 	
 	private:
 	Ui_DialogTags ui;
